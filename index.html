@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  
+  <!-- FORZADO DE MODO OSCURO EN NAVEGADORES MÓVILES -->
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#08080a">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  
+  <title>Menú 3D</title>
+
+  <!-- Google Fonts: Fredoka Variable (Soporta pesos y anchos) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@75..125,300..600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================
+       RESET Y VARIABLES GLOBALES
+       ========================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    :root {
+      color-scheme: dark;
+      --color-btn: #BA0D36;
+      --color-btn-glow: rgba(186, 13, 54, 0.45);
+      --color-bg-base: #08080a;
+      --color-text: #FFFFFF;
+      --font-fredoka: 'Fredoka', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100dvh;
+      background-color: var(--color-bg-base);
+      color: var(--color-text);
+      font-family: var(--font-fredoka);
+      overflow: hidden;
+    }
+
+    /* ==========================================
+       CONTENEDOR PRINCIPAL
+       ========================================== */
+    .app-container {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      height: 100dvh;
+      margin: 0 auto;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      background-color: var(--color-bg-base);
+    }
+
+    /* Gradiente sutil de 4 esquinas */
+    .bg-gradient {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 0% 0%, #1e1e24 0%, transparent 60%),
+        radial-gradient(circle at 100% 0%, #2a1118 0%, transparent 50%),
+        radial-gradient(circle at 0% 100%, #040406 0%, transparent 65%),
+        radial-gradient(circle at 100% 100%, #0d121c 0%, transparent 60%),
+        var(--color-bg-base);
+      z-index: 1;
+    }
+
+    /* Capa derecha: Textura metal rotada 90º, calada y animada */
+    .bg-metal-layer {
+      position: absolute;
+      top: -20%;
+      right: -25%;
+      width: 85%;
+      height: 140%;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.25;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 35%, #000 100%);
+      mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 35%, #000 100%);
+    }
+
+    .metal-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: rotate(-90deg) scale(1.35);
+      animation: metalOrganicMotion 14s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+
+    @keyframes metalOrganicMotion {
+      0% {
+        transform: rotate(-90deg) scale(1.35) translateY(-5%) skewX(0deg);
+      }
+      50% {
+        transform: rotate(-90deg) scale(1.40) translateY(1%) skewX(1.8deg);
+      }
+      100% {
+        transform: rotate(-90deg) scale(1.35) translateY(7%) skewX(-1.2deg);
+      }
+    }
+
+    /* ==========================================
+       ZONA SUPERIOR: VISOR & BOTÓN
+       ========================================== */
+    .viewer-section {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 40dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: center;
+      background: radial-gradient(circle at 50% 60%, #17171c 0%, #0a0a0d 85%);
+    }
+
+    .viewer-slot {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* Botón "Ver en tu mesa" */
+    .btn-ar {
+      position: absolute;
+      bottom: -19px;
+      z-index: 30;
+      background-color: var(--color-btn);
+      color: #FFFFFF;
+      font-family: var(--font-fredoka);
+      font-variation-settings: "wdth" 105, "wght" 400;
+      font-size: 1.05rem;
+      letter-spacing: 0.3px;
+      padding: 11px 28px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      box-shadow: 0 4px 18px var(--color-btn-glow);
+      transition: transform 0.15s ease, filter 0.15s ease;
+    }
+
+    .btn-ar:active {
+      transform: scale(0.96);
+      filter: brightness(1.15);
+    }
+
+    /* ==========================================
+       ZONA INFERIOR: MENÚ & SCROLL
+       ========================================== */
+    .menu-section {
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      width: 100%;
+      overflow: hidden;
+      padding-top: 24px;
+    }
+
+    /* Degradados de desvanecimiento superior e inferior (Estilo Webflow) */
+    .fade-top, .fade-bottom {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 42px;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    .fade-top {
+      top: 0;
+      background: linear-gradient(to bottom, var(--color-bg-base) 10%, rgba(8, 8, 10, 0) 100%);
+    }
+
+    .fade-bottom {
+      bottom: 0;
+      background: linear-gradient(to top, var(--color-bg-base) 15%, rgba(8, 8, 10, 0) 100%);
+    }
+
+    /* Lista desplazable */
+    .menu-list {
+      height: 100%;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      list-style: none;
+      padding: 10px 0 45px 0;
+      scrollbar-width: none;
+    }
+
+    .menu-list::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* Elemento de plato */
+    .menu-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      padding: 15px 24px;
+      cursor: pointer;
+      transition: background 0.25s ease;
+    }
+
+    /* Número (-25% escala, Light) */
+    .item-number {
+      font-size: 0.75rem;
+      font-variation-settings: "wdth" 100, "wght" 300;
+      color: #D4D4D8;
+      margin-right: 18px;
+      letter-spacing: 0.5px;
+      opacity: 0.8;
+    }
+
+    /* Nombre del plato (Expanded Medium) */
+    .item-name {
+      font-size: 1.15rem;
+      font-variation-settings: "wdth" 125, "wght" 500;
+      letter-spacing: 0.3px;
+      color: #FFFFFF;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
+    }
+
+    /* Estado Activo / Seleccionado (Look After Effects) */
+    .menu-item.active {
+      background: linear-gradient(
+        90deg, 
+        rgba(255, 255, 255, 0.16) 0%, 
+        rgba(255, 255, 255, 0.04) 55%, 
+        rgba(255, 255, 255, 0) 100%
+      );
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+
+    /* Barra izquierda en el activo */
+    .menu-item.active::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background-color: #000000;
+      box-shadow: 1px 0 4px rgba(255, 255, 255, 0.18);
+    }
+
+    .menu-item.active .item-name {
+      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <main class="app-container">
+    
+    <!-- Fondos -->
+    <div class="bg-gradient"></div>
+    <div class="bg-metal-layer">
+      <img src="metal.jpg" alt="Fondo metálico" class="metal-img">
+    </div>
+
+    <!-- ZONA SUPERIOR: Visor reservado + Botón -->
+    <section class="viewer-section">
+      <div class="viewer-slot">
+        <!-- Espacio reservado para model-viewer -->
+      </div>
+      <button type="button" class="btn-ar" id="btn-ar">Ver en tu mesa</button>
+    </section>
+
+    <!-- ZONA INFERIOR: Lista de platos -->
+    <section class="menu-section">
+      <!-- Fades de scroll -->
+      <div class="fade-top"></div>
+      <div class="fade-bottom"></div>
+
+      <ul class="menu-list" id="menu-list">
+        <li class="menu-item active" data-index="01">
+          <span class="item-number">01</span>
+          <span class="item-name">Ensalada César</span>
+        </li>
+        <li class="menu-item" data-index="02">
+          <span class="item-number">02</span>
+          <span class="item-name">Pizza Diávola</span>
+        </li>
+        <li class="menu-item" data-index="03">
+          <span class="item-number">03</span>
+          <span class="item-name">Cheeseburger</span>
+        </li>
+        <li class="menu-item" data-index="04">
+          <span class="item-number">04</span>
+          <span class="item-name">Burrata italiana</span>
+        </li>
+        <li class="menu-item" data-index="05">
+          <span class="item-number">05</span>
+          <span class="item-name">Pizza de la casa</span>
+        </li>
+        <li class="menu-item" data-index="06">
+          <span class="item-number">06</span>
+          <span class="item-name">Ensalada Caprese</span>
+        </li>
+        <li class="menu-item" data-index="07">
+          <span class="item-number">07</span>
+          <span class="item-name">Pizza especial</span>
+        </li>
+      </ul>
+    </section>
+
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuItems = document.querySelectorAll('.menu-item');
+      const btnAr = document.getElementById('btn-ar');
+
+      // Cambio de plato activo al tocar
+      menuItems.forEach((item) => {
+        item.addEventListener('click', () => {
+          menuItems.forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+        });
+      });
+
+      // Botón AR listo para recibir función en la siguiente fase
+      btnAr.addEventListener('click', () => {
+        console.log('Disparador AR presionado');
+      });
+    });
+  </script>
+</body>
+</html>
