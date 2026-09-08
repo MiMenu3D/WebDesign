@@ -1,25 +1,26 @@
+<!-- Versión: WebDesign v2.02 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   
-  <!-- FORZADO DE MODO OSCURO EN NAVEGADORES MÓVILES -->
+  <!-- FORZADO DE MODO OSCURO -->
   <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#08080a">
+  <meta name="theme-color" content="#060709">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   
   <title>Menú 3D</title>
 
-  <!-- Google Fonts: Fredoka Variable (Soporta pesos y anchos) -->
+  <!-- Google Fonts: Fredoka Variable -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wdth,wght@75..125,300..600&display=swap" rel="stylesheet">
 
   <style>
-    /* ==========================================
-       RESET Y VARIABLES GLOBALES
-       ========================================== */
+    /* ==========================================================================
+       1. RESET Y VARIABLES GLOBALES
+       ========================================================================== */
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
@@ -31,10 +32,11 @@
     :root {
       color-scheme: dark;
       --color-btn: #BA0D36;
-      --color-btn-glow: rgba(186, 13, 54, 0.45);
-      --color-bg-base: #08080a;
+      --color-btn-glow: rgba(186, 13, 54, 0.5);
+      --color-bg-base: #060709;
       --color-text: #FFFFFF;
       --font-fredoka: 'Fredoka', -apple-system, BlinkMacSystemFont, sans-serif;
+      --ease-webflow: cubic-bezier(0.25, 1, 0.5, 1);
     }
 
     html, body {
@@ -46,9 +48,9 @@
       overflow: hidden;
     }
 
-    /* ==========================================
-       CONTENEDOR PRINCIPAL
-       ========================================== */
+    /* ==========================================================================
+       2. CONTENEDOR PRINCIPAL Y FONDO AMBIENTAL
+       ========================================================================== */
     .app-container {
       position: relative;
       width: 100%;
@@ -61,68 +63,32 @@
       background-color: var(--color-bg-base);
     }
 
-    /* Gradiente sutil de 4 esquinas */
+    /* Atmósfera de fondo: Negro puro a la izquierda, azul zafiro/petróleo a la derecha */
     .bg-gradient {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 0% 0%, #1e1e24 0%, transparent 60%),
-        radial-gradient(circle at 100% 0%, #2a1118 0%, transparent 50%),
-        radial-gradient(circle at 0% 100%, #040406 0%, transparent 65%),
-        radial-gradient(circle at 100% 100%, #0d121c 0%, transparent 60%),
+        radial-gradient(circle at 100% 15%, #0c1b2e 0%, transparent 60%),
+        radial-gradient(circle at 100% 85%, #07131e 0%, transparent 55%),
+        radial-gradient(circle at 0% 50%, #040507 0%, transparent 70%),
         var(--color-bg-base);
       z-index: 1;
     }
 
-    /* Capa derecha: Textura metal rotada 90º, calada y animada */
-    .bg-metal-layer {
-      position: absolute;
-      top: -20%;
-      right: -25%;
-      width: 85%;
-      height: 140%;
-      z-index: 2;
-      pointer-events: none;
-      opacity: 0.25;
-      overflow: hidden;
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 35%, #000 100%);
-      mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 35%, #000 100%);
-    }
-
-    .metal-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: rotate(-90deg) scale(1.35);
-      animation: metalOrganicMotion 14s ease-in-out infinite alternate;
-      will-change: transform;
-    }
-
-    @keyframes metalOrganicMotion {
-      0% {
-        transform: rotate(-90deg) scale(1.35) translateY(-5%) skewX(0deg);
-      }
-      50% {
-        transform: rotate(-90deg) scale(1.40) translateY(1%) skewX(1.8deg);
-      }
-      100% {
-        transform: rotate(-90deg) scale(1.35) translateY(7%) skewX(-1.2deg);
-      }
-    }
-
-    /* ==========================================
-       ZONA SUPERIOR: VISOR & BOTÓN
-       ========================================== */
+    /* ==========================================================================
+       3. ZONA SUPERIOR: VISOR (LIMPIO) Y BOTÓN AR
+       ========================================================================== */
     .viewer-section {
       position: relative;
-      z-index: 10;
+      z-index: 40;
       width: 100%;
       height: 40dvh;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
       align-items: center;
-      background: radial-gradient(circle at 50% 60%, #17171c 0%, #0a0a0d 85%);
+      background: radial-gradient(circle at 50% 60%, #15161b 0%, #08090c 85%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     }
 
     .viewer-slot {
@@ -133,16 +99,16 @@
       align-items: center;
     }
 
-    /* Botón "Ver en tu mesa" */
+    /* Botón "Ver en tu mesa" en capa superior absoluta */
     .btn-ar {
       position: absolute;
       bottom: -19px;
-      z-index: 30;
+      z-index: 50;
       background-color: var(--color-btn);
       color: #FFFFFF;
       font-family: var(--font-fredoka);
       font-variation-settings: "wdth" 105, "wght" 400;
-      font-size: 1.05rem;
+      font-size: 1.02rem;
       letter-spacing: 0.3px;
       padding: 11px 28px;
       border-radius: 10px;
@@ -158,9 +124,9 @@
       filter: brightness(1.15);
     }
 
-    /* ==========================================
-       ZONA INFERIOR: MENÚ & SCROLL
-       ========================================== */
+    /* ==========================================================================
+       4. ZONA INFERIOR: MENÚ Y TEXTURA METAL CONFINADA
+       ========================================================================== */
     .menu-section {
       position: relative;
       z-index: 10;
@@ -170,33 +136,83 @@
       padding-top: 24px;
     }
 
+    /* Contenedor de Textura: Flotación Vertical Pura (Eje Y real de pantalla) */
+    .metal-flow-container {
+      position: absolute;
+      top: -15%;
+      right: -10%;
+      width: 70%;
+      height: 130%;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.25;
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 35%, #000 100%);
+      mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 35%, #000 100%);
+      animation: verticalScreenFlow 14s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+
+    @keyframes verticalScreenFlow {
+      0% {
+        transform: translateY(-6%);
+      }
+      50% {
+        transform: translateY(0%);
+      }
+      100% {
+        transform: translateY(6%);
+      }
+    }
+
+    /* Lienzo rotado 90º desacoplado de las coordenadas de traslación */
+    .metal-rotator {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 180%;
+      height: 180%;
+      transform: translate(-50%, -50%) rotate(-90deg);
+    }
+
+    .metal-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
     /* Degradados de desvanecimiento superior e inferior (Estilo Webflow) */
     .fade-top, .fade-bottom {
       position: absolute;
       left: 0;
       right: 0;
       height: 42px;
-      z-index: 20;
+      z-index: 25;
       pointer-events: none;
     }
 
     .fade-top {
       top: 0;
-      background: linear-gradient(to bottom, var(--color-bg-base) 10%, rgba(8, 8, 10, 0) 100%);
+      background: linear-gradient(to bottom, var(--color-bg-base) 10%, rgba(6, 7, 9, 0) 100%);
     }
 
     .fade-bottom {
       bottom: 0;
-      background: linear-gradient(to top, var(--color-bg-base) 15%, rgba(8, 8, 10, 0) 100%);
+      background: linear-gradient(to top, var(--color-bg-base) 15%, rgba(6, 7, 9, 0) 100%);
     }
 
-    /* Lista desplazable */
+    /* ==========================================================================
+       5. LISTA DE PLATOS Y GLASSMORPHISM
+       ========================================================================== */
     .menu-list {
+      position: relative;
+      z-index: 10;
       height: 100%;
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       list-style: none;
-      padding: 10px 0 45px 0;
+      padding: 10px 0 50px 0;
       scrollbar-width: none;
     }
 
@@ -204,61 +220,88 @@
       display: none;
     }
 
-    /* Elemento de plato */
+    /* Elemento de la lista (No seleccionado: Opacidad 75%) */
     .menu-item {
       position: relative;
       display: flex;
       align-items: center;
-      padding: 15px 24px;
+      padding: 14px 24px;
       cursor: pointer;
-      transition: background 0.25s ease;
+      opacity: 0.75;
+      border-top: 1px solid transparent;
+      border-bottom: 1px solid transparent;
+      transition: 
+        transform 0.35s var(--ease-webflow),
+        opacity 0.35s var(--ease-webflow),
+        background 0.35s var(--ease-webflow),
+        border-color 0.35s var(--ease-webflow);
     }
 
-    /* Número (-25% escala, Light) */
+    /* Número (-25% escala aprox, Fredoka Light) */
     .item-number {
-      font-size: 0.75rem;
+      font-size: 0.68rem;
       font-variation-settings: "wdth" 100, "wght" 300;
-      color: #D4D4D8;
+      color: #D1D5DB;
       margin-right: 18px;
       letter-spacing: 0.5px;
-      opacity: 0.8;
+      transition: opacity 0.35s var(--ease-webflow);
     }
 
-    /* Nombre del plato (Expanded Medium) */
+    /* Nombre del plato (-13% escala, Fredoka Expanded Medium) */
     .item-name {
-      font-size: 1.15rem;
+      font-size: 1.0rem;
       font-variation-settings: "wdth" 125, "wght" 500;
       letter-spacing: 0.3px;
       color: #FFFFFF;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.75);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+      transition: text-shadow 0.35s var(--ease-webflow);
     }
 
-    /* Estado Activo / Seleccionado (Look After Effects) */
+    /* ==========================================================================
+       6. ESTADO SELECCIONADO / ACTIVO
+       ========================================================================== */
     .menu-item.active {
+      opacity: 1;
+      transform: translateX(14px); /* Desplazamiento Webflow */
       background: linear-gradient(
         90deg, 
         rgba(255, 255, 255, 0.16) 0%, 
         rgba(255, 255, 255, 0.04) 55%, 
         rgba(255, 255, 255, 0) 100%
       );
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(10px) brightness(1.2) contrast(1.1);
+      -webkit-backdrop-filter: blur(10px) brightness(1.2) contrast(1.1);
+      
+      /* Bisel de cristal Glassmorphism */
+      border-top: 1px solid rgba(255, 255, 255, 0.32);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.45);
     }
 
-    /* Barra izquierda en el activo */
-    .menu-item.active::before {
+    /* PLAN B: Línea vertical estilizada roja (#BA0D36) revelada a la izquierda */
+    .menu-item::before {
       content: '';
       position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      background-color: #000000;
-      box-shadow: 1px 0 4px rgba(255, 255, 255, 0.18);
+      left: 6px;
+      top: 18%;
+      bottom: 18%;
+      width: 3.5px;
+      border-radius: 3px;
+      background-color: var(--color-btn);
+      box-shadow: 0 0 10px rgba(186, 13, 54, 0.85);
+      opacity: 0;
+      transform: scaleY(0.3);
+      transition: 
+        opacity 0.35s var(--ease-webflow),
+        transform 0.35s var(--ease-webflow);
+    }
+
+    .menu-item.active::before {
+      opacity: 1;
+      transform: scaleY(1);
     }
 
     .menu-item.active .item-name {
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.35);
     }
   </style>
 </head>
@@ -266,26 +309,32 @@
 
   <main class="app-container">
     
-    <!-- Fondos -->
+    <!-- Fondo ambiental oscuro -->
     <div class="bg-gradient"></div>
-    <div class="bg-metal-layer">
-      <img src="metal.jpg" alt="Fondo metálico" class="metal-img">
-    </div>
 
-    <!-- ZONA SUPERIOR: Visor reservado + Botón -->
+    <!-- ZONA SUPERIOR: Visor 3D reservado + Botón AR -->
     <section class="viewer-section">
       <div class="viewer-slot">
-        <!-- Espacio reservado para model-viewer -->
+        <!-- Espacio reservado para <model-viewer> -->
       </div>
       <button type="button" class="btn-ar" id="btn-ar">Ver en tu mesa</button>
     </section>
 
-    <!-- ZONA INFERIOR: Lista de platos -->
+    <!-- ZONA INFERIOR: Menú de 15 Platos + Textura Confinada -->
     <section class="menu-section">
-      <!-- Fades de scroll -->
+      
+      <!-- Textura de metal líquido animada en eje Y puro -->
+      <div class="metal-flow-container">
+        <div class="metal-rotator">
+          <img src="./metal.jpg" alt="Fondo metálico" class="metal-img">
+        </div>
+      </div>
+
+      <!-- Fades de scroll superior e inferior -->
       <div class="fade-top"></div>
       <div class="fade-bottom"></div>
 
+      <!-- Lista completa de 15 platos -->
       <ul class="menu-list" id="menu-list">
         <li class="menu-item active" data-index="01">
           <span class="item-number">01</span>
@@ -315,6 +364,38 @@
           <span class="item-number">07</span>
           <span class="item-name">Pizza especial</span>
         </li>
+        <li class="menu-item" data-index="08">
+          <span class="item-number">08</span>
+          <span class="item-name">Ensalada César</span>
+        </li>
+        <li class="menu-item" data-index="09">
+          <span class="item-number">09</span>
+          <span class="item-name">Pizza Diávola</span>
+        </li>
+        <li class="menu-item" data-index="10">
+          <span class="item-number">10</span>
+          <span class="item-name">Cheeseburger</span>
+        </li>
+        <li class="menu-item" data-index="11">
+          <span class="item-number">11</span>
+          <span class="item-name">Burrata italiana</span>
+        </li>
+        <li class="menu-item" data-index="12">
+          <span class="item-number">12</span>
+          <span class="item-name">Pizza de la casa</span>
+        </li>
+        <li class="menu-item" data-index="13">
+          <span class="item-number">13</span>
+          <span class="item-name">Ensalada Caprese</span>
+        </li>
+        <li class="menu-item" data-index="14">
+          <span class="item-number">14</span>
+          <span class="item-name">Pizza especial</span>
+        </li>
+        <li class="menu-item" data-index="15">
+          <span class="item-number">15</span>
+          <span class="item-name">Pizza de la casa</span>
+        </li>
       </ul>
     </section>
 
@@ -325,7 +406,7 @@
       const menuItems = document.querySelectorAll('.menu-item');
       const btnAr = document.getElementById('btn-ar');
 
-      // Cambio de plato activo al tocar
+      // Cambio de plato activo al pulsar
       menuItems.forEach((item) => {
         item.addEventListener('click', () => {
           menuItems.forEach(i => i.classList.remove('active'));
@@ -333,9 +414,9 @@
         });
       });
 
-      // Botón AR listo para recibir función en la siguiente fase
+      // Event listener reservado para la funcionalidad AR final
       btnAr.addEventListener('click', () => {
-        console.log('Disparador AR presionado');
+        console.log('Botón AR presionado.');
       });
     });
   </script>
