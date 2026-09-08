@@ -1,4 +1,4 @@
-<!-- Versión: WebDesign v2.07 -->
+<!-- Versión: WebDesign v2.08 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -76,7 +76,7 @@
     }
 
     /* ==========================================================================
-       3. ZONA SUPERIOR: VISOR (LIMPIO) Y BOTÓN AR
+       3. ZONA SUPERIOR: VISOR Y BOTÓN AR
        ========================================================================== */
     .viewer-section {
       position: relative;
@@ -125,7 +125,7 @@
     }
 
     /* ==========================================================================
-       4. ZONA INFERIOR: CASCADAS (ESCALA AE 156% x 96% Y BUCLE CONTINUO)
+       4. ZONA INFERIOR: CASCADAS CONTINUAS (IZQ SUBE / DER BAJA)
        ========================================================================== */
     .menu-section {
       position: relative;
@@ -136,7 +136,7 @@
       padding-top: 24px;
     }
 
-    /* Estilo común de las cascadas de metal */
+    /* Contenedores de metal: opacidad 0.25 y contraste 1.55 */
     .metal-flow-container {
       position: absolute;
       top: 0;
@@ -144,9 +144,9 @@
       z-index: 2;
       pointer-events: none;
       overflow: hidden;
-      opacity: 0.32;
-      filter: saturate(0.20) brightness(0.70) contrast(1.35) url(#liquid-distortion);
-      -webkit-filter: saturate(0.20) brightness(0.70) contrast(1.35) url(#liquid-distortion);
+      opacity: 0.25;
+      filter: saturate(0.20) brightness(0.70) contrast(1.55) url(#liquid-distortion);
+      -webkit-filter: saturate(0.20) brightness(0.70) contrast(1.55) url(#liquid-distortion);
     }
 
     /* Cascada Izquierda (28% ancho) */
@@ -165,18 +165,27 @@
       mask-image: linear-gradient(to left, #000 0%, rgba(0,0,0,0.75) 45%, transparent 100%);
     }
 
-    /* Pista de Cascada Continua (2 baldosa idénticas = bucle 100% seamless) */
+    /* Pista de Cascada Continua (2 baldosas = 200% de alto para bucle seamless) */
     .waterfall-track {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 200%;
-      animation: infiniteWaterfall 34s linear infinite;
       will-change: transform;
     }
 
-    @keyframes infiniteWaterfall {
+    /* Izquierda: Flujo SUBIENDO */
+    .flow-left .waterfall-track {
+      animation: waterfallUp 34s linear infinite;
+    }
+
+    /* Derecha: Flujo BAJANDO */
+    .flow-right .waterfall-track {
+      animation: waterfallDown 34s linear infinite;
+    }
+
+    @keyframes waterfallUp {
       0% {
         transform: translateY(0%);
       }
@@ -185,6 +194,16 @@
       }
     }
 
+    @keyframes waterfallDown {
+      0% {
+        transform: translateY(-50%);
+      }
+      100% {
+        transform: translateY(0%);
+      }
+    }
+
+    /* Baldosas de textura nativa vertical */
     .metal-tile {
       position: relative;
       width: 100%;
@@ -192,31 +211,16 @@
       overflow: hidden;
     }
 
-    /* Baldosa B invertida en espejo vertical de pantalla */
+    /* Baldosa B invertida verticalmente para encaje seamless continuo */
     .metal-tile.mirror {
       transform: scaleY(-1);
     }
 
-    /* Escala exacta de AE: 156% en el eje de onda y 96% en transversal, rotada 90º */
-    .metal-tile-rotator {
-      position: absolute;
-      top: 50%;
-      left: 50%;
+    .metal-img {
       width: 100%;
       height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .metal-img {
-      width: 156%;
-      height: 96%;
-      min-width: 156%;
-      min-height: 96%;
       object-fit: cover;
       object-position: center;
-      transform: rotate(-90deg);
       display: block;
     }
 
@@ -241,7 +245,7 @@
     }
 
     /* ==========================================================================
-       5. LISTA DE PLATOS, CRISTAL v2.02 PURO Y RECTÁNGULO ROJO
+       5. LISTA DE PLATOS, CRISTAL ACLARADO Y LÍNEA ROJA (DESPLAZADOS -6px)
        ========================================================================== */
     .menu-list {
       position: relative;
@@ -266,17 +270,17 @@
       z-index: 10;
     }
 
-    /* CRISTAL v2.02 PURO (Nace en left: 39px, solo blur(8px) y degradado suave) */
+    /* CRISTAL (Nace en left: 33px y aclarado un 10%) */
     .glass-overlay {
       position: absolute;
-      left: 39px;
+      left: 33px;
       right: 0;
       top: 0;
       bottom: 0;
       background: linear-gradient(
         90deg, 
-        rgba(255, 255, 255, 0.16) 0%, 
-        rgba(255, 255, 255, 0.04) 55%, 
+        rgba(255, 255, 255, 0.26) 0%, 
+        rgba(255, 255, 255, 0.08) 55%, 
         transparent 100%
       );
       backdrop-filter: blur(0px);
@@ -290,14 +294,14 @@
       z-index: 5;
     }
 
-    /* Al activarse: Fade progresivo y suave del cristal */
+    /* Al activarse: Fade progresivo suave del cristal */
     .menu-item.active .glass-overlay {
       opacity: 1;
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
     }
 
-    /* ESPECULARES SUPERIOR E INFERIOR (0.5px, 35% en centro y 0% en extremos) */
+    /* ESPECULARES SUPERIOR E INFERIOR (0.5px) */
     .specular-top, .specular-bottom {
       position: absolute;
       left: 0;
@@ -317,10 +321,10 @@
       background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.35) 50%, transparent 100%);
     }
 
-    /* RECTÁNGULO ROJO (7px de ancho, sin redondeo, en left: 32px) */
+    /* RECTÁNGULO ROJO (7px de ancho, en left: 26px) */
     .red-indicator {
       position: absolute;
-      left: 32px;
+      left: 26px;
       top: 0;
       bottom: 0;
       width: 7px;
@@ -350,7 +354,7 @@
       transform: translateX(40px);
     }
 
-    /* Número (Fredoka Light) */
+    /* Número: 40% en reposo / 75% exclusivamente al seleccionarse */
     .item-number {
       font-size: 0.68rem;
       font-variation-settings: "wdth" 100, "wght" 300;
@@ -358,10 +362,15 @@
       margin-right: 18px;
       letter-spacing: 0.5px;
       width: 22px;
+      opacity: 0.40;
+      transition: opacity 0.35s var(--ease-webflow);
+    }
+
+    .menu-item.active .item-number {
       opacity: 0.75;
     }
 
-    /* Nombre del plato en REPOSO: Opacidad 60% y Fredoka Expanded Regular */
+    /* Nombre del plato en REPOSO: Opacidad 60% */
     .item-name {
       font-size: 1.0rem;
       font-variation-settings: "wdth" 125, "wght" 400;
@@ -411,34 +420,26 @@
     <!-- ZONA INFERIOR: Menú de 15 Platos + Cascadas Continuas -->
     <section class="menu-section">
       
-      <!-- Cascada Izquierda (28% ancho) -->
+      <!-- Cascada Izquierda (28% ancho - Sube) -->
       <div class="metal-flow-container flow-left">
         <div class="waterfall-track">
           <div class="metal-tile">
-            <div class="metal-tile-rotator">
-              <img src="./metal.jpg" alt="Metal Izquierda" class="metal-img">
-            </div>
+            <img src="./metal.jpg" alt="Metal Izquierda" class="metal-img">
           </div>
           <div class="metal-tile mirror">
-            <div class="metal-tile-rotator">
-              <img src="./metal.jpg" alt="Metal Izquierda Espejo" class="metal-img">
-            </div>
+            <img src="./metal.jpg" alt="Metal Izquierda Espejo" class="metal-img">
           </div>
         </div>
       </div>
 
-      <!-- Cascada Derecha (48% ancho) -->
+      <!-- Cascada Derecha (48% ancho - Baja) -->
       <div class="metal-flow-container flow-right">
         <div class="waterfall-track">
           <div class="metal-tile">
-            <div class="metal-tile-rotator">
-              <img src="./metal.jpg" alt="Metal Derecha" class="metal-img">
-            </div>
+            <img src="./metal.jpg" alt="Metal Derecha" class="metal-img">
           </div>
           <div class="metal-tile mirror">
-            <div class="metal-tile-rotator">
-              <img src="./metal.jpg" alt="Metal Derecha Espejo" class="metal-img">
-            </div>
+            <img src="./metal.jpg" alt="Metal Derecha Espejo" class="metal-img">
           </div>
         </div>
       </div>
