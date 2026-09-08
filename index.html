@@ -1,4 +1,4 @@
-<!-- Versión: WebDesign v2.03 -->
+<!-- Versión: WebDesign v2.04 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -125,7 +125,7 @@
     }
 
     /* ==========================================================================
-       4. ZONA INFERIOR: MENÚ Y CASCADA INFINITA CON REPETILE (MIRROR EDGES)
+       4. ZONA INFERIOR: DOS CASCADAS INDEPENDIENTES (IZQ & DER)
        ========================================================================== */
     .menu-section {
       position: relative;
@@ -136,31 +136,43 @@
       padding-top: 24px;
     }
 
-    /* Contenedor de la cascada con calado hacia el texto y filtro de turbulencia */
+    /* Estilo común de las cascadas de metal */
     .metal-flow-container {
       position: absolute;
       top: 0;
-      right: 0;
-      width: 70%;
       height: 100%;
       z-index: 2;
       pointer-events: none;
       overflow: hidden;
       opacity: 0.20;
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 35%, #000 100%);
-      mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 35%, #000 100%);
-      filter: brightness(0.55) contrast(1.35) url(#liquid-distortion);
-      -webkit-filter: brightness(0.55) contrast(1.35) url(#liquid-distortion);
+      filter: saturate(0.20) brightness(0.6) contrast(1.3) url(#liquid-distortion);
+      -webkit-filter: saturate(0.20) brightness(0.6) contrast(1.3) url(#liquid-distortion);
     }
 
-    /* Pista de Cascada Continua (2 copias para bucle infinito sin costuras) */
+    /* Cascada Izquierda (Estrecha, acariciando los números) */
+    .flow-left {
+      left: 0;
+      width: 18%;
+      -webkit-mask-image: linear-gradient(to right, #000 0%, rgba(0,0,0,0.4) 40%, transparent 100%);
+      mask-image: linear-gradient(to right, #000 0%, rgba(0,0,0,0.4) 40%, transparent 100%);
+    }
+
+    /* Cascada Derecha (Estrecha, acariciando el final del texto largo) */
+    .flow-right {
+      right: 0;
+      width: 35%;
+      -webkit-mask-image: linear-gradient(to left, #000 0%, rgba(0,0,0,0.4) 40%, transparent 100%);
+      mask-image: linear-gradient(to left, #000 0%, rgba(0,0,0,0.4) 40%, transparent 100%);
+    }
+
+    /* Pista continua con velocidad reducida al 50% (44s) */
     .waterfall-track {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 200%;
-      animation: infiniteWaterfall 22s linear infinite;
+      animation: infiniteWaterfall 44s linear infinite;
       will-change: transform;
     }
 
@@ -180,18 +192,19 @@
       overflow: hidden;
     }
 
-    /* Segunda copia invertida en espejo (Mirror Edges) */
+    /* Copia en espejo (Mirror Edges) */
     .metal-tile.mirror {
       transform: scaleY(-1);
     }
 
+    /* Achatado 2.5x para verticalizar el patrón de ondas */
     .metal-tile-rotator {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 170%;
-      height: 170%;
-      transform: translate(-50%, -50%) rotate(-90deg);
+      width: 250%;
+      height: 250%;
+      transform: translate(-50%, -50%) rotate(-90deg) scaleX(0.4);
     }
 
     .metal-img {
@@ -222,7 +235,7 @@
     }
 
     /* ==========================================================================
-       5. LISTA DE PLATOS Y COMPORTAMIENTO DE SELECCIÓN
+       5. LISTA DE PLATOS, CRISTAL ESTÁTICO Y TEXTO DESPLAZABLE
        ========================================================================== */
     .menu-list {
       position: relative;
@@ -239,20 +252,60 @@
       display: none;
     }
 
-    /* Elemento de fila */
+    /* FILA COMPLETA (CRISTAL ESTÁTICO DE ANCHO COMPLETO) */
     .menu-item {
       position: relative;
-      padding: 0;
+      width: 100%;
       cursor: pointer;
       opacity: 0.75;
-      transition: opacity 0.35s var(--ease-webflow);
+      transition: 
+        opacity 0.35s var(--ease-webflow),
+        background 0.35s var(--ease-webflow);
+      z-index: 10;
     }
 
+    /* Estado Activo: Cristal suave recuperado de la v2.02 */
     .menu-item.active {
+      opacity: 1;
+      background: linear-gradient(
+        90deg, 
+        rgba(255, 255, 255, 0.16) 0%, 
+        rgba(255, 255, 255, 0.04) 55%, 
+        rgba(255, 255, 255, 0) 100%
+      );
+      backdrop-filter: blur(10px) brightness(1.2) contrast(1.1);
+      -webkit-backdrop-filter: blur(10px) brightness(1.2) contrast(1.1);
+    }
+
+    /* ESPECULARES SUPERIOR E INFERIOR (0.5px, 20% al centro con fade a 0% a los lados) */
+    .specular-top, .specular-bottom {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 1px;
+      transform: scaleY(0.5);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.35s var(--ease-webflow);
+      z-index: 12;
+    }
+
+    .specular-top {
+      top: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.20) 50%, transparent 100%);
+    }
+
+    .specular-bottom {
+      bottom: 0;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.20) 50%, transparent 100%);
+    }
+
+    .menu-item.active .specular-top,
+    .menu-item.active .specular-bottom {
       opacity: 1;
     }
 
-    /* 1. LÍNEA ROJA (Fija en left: 24px, 100% altura, revelada al desplazarse el botón) */
+    /* LÍNEA ROJA FIJA (3.5px en left: 24px, 100% altura, sin desfasarse) */
     .red-indicator {
       position: absolute;
       left: 24px;
@@ -262,44 +315,26 @@
       background-color: var(--color-btn);
       box-shadow: 0 0 10px rgba(186, 13, 54, 0.75);
       opacity: 0;
-      transition: opacity 0.25s var(--ease-webflow);
-      z-index: 5;
+      transition: opacity 0.35s var(--ease-webflow);
+      z-index: 15;
     }
 
     .menu-item.active .red-indicator {
       opacity: 1;
     }
 
-    /* 2. PASTILLA DE CRISTAL DESPLAZABLE */
-    .item-pill {
+    /* CONTENIDO INTERIOR QUE SE DESPLAZA (+40px) */
+    .item-content {
       position: relative;
-      z-index: 10;
+      z-index: 20;
       display: flex;
       align-items: center;
       padding: 14px 24px;
-      border-top: 1px solid transparent;
-      border-bottom: 1px solid transparent;
-      transition: 
-        transform 0.35s var(--ease-webflow),
-        background 0.35s var(--ease-webflow),
-        border-color 0.35s var(--ease-webflow);
+      transition: transform 0.35s var(--ease-webflow);
     }
 
-    /* Al activarse: desplazamiento a +40px alineando número con el texto inferior */
-    .menu-item.active .item-pill {
+    .menu-item.active .item-content {
       transform: translateX(40px);
-      background: linear-gradient(
-        90deg, 
-        rgba(255, 255, 255, 0.16) 0%, 
-        rgba(255, 255, 255, 0.04) 55%, 
-        rgba(255, 255, 255, 0) 100%
-      );
-      backdrop-filter: blur(8px) brightness(1.25) contrast(1.15);
-      -webkit-backdrop-filter: blur(8px) brightness(1.25) contrast(1.15);
-      
-      /* Bordes de cristal blanco al 50% */
-      border-top: 1px solid rgba(255, 255, 255, 0.5);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
     }
 
     /* Número (-25% escala aprox, Fredoka Light) */
@@ -309,7 +344,7 @@
       color: #D1D5DB;
       margin-right: 18px;
       letter-spacing: 0.5px;
-      width: 22px; /* Ancho fijo para garantizar alineación exacta */
+      width: 22px;
     }
 
     /* Nombre del plato (-13% escala, Fredoka Expanded Medium) */
@@ -329,11 +364,11 @@
 </head>
 <body>
 
-  <!-- FILTRO SVG ESTÁTICO (Calculado una sola vez por GPU, cero coste en tiempo real) -->
+  <!-- FILTRO SVG 100% ESTÁTICO (Calculado una única vez por GPU al iniciar, cero consumo de CPU) -->
   <svg style="position: absolute; width: 0; height: 0; pointer-events: none;" aria-hidden="true">
     <defs>
       <filter id="liquid-distortion" x="-20%" y="-20%" width="140%" height="140%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.004 0.018" numOctaves="2" result="noise" />
+        <feTurbulence type="fractalNoise" baseFrequency="0.002 0.009" numOctaves="2" result="noise" />
         <feDisplacementMap in="SourceGraphic" in2="noise" scale="32" xChannelSelector="R" yChannelSelector="G" />
       </filter>
     </defs>
@@ -352,22 +387,36 @@
       <button type="button" class="btn-ar" id="btn-ar">Ver en tu mesa</button>
     </section>
 
-    <!-- ZONA INFERIOR: Menú de 15 Platos + Cascada Infinita -->
+    <!-- ZONA INFERIOR: Menú de 15 Platos + Cascadas Izquierda y Derecha -->
     <section class="menu-section">
       
-      <!-- Textura de metal líquido en Cascada Continua (RepeTile Mirror) -->
-      <div class="metal-flow-container">
+      <!-- Cascada Izquierda (Acaricia los números) -->
+      <div class="metal-flow-container flow-left">
         <div class="waterfall-track">
-          <!-- Copia A -->
           <div class="metal-tile">
             <div class="metal-tile-rotator">
-              <img src="./metal.jpg" alt="Fondo metálico" class="metal-img">
+              <img src="./metal.jpg" alt="Metal Izquierda" class="metal-img">
             </div>
           </div>
-          <!-- Copia B en espejo para unión continua -->
           <div class="metal-tile mirror">
             <div class="metal-tile-rotator">
-              <img src="./metal.jpg" alt="Fondo metálico espejo" class="metal-img">
+              <img src="./metal.jpg" alt="Metal Izquierda Espejo" class="metal-img">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cascada Derecha (Acaricia los textos largos) -->
+      <div class="metal-flow-container flow-right">
+        <div class="waterfall-track">
+          <div class="metal-tile">
+            <div class="metal-tile-rotator">
+              <img src="./metal.jpg" alt="Metal Derecha" class="metal-img">
+            </div>
+          </div>
+          <div class="metal-tile mirror">
+            <div class="metal-tile-rotator">
+              <img src="./metal.jpg" alt="Metal Derecha Espejo" class="metal-img">
             </div>
           </div>
         </div>
@@ -377,124 +426,154 @@
       <div class="fade-top"></div>
       <div class="fade-bottom"></div>
 
-      <!-- Lista completa de 15 platos con arquitectura de revelado -->
+      <!-- Lista completa de 15 platos -->
       <ul class="menu-list" id="menu-list">
         
         <li class="menu-item active" data-index="01">
+          <div class="specular-top"></div>
+          <div class="specular-bottom"></div>
           <div class="red-indicator"></div>
-          <div class="item-pill">
+          <div class="item-content">
             <span class="item-number">01</span>
             <span class="item-name">Ensalada César</span>
           </div>
         </li>
 
         <li class="menu-item" data-index="02">
+          <div class="specular-top"></div>
+          <div class="specular-bottom"></div>
           <div class="red-indicator"></div>
-          <div class="item-pill">
+          <div class="item-content">
             <span class="item-number">02</span>
             <span class="item-name">Pizza Diávola</span>
           </div>
         </li>
 
         <li class="menu-item" data-index="03">
+          <div class="specular-top"></div>
+          <div class="specular-bottom"></div>
           <div class="red-indicator"></div>
-          <div class="item-pill">
+          <div class="item-content">
             <span class="item-number">03</span>
             <span class="item-name">Cheeseburger</span>
           </div>
         </li>
 
         <li class="menu-item" data-index="04">
+          <div class="specular-top"></div>
+          <div class="specular-bottom"></div>
           <div class="red-indicator"></div>
-          <div class="item-pill">
+          <div class="item-content">
             <span class="item-number">04</span>
             <span class="item-name">Burrata italiana</span>
           </div>
         </li>
 
         <li class="menu-item" data-index="05">
+          <div class="specular-top"></div>
+          <div class="specular-bottom"></div>
           <div class="red-indicator"></div>
-          <div class="item-pill">
+          <div class="item-content">
             <span class="item-number">05</span>
             <span class="item-name">Pizza de la casa</span>
           </div>
         </li>
 
         <li class="menu-item" data-index="06">
+          <div class="specular-top"></div>
+          <div class="specular-bottom"></div>
           <div class="red-indicator"></div>
-          <div class="item-pill">
+          <div class="item-content">
             <span class="item-number">06</span>
             <span class="item-name">Ensalada Caprese</span>
           </div>
         </li>
 
         <li class="menu-item" data-index="07">
+          <div class="specular-top"></div>
+          <div class="specular-bottom"></div>
           <div class="red-indicator"></div>
-          <div class="item-pill">
+          <div class="item-content">
             <span class="item-number">07</span>
             <span class="item-name">Pizza especial</span>
           </div>
         </li>
 
         <li class="menu-item" data-index="08">
+          <div class="specular-top"></div>
+          <div class="specular-bottom"></div>
           <div class="red-indicator"></div>
-          <div class="item-pill">
+          <div class="item-content">
             <span class="item-number">08</span>
             <span class="item-name">Ensalada César</span>
           </div>
         </li>
 
         <li class="menu-item" data-index="09">
+          <div class="specular-top"></div>
+          <div class="specular-bottom"></div>
           <div class="red-indicator"></div>
-          <div class="item-pill">
+          <div class="item-content">
             <span class="item-number">09</span>
             <span class="item-name">Pizza Diávola</span>
           </div>
         </li>
 
         <li class="menu-item" data-index="10">
+          <div class="specular-top"></div>
+          <div class="specular-bottom"></div>
           <div class="red-indicator"></div>
-          <div class="item-pill">
+          <div class="item-content">
             <span class="item-number">10</span>
             <span class="item-name">Cheeseburger</span>
           </div>
         </li>
 
         <li class="menu-item" data-index="11">
+          <div class="specular-top"></div>
+          <div class="specular-bottom"></div>
           <div class="red-indicator"></div>
-          <div class="item-pill">
+          <div class="item-content">
             <span class="item-number">11</span>
             <span class="item-name">Burrata italiana</span>
           </div>
         </li>
 
         <li class="menu-item" data-index="12">
+          <div class="specular-top"></div>
+          <div class="specular-bottom"></div>
           <div class="red-indicator"></div>
-          <div class="item-pill">
+          <div class="item-content">
             <span class="item-number">12</span>
             <span class="item-name">Pizza de la casa</span>
           </div>
         </li>
 
         <li class="menu-item" data-index="13">
+          <div class="specular-top"></div>
+          <div class="specular-bottom"></div>
           <div class="red-indicator"></div>
-          <div class="item-pill">
+          <div class="item-content">
             <span class="item-number">13</span>
             <span class="item-name">Ensalada Caprese</span>
           </div>
         </li>
 
         <li class="menu-item" data-index="14">
+          <div class="specular-top"></div>
+          <div class="specular-bottom"></div>
           <div class="red-indicator"></div>
-          <div class="item-pill">
+          <div class="item-content">
             <span class="item-number">14</span>
             <span class="item-name">Pizza especial</span>
           </div>
         </li>
 
         <li class="menu-item" data-index="15">
+          <div class="specular-top"></div>
+          <div class="specular-bottom"></div>
           <div class="red-indicator"></div>
-          <div class="item-pill">
+          <div class="item-content">
             <span class="item-number">15</span>
             <span class="item-name">Pizza de la casa</span>
           </div>
@@ -518,7 +597,7 @@
         });
       });
 
-      // Disparador AR preparado para la siguiente fase
+      // Disparador AR
       btnAr.addEventListener('click', () => {
         console.log('Botón "Ver en tu mesa" presionado');
       });
