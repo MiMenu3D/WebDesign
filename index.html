@@ -1,4 +1,4 @@
-<!-- Versión: WebDesign v2.02 -->
+<!-- Versión: WebDesign v2.03 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -7,7 +7,7 @@
   
   <!-- FORZADO DE MODO OSCURO -->
   <meta name="color-scheme" content="dark">
-  <meta name="theme-color" content="#060709">
+  <meta name="theme-color" content="#040507">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   
   <title>Menú 3D</title>
@@ -33,7 +33,7 @@
       color-scheme: dark;
       --color-btn: #BA0D36;
       --color-btn-glow: rgba(186, 13, 54, 0.5);
-      --color-bg-base: #060709;
+      --color-bg-base: #040507;
       --color-text: #FFFFFF;
       --font-fredoka: 'Fredoka', -apple-system, BlinkMacSystemFont, sans-serif;
       --ease-webflow: cubic-bezier(0.25, 1, 0.5, 1);
@@ -63,14 +63,14 @@
       background-color: var(--color-bg-base);
     }
 
-    /* Atmósfera de fondo: Negro puro a la izquierda, azul zafiro/petróleo a la derecha */
+    /* Gradiente ambiental: Negro puro a la izquierda, azul zafiro/petróleo a la derecha */
     .bg-gradient {
       position: absolute;
       inset: 0;
       background:
-        radial-gradient(circle at 100% 15%, #0c1b2e 0%, transparent 60%),
-        radial-gradient(circle at 100% 85%, #07131e 0%, transparent 55%),
-        radial-gradient(circle at 0% 50%, #040507 0%, transparent 70%),
+        radial-gradient(circle at 100% 20%, #0c1b2e 0%, transparent 60%),
+        radial-gradient(circle at 100% 80%, #07131e 0%, transparent 55%),
+        radial-gradient(circle at 0% 50%, #030405 0%, transparent 70%),
         var(--color-bg-base);
       z-index: 1;
     }
@@ -87,7 +87,7 @@
       flex-direction: column;
       justify-content: flex-end;
       align-items: center;
-      background: radial-gradient(circle at 50% 60%, #15161b 0%, #08090c 85%);
+      background: radial-gradient(circle at 50% 60%, #15161b 0%, #07080a 85%);
       border-bottom: 1px solid rgba(255, 255, 255, 0.04);
     }
 
@@ -99,7 +99,7 @@
       align-items: center;
     }
 
-    /* Botón "Ver en tu mesa" en capa superior absoluta */
+    /* Botón "Ver en tu mesa" */
     .btn-ar {
       position: absolute;
       bottom: -19px;
@@ -125,7 +125,7 @@
     }
 
     /* ==========================================================================
-       4. ZONA INFERIOR: MENÚ Y TEXTURA METAL CONFINADA
+       4. ZONA INFERIOR: MENÚ Y CASCADA INFINITA CON REPETILE (MIRROR EDGES)
        ========================================================================== */
     .menu-section {
       position: relative;
@@ -136,42 +136,61 @@
       padding-top: 24px;
     }
 
-    /* Contenedor de Textura: Flotación Vertical Pura (Eje Y real de pantalla) */
+    /* Contenedor de la cascada con calado hacia el texto y filtro de turbulencia */
     .metal-flow-container {
       position: absolute;
-      top: -15%;
-      right: -10%;
+      top: 0;
+      right: 0;
       width: 70%;
-      height: 130%;
+      height: 100%;
       z-index: 2;
       pointer-events: none;
-      opacity: 0.25;
       overflow: hidden;
+      opacity: 0.20;
       -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 35%, #000 100%);
       mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.5) 35%, #000 100%);
-      animation: verticalScreenFlow 14s ease-in-out infinite alternate;
+      filter: brightness(0.55) contrast(1.35) url(#liquid-distortion);
+      -webkit-filter: brightness(0.55) contrast(1.35) url(#liquid-distortion);
+    }
+
+    /* Pista de Cascada Continua (2 copias para bucle infinito sin costuras) */
+    .waterfall-track {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 200%;
+      animation: infiniteWaterfall 22s linear infinite;
       will-change: transform;
     }
 
-    @keyframes verticalScreenFlow {
+    @keyframes infiniteWaterfall {
       0% {
-        transform: translateY(-6%);
-      }
-      50% {
         transform: translateY(0%);
       }
       100% {
-        transform: translateY(6%);
+        transform: translateY(-50%);
       }
     }
 
-    /* Lienzo rotado 90º desacoplado de las coordenadas de traslación */
-    .metal-rotator {
+    .metal-tile {
+      position: relative;
+      width: 100%;
+      height: 50%;
+      overflow: hidden;
+    }
+
+    /* Segunda copia invertida en espejo (Mirror Edges) */
+    .metal-tile.mirror {
+      transform: scaleY(-1);
+    }
+
+    .metal-tile-rotator {
       position: absolute;
       top: 50%;
       left: 50%;
-      width: 180%;
-      height: 180%;
+      width: 170%;
+      height: 170%;
       transform: translate(-50%, -50%) rotate(-90deg);
     }
 
@@ -182,7 +201,7 @@
       display: block;
     }
 
-    /* Degradados de desvanecimiento superior e inferior (Estilo Webflow) */
+    /* Fades de scroll superior e inferior */
     .fade-top, .fade-bottom {
       position: absolute;
       left: 0;
@@ -194,16 +213,16 @@
 
     .fade-top {
       top: 0;
-      background: linear-gradient(to bottom, var(--color-bg-base) 10%, rgba(6, 7, 9, 0) 100%);
+      background: linear-gradient(to bottom, var(--color-bg-base) 10%, rgba(4, 5, 7, 0) 100%);
     }
 
     .fade-bottom {
       bottom: 0;
-      background: linear-gradient(to top, var(--color-bg-base) 15%, rgba(6, 7, 9, 0) 100%);
+      background: linear-gradient(to top, var(--color-bg-base) 15%, rgba(4, 5, 7, 0) 100%);
     }
 
     /* ==========================================================================
-       5. LISTA DE PLATOS Y GLASSMORPHISM
+       5. LISTA DE PLATOS Y COMPORTAMIENTO DE SELECCIÓN
        ========================================================================== */
     .menu-list {
       position: relative;
@@ -220,21 +239,67 @@
       display: none;
     }
 
-    /* Elemento de la lista (No seleccionado: Opacidad 75%) */
+    /* Elemento de fila */
     .menu-item {
       position: relative;
+      padding: 0;
+      cursor: pointer;
+      opacity: 0.75;
+      transition: opacity 0.35s var(--ease-webflow);
+    }
+
+    .menu-item.active {
+      opacity: 1;
+    }
+
+    /* 1. LÍNEA ROJA (Fija en left: 24px, 100% altura, revelada al desplazarse el botón) */
+    .red-indicator {
+      position: absolute;
+      left: 24px;
+      top: 0;
+      bottom: 0;
+      width: 3.5px;
+      background-color: var(--color-btn);
+      box-shadow: 0 0 10px rgba(186, 13, 54, 0.75);
+      opacity: 0;
+      transition: opacity 0.25s var(--ease-webflow);
+      z-index: 5;
+    }
+
+    .menu-item.active .red-indicator {
+      opacity: 1;
+    }
+
+    /* 2. PASTILLA DE CRISTAL DESPLAZABLE */
+    .item-pill {
+      position: relative;
+      z-index: 10;
       display: flex;
       align-items: center;
       padding: 14px 24px;
-      cursor: pointer;
-      opacity: 0.75;
       border-top: 1px solid transparent;
       border-bottom: 1px solid transparent;
       transition: 
         transform 0.35s var(--ease-webflow),
-        opacity 0.35s var(--ease-webflow),
         background 0.35s var(--ease-webflow),
         border-color 0.35s var(--ease-webflow);
+    }
+
+    /* Al activarse: desplazamiento a +40px alineando número con el texto inferior */
+    .menu-item.active .item-pill {
+      transform: translateX(40px);
+      background: linear-gradient(
+        90deg, 
+        rgba(255, 255, 255, 0.16) 0%, 
+        rgba(255, 255, 255, 0.04) 55%, 
+        rgba(255, 255, 255, 0) 100%
+      );
+      backdrop-filter: blur(8px) brightness(1.25) contrast(1.15);
+      -webkit-backdrop-filter: blur(8px) brightness(1.25) contrast(1.15);
+      
+      /* Bordes de cristal blanco al 50% */
+      border-top: 1px solid rgba(255, 255, 255, 0.5);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
     }
 
     /* Número (-25% escala aprox, Fredoka Light) */
@@ -244,7 +309,7 @@
       color: #D1D5DB;
       margin-right: 18px;
       letter-spacing: 0.5px;
-      transition: opacity 0.35s var(--ease-webflow);
+      width: 22px; /* Ancho fijo para garantizar alineación exacta */
     }
 
     /* Nombre del plato (-13% escala, Fredoka Expanded Medium) */
@@ -253,51 +318,8 @@
       font-variation-settings: "wdth" 125, "wght" 500;
       letter-spacing: 0.3px;
       color: #FFFFFF;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
       transition: text-shadow 0.35s var(--ease-webflow);
-    }
-
-    /* ==========================================================================
-       6. ESTADO SELECCIONADO / ACTIVO
-       ========================================================================== */
-    .menu-item.active {
-      opacity: 1;
-      transform: translateX(14px); /* Desplazamiento Webflow */
-      background: linear-gradient(
-        90deg, 
-        rgba(255, 255, 255, 0.16) 0%, 
-        rgba(255, 255, 255, 0.04) 55%, 
-        rgba(255, 255, 255, 0) 100%
-      );
-      backdrop-filter: blur(10px) brightness(1.2) contrast(1.1);
-      -webkit-backdrop-filter: blur(10px) brightness(1.2) contrast(1.1);
-      
-      /* Bisel de cristal Glassmorphism */
-      border-top: 1px solid rgba(255, 255, 255, 0.32);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.45);
-    }
-
-    /* PLAN B: Línea vertical estilizada roja (#BA0D36) revelada a la izquierda */
-    .menu-item::before {
-      content: '';
-      position: absolute;
-      left: 6px;
-      top: 18%;
-      bottom: 18%;
-      width: 3.5px;
-      border-radius: 3px;
-      background-color: var(--color-btn);
-      box-shadow: 0 0 10px rgba(186, 13, 54, 0.85);
-      opacity: 0;
-      transform: scaleY(0.3);
-      transition: 
-        opacity 0.35s var(--ease-webflow),
-        transform 0.35s var(--ease-webflow);
-    }
-
-    .menu-item.active::before {
-      opacity: 1;
-      transform: scaleY(1);
     }
 
     .menu-item.active .item-name {
@@ -306,6 +328,16 @@
   </style>
 </head>
 <body>
+
+  <!-- FILTRO SVG ESTÁTICO (Calculado una sola vez por GPU, cero coste en tiempo real) -->
+  <svg style="position: absolute; width: 0; height: 0; pointer-events: none;" aria-hidden="true">
+    <defs>
+      <filter id="liquid-distortion" x="-20%" y="-20%" width="140%" height="140%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.004 0.018" numOctaves="2" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="32" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
 
   <main class="app-container">
     
@@ -320,13 +352,24 @@
       <button type="button" class="btn-ar" id="btn-ar">Ver en tu mesa</button>
     </section>
 
-    <!-- ZONA INFERIOR: Menú de 15 Platos + Textura Confinada -->
+    <!-- ZONA INFERIOR: Menú de 15 Platos + Cascada Infinita -->
     <section class="menu-section">
       
-      <!-- Textura de metal líquido animada en eje Y puro -->
+      <!-- Textura de metal líquido en Cascada Continua (RepeTile Mirror) -->
       <div class="metal-flow-container">
-        <div class="metal-rotator">
-          <img src="./metal.jpg" alt="Fondo metálico" class="metal-img">
+        <div class="waterfall-track">
+          <!-- Copia A -->
+          <div class="metal-tile">
+            <div class="metal-tile-rotator">
+              <img src="./metal.jpg" alt="Fondo metálico" class="metal-img">
+            </div>
+          </div>
+          <!-- Copia B en espejo para unión continua -->
+          <div class="metal-tile mirror">
+            <div class="metal-tile-rotator">
+              <img src="./metal.jpg" alt="Fondo metálico espejo" class="metal-img">
+            </div>
+          </div>
         </div>
       </div>
 
@@ -334,68 +377,129 @@
       <div class="fade-top"></div>
       <div class="fade-bottom"></div>
 
-      <!-- Lista completa de 15 platos -->
+      <!-- Lista completa de 15 platos con arquitectura de revelado -->
       <ul class="menu-list" id="menu-list">
+        
         <li class="menu-item active" data-index="01">
-          <span class="item-number">01</span>
-          <span class="item-name">Ensalada César</span>
+          <div class="red-indicator"></div>
+          <div class="item-pill">
+            <span class="item-number">01</span>
+            <span class="item-name">Ensalada César</span>
+          </div>
         </li>
+
         <li class="menu-item" data-index="02">
-          <span class="item-number">02</span>
-          <span class="item-name">Pizza Diávola</span>
+          <div class="red-indicator"></div>
+          <div class="item-pill">
+            <span class="item-number">02</span>
+            <span class="item-name">Pizza Diávola</span>
+          </div>
         </li>
+
         <li class="menu-item" data-index="03">
-          <span class="item-number">03</span>
-          <span class="item-name">Cheeseburger</span>
+          <div class="red-indicator"></div>
+          <div class="item-pill">
+            <span class="item-number">03</span>
+            <span class="item-name">Cheeseburger</span>
+          </div>
         </li>
+
         <li class="menu-item" data-index="04">
-          <span class="item-number">04</span>
-          <span class="item-name">Burrata italiana</span>
+          <div class="red-indicator"></div>
+          <div class="item-pill">
+            <span class="item-number">04</span>
+            <span class="item-name">Burrata italiana</span>
+          </div>
         </li>
+
         <li class="menu-item" data-index="05">
-          <span class="item-number">05</span>
-          <span class="item-name">Pizza de la casa</span>
+          <div class="red-indicator"></div>
+          <div class="item-pill">
+            <span class="item-number">05</span>
+            <span class="item-name">Pizza de la casa</span>
+          </div>
         </li>
+
         <li class="menu-item" data-index="06">
-          <span class="item-number">06</span>
-          <span class="item-name">Ensalada Caprese</span>
+          <div class="red-indicator"></div>
+          <div class="item-pill">
+            <span class="item-number">06</span>
+            <span class="item-name">Ensalada Caprese</span>
+          </div>
         </li>
+
         <li class="menu-item" data-index="07">
-          <span class="item-number">07</span>
-          <span class="item-name">Pizza especial</span>
+          <div class="red-indicator"></div>
+          <div class="item-pill">
+            <span class="item-number">07</span>
+            <span class="item-name">Pizza especial</span>
+          </div>
         </li>
+
         <li class="menu-item" data-index="08">
-          <span class="item-number">08</span>
-          <span class="item-name">Ensalada César</span>
+          <div class="red-indicator"></div>
+          <div class="item-pill">
+            <span class="item-number">08</span>
+            <span class="item-name">Ensalada César</span>
+          </div>
         </li>
+
         <li class="menu-item" data-index="09">
-          <span class="item-number">09</span>
-          <span class="item-name">Pizza Diávola</span>
+          <div class="red-indicator"></div>
+          <div class="item-pill">
+            <span class="item-number">09</span>
+            <span class="item-name">Pizza Diávola</span>
+          </div>
         </li>
+
         <li class="menu-item" data-index="10">
-          <span class="item-number">10</span>
-          <span class="item-name">Cheeseburger</span>
+          <div class="red-indicator"></div>
+          <div class="item-pill">
+            <span class="item-number">10</span>
+            <span class="item-name">Cheeseburger</span>
+          </div>
         </li>
+
         <li class="menu-item" data-index="11">
-          <span class="item-number">11</span>
-          <span class="item-name">Burrata italiana</span>
+          <div class="red-indicator"></div>
+          <div class="item-pill">
+            <span class="item-number">11</span>
+            <span class="item-name">Burrata italiana</span>
+          </div>
         </li>
+
         <li class="menu-item" data-index="12">
-          <span class="item-number">12</span>
-          <span class="item-name">Pizza de la casa</span>
+          <div class="red-indicator"></div>
+          <div class="item-pill">
+            <span class="item-number">12</span>
+            <span class="item-name">Pizza de la casa</span>
+          </div>
         </li>
+
         <li class="menu-item" data-index="13">
-          <span class="item-number">13</span>
-          <span class="item-name">Ensalada Caprese</span>
+          <div class="red-indicator"></div>
+          <div class="item-pill">
+            <span class="item-number">13</span>
+            <span class="item-name">Ensalada Caprese</span>
+          </div>
         </li>
+
         <li class="menu-item" data-index="14">
-          <span class="item-number">14</span>
-          <span class="item-name">Pizza especial</span>
+          <div class="red-indicator"></div>
+          <div class="item-pill">
+            <span class="item-number">14</span>
+            <span class="item-name">Pizza especial</span>
+          </div>
         </li>
+
         <li class="menu-item" data-index="15">
-          <span class="item-number">15</span>
-          <span class="item-name">Pizza de la casa</span>
+          <div class="red-indicator"></div>
+          <div class="item-pill">
+            <span class="item-number">15</span>
+            <span class="item-name">Pizza de la casa</span>
+          </div>
         </li>
+
       </ul>
     </section>
 
@@ -406,7 +510,7 @@
       const menuItems = document.querySelectorAll('.menu-item');
       const btnAr = document.getElementById('btn-ar');
 
-      // Cambio de plato activo al pulsar
+      // Cambio de selección activo
       menuItems.forEach((item) => {
         item.addEventListener('click', () => {
           menuItems.forEach(i => i.classList.remove('active'));
@@ -414,9 +518,9 @@
         });
       });
 
-      // Event listener reservado para la funcionalidad AR final
+      // Disparador AR preparado para la siguiente fase
       btnAr.addEventListener('click', () => {
-        console.log('Botón AR presionado.');
+        console.log('Botón "Ver en tu mesa" presionado');
       });
     });
   </script>
