@@ -1,4 +1,4 @@
-<!-- Versión: WebDesign v2.22 -->
+<!-- Versión: WebDesign v2.23 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -62,7 +62,7 @@
     }
 
     /* ==========================================================================
-       3. ZONA SUPERIOR: VISOR 3D Y BOTÓN AR
+       3. ZONA SUPERIOR: VISOR 3D Y BOTÓN AR (CENTRADO ÓPTICO AJUSTADO)
        ========================================================================== */
     .viewer-section {
       position: relative;
@@ -109,9 +109,10 @@
       justify-content: center;
     }
 
+    /* Centrado óptico exacto para tipografía Fredoka */
     .btn-ar span {
       display: inline-block;
-      transform: translateY(-1px);
+      transform: translateY(-2px);
     }
 
     .btn-ar:active {
@@ -120,7 +121,7 @@
     }
 
     /* ==========================================================================
-       4. ZONA INFERIOR: CERÁMICA NEUMÓRFICA 3D (-15% ESCALA GLOBAL)
+       4. ZONA INFERIOR: CERÁMICA NEUMÓRFICA 3D (DEGRADADOS DE PROFUNDIDAD PROFUNDA)
        ========================================================================== */
     .menu-section {
       position: relative;
@@ -141,67 +142,67 @@
       overflow: hidden;
     }
 
-    /* Estructura común: Luz longitudinal a 90deg */
+    /* Estructura común: Luz longitudinal amplia de alta gama */
     .ceramic-layer {
       position: absolute;
       top: 50%;
       left: 50%;
       transform-origin: center center;
-      background: linear-gradient(90deg, #E6EBF1 0%, #F0F4F8 40%, #F9FBFC 75%, #FFFFFF 100%);
+      background: linear-gradient(90deg, #DCE3EB 0%, #E7ECF2 26%, #F3F6F9 60%, #FFFFFF 100%);
       will-change: transform;
     }
 
-    /* CAPA 1: Plato central nítido (255x191px, r: 44px) */
+    /* CAPA 1: Plato central con concavidad continua y sombra profunda (255x191px, r: 44px) */
     .layer-1 {
       width: 255px;
       height: 191px;
       border-radius: 44px;
       z-index: 5;
       box-shadow: 
-        7px 10px 18px rgba(18, 25, 40, 0.08),
-        2px 3px 5px rgba(18, 25, 40, 0.03),
-        inset 12px 0px 16px rgba(175, 186, 200, 0.35),
-        inset -12px 0px 16px rgba(255, 255, 255, 0.95),
-        inset 0px 1px 2px rgba(255, 255, 255, 0.85);
+        8px 14px 24px rgba(18, 25, 40, 0.08),
+        2px 4px 8px rgba(18, 25, 40, 0.03),
+        inset 28px 0px 36px rgba(155, 172, 194, 0.42),
+        inset -28px 0px 36px rgba(255, 255, 255, 0.96),
+        inset 0px 2px 4px rgba(255, 255, 255, 0.90);
     }
 
-    /* CAPA 2: Terraza 1 (343x280px, r: 80px) */
+    /* CAPA 2: Terraza 1 con onda envolvente (343x280px, r: 80px) */
     .layer-2 {
       width: 343px;
       height: 280px;
       border-radius: 80px;
       z-index: 4;
       box-shadow: 
-        10px 14px 22px rgba(18, 25, 40, 0.06),
-        3px 4px 8px rgba(18, 25, 40, 0.025),
-        inset 14px 0px 20px rgba(175, 186, 200, 0.26),
-        inset -14px 0px 20px rgba(255, 255, 255, 0.88);
+        12px 18px 30px rgba(18, 25, 40, 0.065),
+        3px 5px 10px rgba(18, 25, 40, 0.025),
+        inset 34px 0px 44px rgba(155, 172, 194, 0.32),
+        inset -34px 0px 44px rgba(255, 255, 255, 0.90);
     }
 
-    /* CAPA 3: Terraza 2 (432x368px, r: 124px) */
+    /* CAPA 3: Terraza 2 con transición suave (432x368px, r: 124px) */
     .layer-3 {
       width: 432px;
       height: 368px;
       border-radius: 124px;
       z-index: 3;
       box-shadow: 
-        14px 19px 30px rgba(18, 25, 40, 0.048),
-        4px 6px 12px rgba(18, 25, 40, 0.02),
-        inset 17px 0px 26px rgba(175, 186, 200, 0.20),
-        inset -17px 0px 26px rgba(255, 255, 255, 0.82);
+        16px 24px 38px rgba(18, 25, 40, 0.05),
+        4px 7px 14px rgba(18, 25, 40, 0.02),
+        inset 40px 0px 52px rgba(155, 172, 194, 0.24),
+        inset -40px 0px 52px rgba(255, 255, 255, 0.85);
     }
 
-    /* CAPA 4: Base gigante (520x456px, r: 168px) */
+    /* CAPA 4: Base gigante difusa (520x456px, r: 168px) */
     .layer-4 {
       width: 520px;
       height: 456px;
       border-radius: 168px;
       z-index: 2;
       box-shadow: 
-        19px 26px 42px rgba(18, 25, 40, 0.038),
-        6px 9px 16px rgba(18, 25, 40, 0.015),
-        inset 20px 0px 32px rgba(175, 186, 200, 0.14),
-        inset -20px 0px 32px rgba(255, 255, 255, 0.75);
+        22px 32px 50px rgba(18, 25, 40, 0.04),
+        6px 10px 18px rgba(18, 25, 40, 0.015),
+        inset 46px 0px 60px rgba(155, 172, 194, 0.18),
+        inset -46px 0px 60px rgba(255, 255, 255, 0.78);
     }
 
     /* Fades de scroll desacoplados */
@@ -225,7 +226,7 @@
     }
 
     /* ==========================================================================
-       5. LISTA DE PLATOS Y GLASSMORPHISM (SOMBRA AMBIENTAL + CÁUSTICAS)
+       5. LISTA DE PLATOS Y GLASSMORPHISM (CÁUSTICA EXTERIOR REUBICADA)
        ========================================================================== */
     .menu-list {
       position: relative;
@@ -250,7 +251,7 @@
       z-index: 10;
     }
 
-    /* 1. SOMBRA AMBIENTAL BAJO EL CRISTAL (BASE OSCURA DE ELEVACIÓN NEUMÓRFICA) */
+    /* 1. SOMBRA AMBIENTAL BAJO EL CRISTAL (BASE OSCURA DE CONTRASTE) */
     .glass-shadow {
       position: absolute;
       left: 33px;
@@ -261,7 +262,7 @@
       opacity: 0;
       pointer-events: none;
       box-shadow: 
-        0 12px 26px rgba(18, 25, 40, 0.14),
+        0 14px 28px rgba(18, 25, 40, 0.15),
         0 4px 10px rgba(18, 25, 40, 0.08);
       transition: opacity 0.35s var(--ease-webflow);
       z-index: 2;
@@ -271,11 +272,11 @@
       opacity: 1;
     }
 
-    /* 2. CÁUSTICA 1: PROYECCIÓN EN "SCREEN" SOBRE EL ÁREA SOMBREADA */
+    /* 2. CÁUSTICA 1 (EXTERIOR): REUBICADA 15px ABAJO (-23px) Y 40px A LA IZQUIERDA (right: 64px) */
     .caustic-bg {
       position: absolute;
-      right: 24px;
-      bottom: -8px;
+      right: 64px;
+      bottom: -23px;
       width: 140px;
       height: 26px;
       border-radius: 50%;
@@ -322,7 +323,7 @@
       -webkit-backdrop-filter: blur(6px);
     }
 
-    /* 4. CÁUSTICA 2: REFRACCIÓN EN EL CRISTAL (-10% TAMAÑO, +15% INTENSIDAD) */
+    /* 4. CÁUSTICA 2 (INTERIOR): DENTRO DEL CRISTAL */
     .caustic-glass {
       position: absolute;
       right: 20px;
@@ -697,7 +698,7 @@
       const btnAr = document.getElementById('btn-ar');
 
       // ======================================================================
-      // 1. CINEMÁTICA Y FÍSICA: MUELLE DE TORSIÓN Y PULSO DE ESCALA SIN REBOTES
+      // 1. CINEMÁTICA Y FÍSICA: EFECTO VENTILADOR A PILAS (INERCIA PESADA + TORSIÓN)
       // ======================================================================
       const layerElements = [
         document.querySelector('.layer-1'),
@@ -709,18 +710,19 @@
       const BASE_SPEED = 0.055;
       let currentDirection = 1;
 
-      // Configuración de muelle de torsión rápida y compresión plástica
+      // Escalonado temporal amplio (170ms delta) y par de torsión con inercia
       const layerConfigs = [
-        { delay: 0,   twistKick: 0.28, twistDamp: 0.92, scaleDip: 0.962, parallaxK: 1.80 },
-        { delay: 40,  twistKick: 0.52, twistDamp: 0.91, scaleDip: 0.972, parallaxK: 1.28 }, // Capa 2: Golpe rápido de torsión
-        { delay: 100, twistKick: 0.22, twistDamp: 0.93, scaleDip: 0.982, parallaxK: 0.72 },
-        { delay: 160, twistKick: 0.08, twistDamp: 0.94, scaleDip: 0.990, parallaxK: 0.20 }
+        { delay: 0,   twistPower: 0.42, twistDamp: 0.958, scaleDip: 0.962, parallaxK: 1.80 },
+        { delay: 170, twistPower: 0.82, twistDamp: 0.955, scaleDip: 0.972, parallaxK: 1.28 }, // Capa 2: Golpe y mayor recorrido angular
+        { delay: 340, twistPower: 0.35, twistDamp: 0.962, scaleDip: 0.982, parallaxK: 0.72 },
+        { delay: 510, twistPower: 0.12, twistDamp: 0.968, scaleDip: 0.990, parallaxK: 0.20 }
       ];
 
       const layers = layerElements.map((el, i) => ({
         el,
         angle: 45,
         twistSpeed: 0,
+        twistAcc: 0,
         scale: 1,
         targetScale: 1,
         isCompressing: false,
@@ -747,30 +749,35 @@
       // 3. BUCLE DE GPU CONTINUO (60 - 120 FPS)
       // ======================================================================
       function kineticLoop() {
-        // Suavizado Lerp 20% más progresivo
+        // Suavizado Lerp de Parallax
         currentParallaxY += (targetParallaxY - currentParallaxY) * 0.096;
 
         layers.forEach((layer, i) => {
           const conf = layer.config;
 
-          // 1. Movimiento angular + Deceleración del impulso de torsión ("Muelle de torsión")
-          layer.angle += (BASE_SPEED * currentDirection) + layer.twistSpeed;
-          layer.twistSpeed *= conf.twistDamp;
+          // Inercia "Ventilador a pilas":
+          // 1. Aceleración progresiva con arranque perezoso (Ease-In)
+          layer.twistSpeed += (layer.twistAcc - layer.twistSpeed) * 0.18;
+          layer.twistAcc *= 0.88;
 
-          // Sincronización asintótica suave con la Capa 1 (paralelismo 100% garantizado)
+          // 2. Deceleración viscosa prolongada (Ease-Out perezoso)
+          layer.twistSpeed *= conf.twistDamp;
+          layer.angle += (BASE_SPEED * currentDirection) + layer.twistSpeed;
+
+          // 3. Sincronización asintótica suave con la Capa 1 (paralelismo final 100% perfecto)
           if (i > 0) {
             const angleDiff = layers[0].angle - layer.angle;
-            layer.angle += angleDiff * 0.015;
+            layer.angle += angleDiff * 0.012;
           }
 
-          // 2. Escala: 1 bajada rápida + 1 subida suave continua (CERO oscilaciones / rebotes)
+          // 4. Escala: 1 bajada rápida reactiva + 1 subida suave continua (CERO rebotes)
           const lerpRate = layer.isCompressing ? 0.22 : 0.055;
           layer.scale += (layer.targetScale - layer.scale) * lerpRate;
 
-          // 3. Parallax vertical por capa
+          // 5. Parallax vertical por capa
           const layerY = currentParallaxY * conf.parallaxK;
 
-          // Renderizado final
+          // Renderizado final GPU
           layer.el.style.transform = `translate(-50%, calc(-50% + ${layerY}px)) rotate(${layer.angle}deg) scale(${layer.scale})`;
         });
 
@@ -780,7 +787,7 @@
       requestAnimationFrame(kineticLoop);
 
       // ======================================================================
-      // 4. DISPARO DE REACCIÓN EN CADENA: TORSIÓN DIRECTA Y PULSO EN 2 FASES
+      // 4. DISPARO DE REACCIÓN EN CADENA: ENCADENAMIENTO ESCALONADO REAL
       // ======================================================================
       function triggerChainReaction() {
         currentDirection *= -1;
@@ -792,14 +799,14 @@
           layer.timeoutId = setTimeout(() => {
             const conf = layer.config;
             
-            // Impulso de torsión elástica directo (Capa 2 lidera con giro rápido)
-            layer.twistSpeed = currentDirection * conf.twistKick;
+            // Impulso de aceleración de torsión (Inicia el motor del ventilador)
+            layer.twistAcc = currentDirection * conf.twistPower;
 
             // FASE 1: Hundimiento rápido reactivo (~180ms)
             layer.isCompressing = true;
             layer.targetScale = conf.scaleDip;
 
-            // FASE 2: Retorno continuo y suave a escala 1.0 (duración total suave ~500ms)
+            // FASE 2: Retorno continuo y suave a escala 1.0 (~500ms)
             layer.recoveryTimeoutId = setTimeout(() => {
               layer.isCompressing = false;
               layer.targetScale = 1.0;
