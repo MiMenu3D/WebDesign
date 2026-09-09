@@ -1,4 +1,4 @@
-<!-- Versión: WebDesign v2.11 -->
+<!-- Versión: WebDesign v2.12 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -112,7 +112,7 @@
     }
 
     /* ==========================================================================
-       4. ZONA INFERIOR: CERÁMICA NEUMÓRFICA 3D (PLATO Y TERRAZAS EN EL AIRE)
+       4. ZONA INFERIOR: CERÁMICA NEUMÓRFICA 3D (LUZ LONGITUDINAL Y EQUIDISTANTE)
        ========================================================================== */
     .menu-section {
       position: relative;
@@ -121,7 +121,7 @@
       width: 100%;
       overflow: hidden;
       padding-top: 24px;
-      background: radial-gradient(circle at 50% 45%, #F7F9FB 0%, #E2E6EC 100%);
+      background: radial-gradient(circle at 50% 45%, #F9FAFC 0%, #E6EAEF 100%);
     }
 
     /* Escenario cinético */
@@ -133,69 +133,71 @@
       overflow: hidden;
     }
 
-    /* Estructura común: Luz longitudinal de extremo corto a extremo corto */
+    /* Estructura común: Luz longitudinal estricta de extremo corto a extremo corto (90deg) */
     .ceramic-layer {
       position: absolute;
       top: 50%;
       left: 50%;
       transform-origin: center center;
-      background: linear-gradient(135deg, #DCE2E9 0%, #EBF0F5 38%, #F7F9FC 72%, #FFFFFF 100%);
+      background: linear-gradient(90deg, #E6EBF1 0%, #F0F4F8 40%, #F9FBFC 75%, #FFFFFF 100%);
       will-change: transform;
     }
 
-    /* CAPA 1: Plato cerámico superior (Corte fino y concavidad definida) */
+    /* CAPA 1: Plato cerámico superior (273x205px | +5% tamaño) */
     .layer-1 {
-      width: 260px;
-      height: 195px;
-      border-radius: 46px;
+      width: 273px;
+      height: 205px;
+      border-radius: 48px;
       z-index: 5;
       border: 1px solid rgba(255, 255, 255, 0.85);
       box-shadow: 
-        14px 18px 28px rgba(18, 25, 40, 0.12),
-        4px 6px 10px rgba(18, 25, 40, 0.05),
-        inset 14px 14px 24px rgba(170, 182, 198, 0.45),
-        inset -14px -14px 24px rgba(255, 255, 255, 0.95),
-        inset 1.5px 1.5px 2px rgba(255, 255, 255, 1);
+        10px 14px 22px rgba(18, 25, 40, 0.08),
+        3px 4px 8px rgba(18, 25, 40, 0.035),
+        inset 14px 0px 20px rgba(175, 186, 200, 0.38),
+        inset -14px 0px 20px rgba(255, 255, 255, 0.95),
+        inset 0px 1.5px 2px rgba(255, 255, 255, 0.90);
     }
 
-    /* CAPA 2: Primera terraza (Corte más suave y sombra más amplia) */
+    /* CAPA 2: Primera terraza (+140x105px | Paso simétrico equidistante) */
     .layer-2 {
-      width: 430px;
-      height: 320px;
-      border-radius: 76px;
+      width: 413px;
+      height: 310px;
+      border-radius: 78px;
       z-index: 4;
+      border: 1px solid rgba(255, 255, 255, 0.75);
       box-shadow: 
-        20px 28px 48px rgba(18, 25, 40, 0.09),
-        6px 9px 18px rgba(18, 25, 40, 0.04),
-        inset 18px 18px 32px rgba(170, 182, 198, 0.35),
-        inset -18px -18px 32px rgba(255, 255, 255, 0.90),
-        inset 2px 2px 4px rgba(255, 255, 255, 0.85);
+        14px 18px 30px rgba(18, 25, 40, 0.065),
+        4px 6px 12px rgba(18, 25, 40, 0.03),
+        inset 16px 0px 24px rgba(175, 186, 200, 0.30),
+        inset -16px 0px 24px rgba(255, 255, 255, 0.90);
     }
 
-    /* CAPA 3: Segunda terraza (Relieve orgánico y difuminado) */
+    /* CAPA 3: Segunda terraza (+140x105px | Paso simétrico equidistante) */
     .layer-3 {
-      width: 630px;
-      height: 470px;
-      border-radius: 110px;
+      width: 553px;
+      height: 415px;
+      border-radius: 108px;
       z-index: 3;
+      border: 1px solid rgba(255, 255, 255, 0.65);
       box-shadow: 
-        28px 38px 68px rgba(18, 25, 40, 0.07),
-        10px 14px 28px rgba(18, 25, 40, 0.03),
-        inset 24px 24px 44px rgba(170, 182, 198, 0.25),
-        inset -24px -24px 44px rgba(255, 255, 255, 0.85);
+        18px 24px 40px rgba(18, 25, 40, 0.055),
+        6px 8px 16px rgba(18, 25, 40, 0.025),
+        inset 18px 0px 28px rgba(175, 186, 200, 0.24),
+        inset -18px 0px 28px rgba(255, 255, 255, 0.85);
     }
 
-    /* CAPA 4: Terraza base gigante (Onda flotante ultra suave sin arista dura) */
+    /* CAPA 4: Terraza base gigante (+140x105px | Paso simétrico equidistante) */
     .layer-4 {
-      width: 860px;
-      height: 640px;
-      border-radius: 148px;
+      width: 693px;
+      height: 520px;
+      border-radius: 138px;
       z-index: 2;
+      border: 1px solid rgba(255, 255, 255, 0.55);
       box-shadow: 
-        38px 50px 95px rgba(18, 25, 40, 0.06),
-        14px 20px 40px rgba(18, 25, 40, 0.02),
-        inset 32px 32px 64px rgba(170, 182, 198, 0.18),
-        inset -32px -32px 64px rgba(255, 255, 255, 0.80);
+        24px 32px 55px rgba(18, 25, 40, 0.045),
+        8px 12px 22px rgba(18, 25, 40, 0.02),
+        inset 22px 0px 34px rgba(175, 186, 200, 0.18),
+        inset -22px 0px 34px rgba(255, 255, 255, 0.80);
     }
 
     /* Fades de scroll superior e inferior */
@@ -219,7 +221,7 @@
     }
 
     /* ==========================================================================
-       5. LISTA DE PLATOS, CRISTAL ESMERILADO Y TIPOGRAFÍA
+       5. LISTA DE PLATOS Y CRISTAL ESMERILADO (FROSTED GLASS A+B)
        ========================================================================== */
     .menu-list {
       position: relative;
@@ -244,7 +246,7 @@
       z-index: 10;
     }
 
-    /* CRISTAL ESMERILADO (FROSTED GLASS) */
+    /* CRISTAL ESMERILADO: Refracción Densa + Sombra de Flotación Neumórfica */
     .glass-overlay {
       position: absolute;
       left: 33px;
@@ -253,14 +255,15 @@
       bottom: 0;
       background: linear-gradient(
         90deg, 
-        rgba(255, 255, 255, 0.70) 0%, 
-        rgba(255, 255, 255, 0.40) 55%, 
+        rgba(255, 255, 255, 0.82) 0%, 
+        rgba(255, 255, 255, 0.48) 55%, 
         rgba(255, 255, 255, 0.08) 100%
       );
-      backdrop-filter: blur(0px);
-      -webkit-backdrop-filter: blur(0px);
+      backdrop-filter: blur(0px) brightness(100%) saturate(100%);
+      -webkit-backdrop-filter: blur(0px) brightness(100%) saturate(100%);
       opacity: 0;
       pointer-events: none;
+      box-shadow: 0 4px 16px rgba(18, 25, 40, 0.065), inset 0 1px 0 rgba(255, 255, 255, 0.95);
       transition: 
         backdrop-filter 0.35s var(--ease-webflow),
         -webkit-backdrop-filter 0.35s var(--ease-webflow),
@@ -270,11 +273,11 @@
 
     .menu-item.active .glass-overlay {
       opacity: 1;
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(14px) brightness(105%) saturate(120%);
+      -webkit-backdrop-filter: blur(14px) brightness(105%) saturate(120%);
     }
 
-    /* ESPECULARES SUPERIOR E INFERIOR */
+    /* ESPECULARES REFINADOS SUPERIOR E INFERIOR */
     .specular-top, .specular-bottom {
       position: absolute;
       left: 0;
@@ -286,12 +289,12 @@
 
     .specular-top {
       top: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.95) 35%, rgba(0, 0, 0, 0.08) 70%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.95) 35%, rgba(0, 0, 0, 0.05) 70%, transparent 100%);
     }
 
     .specular-bottom {
       bottom: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.95) 35%, rgba(0, 0, 0, 0.08) 70%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.80) 35%, rgba(18, 25, 40, 0.04) 70%, transparent 100%);
     }
 
     /* RECTÁNGULO ROJO */
@@ -382,7 +385,7 @@
     <!-- ZONA INFERIOR: Fondo de Cerámica 3D y Menú -->
     <section class="menu-section">
       
-      <!-- 4 Capas de Cerámica Concéntricas -->
+      <!-- 4 Capas de Cerámica Concéntricas Equidistantes -->
       <div class="ceramic-viewport" id="ceramic-viewport">
         <div class="ceramic-layer layer-4"></div>
         <div class="ceramic-layer layer-3"></div>
@@ -588,39 +591,49 @@
       const btnAr = document.getElementById('btn-ar');
 
       // ======================================================================
-      // FÍSICA MARINA FLUIDA: MEDUSA EN EL MAR (HUNDIMIENTO + GIRO SEDOSO)
+      // CINEMÁTICA Y FÍSICA MARINA: REACCIÓN EN CADENA CON TORSIÓN ELÁSTICA
       // ======================================================================
       const layerElements = [
-        document.querySelector('.layer-1'), // Capa 1: Plato central
-        document.querySelector('.layer-2'), // Capa 2: Terraza 1
-        document.querySelector('.layer-3'), // Capa 3: Terraza 2
-        document.querySelector('.layer-4')  // Capa 4: Terraza base
+        document.querySelector('.layer-1'), // Capa 1: Plato central ("Cabeza")
+        document.querySelector('.layer-2'), // Capa 2: Terraza 1 ("Hombros")
+        document.querySelector('.layer-3'), // Capa 3: Terraza 2 ("Torso")
+        document.querySelector('.layer-4')  // Capa 4: Terraza base ("Base densa")
       ];
 
       const BASE_SPEED = 0.055; // Velocidad de crucero lenta e hipnótica
-      let currentDirection = 1; // 1 = Horario (Derecha), -1 = Antihorario (Izquierda)
+      let currentDirection = 1;  // 1 = Horario (Derecha), -1 = Antihorario (Izquierda)
+
+      // Calibración por capa (gradiente de peso, velocidad, retraso y amortiguación)
+      const layerConfigs = [
+        { delay: 0,   boostFactor: 1.50, cruiseFactor: 1.00, scaleDip: 0.982, lerpRate: 0.028, springK: 0.020, damp: 0.92 },
+        { delay: 180, boostFactor: 1.38, cruiseFactor: 0.94, scaleDip: 0.985, lerpRate: 0.020, springK: 0.016, damp: 0.93 },
+        { delay: 360, boostFactor: 1.28, cruiseFactor: 0.88, scaleDip: 0.988, lerpRate: 0.015, springK: 0.013, damp: 0.94 },
+        { delay: 540, boostFactor: 1.18, cruiseFactor: 0.82, scaleDip: 0.991, lerpRate: 0.011, springK: 0.010, damp: 0.95 }
+      ];
 
       // Estado dinámico por capa
-      const layers = layerElements.map((el) => ({
+      const layers = layerElements.map((el, i) => ({
         el,
         angle: 45, // Inclinación diagonal exacta
-        currentSpeed: BASE_SPEED,
-        targetSpeed: BASE_SPEED,
+        currentSpeed: BASE_SPEED * layerConfigs[i].cruiseFactor,
+        targetSpeed: BASE_SPEED * layerConfigs[i].cruiseFactor,
         scale: 1,
         targetScale: 1,
-        scaleVel: 0
+        scaleVel: 0,
+        config: layerConfigs[i],
+        timeoutId: null
       }));
 
-      // Bucle de física a 60-120 fps en GPU
+      // Bucle cinético a 60-120 fps en GPU
       function kineticLoop() {
         layers.forEach((layer) => {
-          // Inercia angular ultra suave (cambio de dirección sedoso, sin saltos)
-          layer.currentSpeed += (layer.targetSpeed - layer.currentSpeed) * 0.016;
+          // Inercia angular con fricción suave hacia la velocidad objetivo
+          layer.currentSpeed += (layer.targetSpeed - layer.currentSpeed) * layer.config.lerpRate;
           layer.angle += layer.currentSpeed;
 
-          // Física de medusa: Hundimiento inicial y recuperación elástica prolongada (~2.2s)
-          const scaleForce = (layer.targetScale - layer.scale) * 0.045;
-          layer.scaleVel = (layer.scaleVel + scaleForce) * 0.88;
+          // Física de recuperación elástica prolongada (~3.2s)
+          const scaleForce = (layer.targetScale - layer.scale) * layer.config.springK;
+          layer.scaleVel = (layer.scaleVel + scaleForce) * layer.config.damp;
           layer.scale += layer.scaleVel;
 
           // Renderizado en GPU
@@ -632,24 +645,30 @@
 
       requestAnimationFrame(kineticLoop);
 
-      // Disparo de la onda al pulsar cualquier plato
-      function triggerJellyfishPulse() {
-        // Invertir sentido de giro permanentemente para este clic
+      // Disparo de la reacción en cadena elástica (Efecto Torsión / Muelle)
+      function triggerChainReaction() {
         currentDirection *= -1;
-        const newCruiseSpeed = currentDirection * BASE_SPEED;
 
-        layers.forEach((layer, i) => {
-          const delay = i * 150; // Retraso escalonado pausado (150ms entre capas)
+        layers.forEach((layer) => {
+          // Cancelar temporizadores previos si el usuario pulsa con rapidez
+          if (layer.timeoutId) {
+            clearTimeout(layer.timeoutId);
+          }
 
-          setTimeout(() => {
-            // 1. Desaceleración y giro suave en el nuevo sentido
-            layer.targetSpeed = newCruiseSpeed;
+          // Cada capa mantiene su inercia previa hasta que se cumple su retraso individual
+          layer.timeoutId = setTimeout(() => {
+            const conf = layer.config;
 
-            // 2. Hundimiento inicial (compresión suave hacia adentro)
-            layer.scale = 0.962;
-            layer.scaleVel = -0.003;
+            // 1. Micro-impulso sutil en el nuevo sentido de giro
+            layer.currentSpeed = currentDirection * BASE_SPEED * conf.boostFactor;
+            // Desaceleración progresiva hacia su velocidad de crucero amortiguada
+            layer.targetSpeed = currentDirection * BASE_SPEED * conf.cruiseFactor;
+
+            // 2. Onda de hundimiento suave con compresión reducida y lenta recuperación
+            layer.scale = conf.scaleDip;
+            layer.scaleVel = -0.0008;
             layer.targetScale = 1.0;
-          }, delay);
+          }, layer.config.delay);
         });
       }
 
@@ -658,7 +677,7 @@
         item.addEventListener('click', () => {
           menuItems.forEach(i => i.classList.remove('active'));
           item.classList.add('active');
-          triggerJellyfishPulse();
+          triggerChainReaction();
         });
       });
 
