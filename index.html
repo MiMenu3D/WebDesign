@@ -1,4 +1,4 @@
-<!-- Versión: WebDesign v2.12 -->
+<!-- Versión: WebDesign v2.14 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -112,7 +112,7 @@
     }
 
     /* ==========================================================================
-       4. ZONA INFERIOR: CERÁMICA NEUMÓRFICA 3D (LUZ LONGITUDINAL Y EQUIDISTANTE)
+       4. ZONA INFERIOR: CERÁMICA NEUMÓRFICA (OFFSET CONSTANTE + SIN FILETE)
        ========================================================================== */
     .menu-section {
       position: relative;
@@ -133,7 +133,7 @@
       overflow: hidden;
     }
 
-    /* Estructura común: Luz longitudinal estricta de extremo corto a extremo corto (90deg) */
+    /* Estructura común: Luz longitudinal a 90deg (extremo corto a extremo corto) */
     .ceramic-layer {
       position: absolute;
       top: 50%;
@@ -143,61 +143,57 @@
       will-change: transform;
     }
 
-    /* CAPA 1: Plato cerámico superior (273x205px | +5% tamaño) */
+    /* CAPA 1: Plato central nítido (300x225px | D=65px) */
     .layer-1 {
-      width: 273px;
-      height: 205px;
-      border-radius: 48px;
+      width: 300px;
+      height: 225px;
+      border-radius: 52px;
       z-index: 5;
-      border: 1px solid rgba(255, 255, 255, 0.85);
       box-shadow: 
-        10px 14px 22px rgba(18, 25, 40, 0.08),
-        3px 4px 8px rgba(18, 25, 40, 0.035),
-        inset 14px 0px 20px rgba(175, 186, 200, 0.38),
-        inset -14px 0px 20px rgba(255, 255, 255, 0.95),
-        inset 0px 1.5px 2px rgba(255, 255, 255, 0.90);
+        8px 12px 20px rgba(18, 25, 40, 0.08),
+        2px 4px 6px rgba(18, 25, 40, 0.03),
+        inset 14px 0px 18px rgba(175, 186, 200, 0.35),
+        inset -14px 0px 18px rgba(255, 255, 255, 0.95),
+        inset 0px 1px 2px rgba(255, 255, 255, 0.85);
     }
 
-    /* CAPA 2: Primera terraza (+140x105px | Paso simétrico equidistante) */
+    /* CAPA 2: Terraza 1 (+130px ancho/alto | Radio: 117px | Bisel orgánico) */
     .layer-2 {
-      width: 413px;
-      height: 310px;
-      border-radius: 78px;
+      width: 430px;
+      height: 355px;
+      border-radius: 117px;
       z-index: 4;
-      border: 1px solid rgba(255, 255, 255, 0.75);
       box-shadow: 
-        14px 18px 30px rgba(18, 25, 40, 0.065),
-        4px 6px 12px rgba(18, 25, 40, 0.03),
-        inset 16px 0px 24px rgba(175, 186, 200, 0.30),
-        inset -16px 0px 24px rgba(255, 255, 255, 0.90);
+        12px 16px 26px rgba(18, 25, 40, 0.06),
+        3px 5px 10px rgba(18, 25, 40, 0.025),
+        inset 16px 0px 24px rgba(175, 186, 200, 0.26),
+        inset -16px 0px 24px rgba(255, 255, 255, 0.88);
     }
 
-    /* CAPA 3: Segunda terraza (+140x105px | Paso simétrico equidistante) */
+    /* CAPA 3: Terraza 2 (+130px ancho/alto | Radio: 182px | Valle suave) */
     .layer-3 {
-      width: 553px;
-      height: 415px;
-      border-radius: 108px;
+      width: 560px;
+      height: 485px;
+      border-radius: 182px;
       z-index: 3;
-      border: 1px solid rgba(255, 255, 255, 0.65);
       box-shadow: 
-        18px 24px 40px rgba(18, 25, 40, 0.055),
-        6px 8px 16px rgba(18, 25, 40, 0.025),
-        inset 18px 0px 28px rgba(175, 186, 200, 0.24),
-        inset -18px 0px 28px rgba(255, 255, 255, 0.85);
+        16px 22px 34px rgba(18, 25, 40, 0.048),
+        5px 7px 14px rgba(18, 25, 40, 0.02),
+        inset 20px 0px 30px rgba(175, 186, 200, 0.20),
+        inset -20px 0px 30px rgba(255, 255, 255, 0.82);
     }
 
-    /* CAPA 4: Terraza base gigante (+140x105px | Paso simétrico equidistante) */
+    /* CAPA 4: Base gigante (+130px ancho/alto | Radio: 247px | Duna de fondo) */
     .layer-4 {
-      width: 693px;
-      height: 520px;
-      border-radius: 138px;
+      width: 690px;
+      height: 615px;
+      border-radius: 247px;
       z-index: 2;
-      border: 1px solid rgba(255, 255, 255, 0.55);
       box-shadow: 
-        24px 32px 55px rgba(18, 25, 40, 0.045),
-        8px 12px 22px rgba(18, 25, 40, 0.02),
-        inset 22px 0px 34px rgba(175, 186, 200, 0.18),
-        inset -22px 0px 34px rgba(255, 255, 255, 0.80);
+        22px 30px 48px rgba(18, 25, 40, 0.038),
+        7px 10px 18px rgba(18, 25, 40, 0.015),
+        inset 24px 0px 36px rgba(175, 186, 200, 0.14),
+        inset -24px 0px 36px rgba(255, 255, 255, 0.75);
     }
 
     /* Fades de scroll superior e inferior */
@@ -221,7 +217,7 @@
     }
 
     /* ==========================================================================
-       5. LISTA DE PLATOS Y CRISTAL ESMERILADO (FROSTED GLASS A+B)
+       5. LISTA DE PLATOS Y LIQUID GLASS (DISTORSIÓN + CÁUSTICA + SOMBRA LÍQUIDA)
        ========================================================================== */
     .menu-list {
       position: relative;
@@ -246,7 +242,7 @@
       z-index: 10;
     }
 
-    /* CRISTAL ESMERILADO: Refracción Densa + Sombra de Flotación Neumórfica */
+    /* LIQUID GLASS: Base v2.11 + Blur 4px + Cáustica de Cristal + Sombra Líquida */
     .glass-overlay {
       position: absolute;
       left: 33px;
@@ -255,15 +251,20 @@
       bottom: 0;
       background: linear-gradient(
         90deg, 
-        rgba(255, 255, 255, 0.82) 0%, 
-        rgba(255, 255, 255, 0.48) 55%, 
+        rgba(255, 255, 255, 0.70) 0%, 
+        rgba(255, 255, 255, 0.40) 55%, 
         rgba(255, 255, 255, 0.08) 100%
       );
-      backdrop-filter: blur(0px) brightness(100%) saturate(100%);
-      -webkit-backdrop-filter: blur(0px) brightness(100%) saturate(100%);
+      backdrop-filter: blur(0px);
+      -webkit-backdrop-filter: blur(0px);
       opacity: 0;
       pointer-events: none;
-      box-shadow: 0 4px 16px rgba(18, 25, 40, 0.065), inset 0 1px 0 rgba(255, 255, 255, 0.95);
+      /* Sombra de lente líquida + Bisel cáustico interno */
+      box-shadow: 
+        0 10px 24px rgba(18, 25, 40, 0.07),
+        0 2px 6px rgba(18, 25, 40, 0.09),
+        inset 1.5px 2px 3px rgba(255, 255, 255, 0.95),
+        inset -1.5px -2px 6px rgba(255, 255, 255, 0.60);
       transition: 
         backdrop-filter 0.35s var(--ease-webflow),
         -webkit-backdrop-filter 0.35s var(--ease-webflow),
@@ -273,11 +274,11 @@
 
     .menu-item.active .glass-overlay {
       opacity: 1;
-      backdrop-filter: blur(14px) brightness(105%) saturate(120%);
-      -webkit-backdrop-filter: blur(14px) brightness(105%) saturate(120%);
+      backdrop-filter: blur(4px) url(#liquid-lens);
+      -webkit-backdrop-filter: blur(4px);
     }
 
-    /* ESPECULARES REFINADOS SUPERIOR E INFERIOR */
+    /* ESPECULARES SUPERIOR E INFERIOR (v2.11) */
     .specular-top, .specular-bottom {
       position: absolute;
       left: 0;
@@ -289,12 +290,12 @@
 
     .specular-top {
       top: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.95) 35%, rgba(0, 0, 0, 0.05) 70%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.95) 35%, rgba(0, 0, 0, 0.08) 70%, transparent 100%);
     }
 
     .specular-bottom {
       bottom: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.80) 35%, rgba(18, 25, 40, 0.04) 70%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.95) 35%, rgba(0, 0, 0, 0.08) 70%, transparent 100%);
     }
 
     /* RECTÁNGULO ROJO */
@@ -372,6 +373,17 @@
 </head>
 <body>
 
+  <!-- Filtro SVG: Distorsión de Lente Líquida en Óvalo Vertical -->
+  <svg style="position: absolute; width: 0; height: 0; pointer-events: none;">
+    <defs>
+      <filter id="liquid-lens" x="-20%" y="-20%" width="140%" height="140%">
+        <!-- Frecuencia asimétrica con elongación vertical tipo lente anamórfica -->
+        <feTurbulence type="fractalNoise" baseFrequency="0.008 0.0022" numOctaves="2" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="14" xChannelSelector="R" yChannelSelector="G" result="displaced" />
+      </filter>
+    </defs>
+  </svg>
+
   <main class="app-container">
 
     <!-- ZONA SUPERIOR: Visor 3D reservado + Botón AR -->
@@ -385,7 +397,7 @@
     <!-- ZONA INFERIOR: Fondo de Cerámica 3D y Menú -->
     <section class="menu-section">
       
-      <!-- 4 Capas de Cerámica Concéntricas Equidistantes -->
+      <!-- 4 Capas de Cerámica Concéntricas Equidistantes (D = 65px constantes) -->
       <div class="ceramic-viewport" id="ceramic-viewport">
         <div class="ceramic-layer layer-4"></div>
         <div class="ceramic-layer layer-3"></div>
@@ -587,36 +599,36 @@
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
+      const menuList = document.getElementById('menu-list');
       const menuItems = document.querySelectorAll('.menu-item');
       const btnAr = document.getElementById('btn-ar');
 
       // ======================================================================
-      // CINEMÁTICA Y FÍSICA MARINA: REACCIÓN EN CADENA CON TORSIÓN ELÁSTICA
+      // 1. CINEMÁTICA Y FÍSICA: ÁNGULO MAESTRO + TORSIÓN ELÁSTICA ESCALONADA
       // ======================================================================
       const layerElements = [
         document.querySelector('.layer-1'), // Capa 1: Plato central ("Cabeza")
         document.querySelector('.layer-2'), // Capa 2: Terraza 1 ("Hombros")
         document.querySelector('.layer-3'), // Capa 3: Terraza 2 ("Torso")
-        document.querySelector('.layer-4')  // Capa 4: Terraza base ("Base densa")
+        document.querySelector('.layer-4')  // Capa 4: Terraza base ("Base gigante")
       ];
 
       const BASE_SPEED = 0.055; // Velocidad de crucero lenta e hipnótica
-      let currentDirection = 1;  // 1 = Horario (Derecha), -1 = Antihorario (Izquierda)
+      let masterAngle = 45;     // Ángulo maestro global (garantiza paralelismo final exacto)
+      let masterDirection = 1;  // 1 = Horario, -1 = Antihorario
 
-      // Calibración por capa (gradiente de peso, velocidad, retraso y amortiguación)
+      // Calibración por capa (desaceleración y amortiguación elástica diferenciada)
       const layerConfigs = [
-        { delay: 0,   boostFactor: 1.50, cruiseFactor: 1.00, scaleDip: 0.982, lerpRate: 0.028, springK: 0.020, damp: 0.92 },
-        { delay: 180, boostFactor: 1.38, cruiseFactor: 0.94, scaleDip: 0.985, lerpRate: 0.020, springK: 0.016, damp: 0.93 },
-        { delay: 360, boostFactor: 1.28, cruiseFactor: 0.88, scaleDip: 0.988, lerpRate: 0.015, springK: 0.013, damp: 0.94 },
-        { delay: 540, boostFactor: 1.18, cruiseFactor: 0.82, scaleDip: 0.991, lerpRate: 0.011, springK: 0.010, damp: 0.95 }
+        { delay: 0,   swingAmp: 3.2, settleRate: 0.038, scaleDip: 0.990,  springK: 0.0050, damp: 0.965, parallaxK: 1.15 }, // Capa 1 frena en ~1.2s
+        { delay: 180, swingAmp: 2.5, settleRate: 0.024, scaleDip: 0.993,  springK: 0.0042, damp: 0.968, parallaxK: 1.05 }, // Capa 2 frena en ~2.0s
+        { delay: 360, swingAmp: 1.8, settleRate: 0.017, scaleDip: 0.996,  springK: 0.0035, damp: 0.970, parallaxK: 0.95 }, // Capa 3 frena en ~2.8s
+        { delay: 540, swingAmp: 1.2, settleRate: 0.012, scaleDip: 0.9985, springK: 0.0028, damp: 0.972, parallaxK: 0.85 }  // Capa 4 frena en ~3.8s
       ];
 
       // Estado dinámico por capa
       const layers = layerElements.map((el, i) => ({
         el,
-        angle: 45, // Inclinación diagonal exacta
-        currentSpeed: BASE_SPEED * layerConfigs[i].cruiseFactor,
-        targetSpeed: BASE_SPEED * layerConfigs[i].cruiseFactor,
+        angleOffset: 0, // Desfase transitorio relativo al ángulo maestro
         scale: 1,
         targetScale: 1,
         scaleVel: 0,
@@ -624,20 +636,46 @@
         timeoutId: null
       }));
 
-      // Bucle cinético a 60-120 fps en GPU
-      function kineticLoop() {
-        layers.forEach((layer) => {
-          // Inercia angular con fricción suave hacia la velocidad objetivo
-          layer.currentSpeed += (layer.targetSpeed - layer.currentSpeed) * layer.config.lerpRate;
-          layer.angle += layer.currentSpeed;
+      // ======================================================================
+      // 2. PARALLAX DINÁMICO CON SCROLL INTERPOLADO (64px de recorrido total)
+      // ======================================================================
+      let targetParallaxY = 32;  // Posición inicial rebajada (+32px en reposo)
+      let currentParallaxY = 32;
 
-          // Física de recuperación elástica prolongada (~3.2s)
+      function updateParallax() {
+        const maxScroll = menuList.scrollHeight - menuList.clientHeight;
+        const progress = maxScroll > 0 ? (menuList.scrollTop / maxScroll) : 0;
+        // Mapeo: de +32px en el primer plato hasta -32px en el último
+        targetParallaxY = 32 - (progress * 64);
+      }
+
+      menuList.addEventListener('scroll', updateParallax, { passive: true });
+
+      // ======================================================================
+      // 3. BUCLE PRINCIPAL DE GPU (60 - 120 FPS)
+      // ======================================================================
+      function kineticLoop() {
+        // Avance continuo del ángulo maestro
+        masterAngle += masterDirection * BASE_SPEED;
+
+        // Inercia fluida del parallax (lerp)
+        currentParallaxY += (targetParallaxY - currentParallaxY) * 0.08;
+
+        layers.forEach((layer) => {
+          // El desfase de torsión decae suavemente a 0 -> todas convergen al mismo ángulo maestro
+          layer.angleOffset += (0 - layer.angleOffset) * layer.config.settleRate;
+          const currentAngle = masterAngle + layer.angleOffset;
+
+          // Recuperación tipo plastilina hiperlenta (~4-5s)
           const scaleForce = (layer.targetScale - layer.scale) * layer.config.springK;
           layer.scaleVel = (layer.scaleVel + scaleForce) * layer.config.damp;
           layer.scale += layer.scaleVel;
 
-          // Renderizado en GPU
-          layer.el.style.transform = `translate(-50%, -50%) rotate(${layer.angle}deg) scale(${layer.scale})`;
+          // Desplazamiento vertical diferenciado por capa
+          const layerY = currentParallaxY * layer.config.parallaxK;
+
+          // Renderizado final en GPU
+          layer.el.style.transform = `translate(-50%, calc(-50% + ${layerY}px)) rotate(${currentAngle}deg) scale(${layer.scale})`;
         });
 
         requestAnimationFrame(kineticLoop);
@@ -645,28 +683,28 @@
 
       requestAnimationFrame(kineticLoop);
 
-      // Disparo de la reacción en cadena elástica (Efecto Torsión / Muelle)
+      // ======================================================================
+      // 4. DISPARO DE REACCIÓN EN CADENA CON TORSIÓN ELÁSTICA (CARLTON KINEMATICS)
+      // ======================================================================
       function triggerChainReaction() {
-        currentDirection *= -1;
+        // Invertir rumbo del ángulo maestro
+        masterDirection *= -1;
 
         layers.forEach((layer) => {
-          // Cancelar temporizadores previos si el usuario pulsa con rapidez
           if (layer.timeoutId) {
             clearTimeout(layer.timeoutId);
           }
 
-          // Cada capa mantiene su inercia previa hasta que se cumple su retraso individual
+          // Inercia escalonada por capa
           layer.timeoutId = setTimeout(() => {
             const conf = layer.config;
 
-            // 1. Micro-impulso sutil en el nuevo sentido de giro
-            layer.currentSpeed = currentDirection * BASE_SPEED * conf.boostFactor;
-            // Desaceleración progresiva hacia su velocidad de crucero amortiguada
-            layer.targetSpeed = currentDirection * BASE_SPEED * conf.cruiseFactor;
+            // 1. Giro elástico con arco amplio transitorio en el nuevo sentido
+            layer.angleOffset += masterDirection * conf.swingAmp;
 
-            // 2. Onda de hundimiento suave con compresión reducida y lenta recuperación
+            // 2. Hundimiento imperceptible y recuperación plástica
             layer.scale = conf.scaleDip;
-            layer.scaleVel = -0.0008;
+            layer.scaleVel = -0.00025;
             layer.targetScale = 1.0;
           }, layer.config.delay);
         });
