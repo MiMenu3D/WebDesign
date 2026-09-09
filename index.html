@@ -1,4 +1,4 @@
-<!-- Versión: WebDesign v2.14 -->
+<!-- Versión: WebDesign v2.15 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -112,7 +112,7 @@
     }
 
     /* ==========================================================================
-       4. ZONA INFERIOR: CERÁMICA NEUMÓRFICA (OFFSET CONSTANTE + SIN FILETE)
+       4. ZONA INFERIOR: CERÁMICA NEUMÓRFICA 3D
        ========================================================================== */
     .menu-section {
       position: relative;
@@ -196,28 +196,8 @@
         inset -24px 0px 36px rgba(255, 255, 255, 0.75);
     }
 
-    /* Fades de scroll superior e inferior */
-    .fade-top, .fade-bottom {
-      position: absolute;
-      left: 0;
-      right: 0;
-      height: 42px;
-      z-index: 25;
-      pointer-events: none;
-    }
-
-    .fade-top {
-      top: 0;
-      background: linear-gradient(to bottom, rgba(238, 242, 246, 0.95) 10%, rgba(238, 242, 246, 0) 100%);
-    }
-
-    .fade-bottom {
-      bottom: 0;
-      background: linear-gradient(to top, rgba(238, 242, 246, 0.95) 15%, rgba(238, 242, 246, 0) 100%);
-    }
-
     /* ==========================================================================
-       5. LISTA DE PLATOS Y LIQUID GLASS (DISTORSIÓN + CÁUSTICA + SOMBRA LÍQUIDA)
+       5. LISTA DE PLATOS Y MÁSCARA DE FUNDIDO FLUIDA (MASK-IMAGE)
        ========================================================================== */
     .menu-list {
       position: relative;
@@ -226,8 +206,11 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       list-style: none;
-      padding: 10px 0 50px 0;
+      padding: 24px 0 60px 0;
       scrollbar-width: none;
+      /* Máscara de transparencia nativa: difumina textos arriba y abajo sin cortes */
+      -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 54px, black calc(100% - 54px), transparent 100%);
+      mask-image: linear-gradient(to bottom, transparent 0%, black 54px, black calc(100% - 54px), transparent 100%);
     }
 
     .menu-list::-webkit-scrollbar {
@@ -242,29 +225,22 @@
       z-index: 10;
     }
 
-    /* LIQUID GLASS: Base v2.11 + Blur 4px + Cáustica de Cristal + Sombra Líquida */
+    /* LIQUID GLASS: Puro cristal transparente + Lente de distorsión x300% */
     .glass-overlay {
       position: absolute;
       left: 33px;
       right: 0;
       top: 0;
       bottom: 0;
-      background: linear-gradient(
-        90deg, 
-        rgba(255, 255, 255, 0.70) 0%, 
-        rgba(255, 255, 255, 0.40) 55%, 
-        rgba(255, 255, 255, 0.08) 100%
-      );
+      background: transparent;
       backdrop-filter: blur(0px);
       -webkit-backdrop-filter: blur(0px);
       opacity: 0;
       pointer-events: none;
-      /* Sombra de lente líquida + Bisel cáustico interno */
       box-shadow: 
-        0 10px 24px rgba(18, 25, 40, 0.07),
-        0 2px 6px rgba(18, 25, 40, 0.09),
-        inset 1.5px 2px 3px rgba(255, 255, 255, 0.95),
-        inset -1.5px -2px 6px rgba(255, 255, 255, 0.60);
+        0 8px 24px rgba(18, 25, 40, 0.06),
+        inset 1.5px 2px 3px rgba(255, 255, 255, 0.90),
+        inset -1.5px -2px 4px rgba(18, 25, 40, 0.04);
       transition: 
         backdrop-filter 0.35s var(--ease-webflow),
         -webkit-backdrop-filter 0.35s var(--ease-webflow),
@@ -278,7 +254,7 @@
       -webkit-backdrop-filter: blur(4px);
     }
 
-    /* ESPECULARES SUPERIOR E INFERIOR (v2.11) */
+    /* ESPECULARES SUPERIOR E INFERIOR */
     .specular-top, .specular-bottom {
       position: absolute;
       left: 0;
@@ -290,12 +266,12 @@
 
     .specular-top {
       top: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.95) 35%, rgba(0, 0, 0, 0.08) 70%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.90) 35%, rgba(0, 0, 0, 0.05) 70%, transparent 100%);
     }
 
     .specular-bottom {
       bottom: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.95) 35%, rgba(0, 0, 0, 0.08) 70%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.85) 35%, rgba(0, 0, 0, 0.04) 70%, transparent 100%);
     }
 
     /* RECTÁNGULO ROJO */
@@ -373,13 +349,12 @@
 </head>
 <body>
 
-  <!-- Filtro SVG: Distorsión de Lente Líquida en Óvalo Vertical -->
+  <!-- Filtro SVG: Distorsión de Lente Líquida aumentada un +300% (scale=88) -->
   <svg style="position: absolute; width: 0; height: 0; pointer-events: none;">
     <defs>
-      <filter id="liquid-lens" x="-20%" y="-20%" width="140%" height="140%">
-        <!-- Frecuencia asimétrica con elongación vertical tipo lente anamórfica -->
-        <feTurbulence type="fractalNoise" baseFrequency="0.008 0.0022" numOctaves="2" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="14" xChannelSelector="R" yChannelSelector="G" result="displaced" />
+      <filter id="liquid-lens" x="-50%" y="-50%" width="200%" height="200%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.005 0.0016" numOctaves="2" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="88" xChannelSelector="R" yChannelSelector="G" result="displaced" />
       </filter>
     </defs>
   </svg>
@@ -397,7 +372,7 @@
     <!-- ZONA INFERIOR: Fondo de Cerámica 3D y Menú -->
     <section class="menu-section">
       
-      <!-- 4 Capas de Cerámica Concéntricas Equidistantes (D = 65px constantes) -->
+      <!-- 4 Capas de Cerámica Concéntricas Equidistantes -->
       <div class="ceramic-viewport" id="ceramic-viewport">
         <div class="ceramic-layer layer-4"></div>
         <div class="ceramic-layer layer-3"></div>
@@ -405,11 +380,7 @@
         <div class="ceramic-layer layer-1"></div>
       </div>
 
-      <!-- Fades de scroll superior e inferior -->
-      <div class="fade-top"></div>
-      <div class="fade-bottom"></div>
-
-      <!-- Lista completa de 15 platos -->
+      <!-- Lista completa de 15 platos con difuminado por máscara CSS -->
       <ul class="menu-list" id="menu-list">
         
         <li class="menu-item active" data-index="01">
@@ -604,31 +575,32 @@
       const btnAr = document.getElementById('btn-ar');
 
       // ======================================================================
-      // 1. CINEMÁTICA Y FÍSICA: ÁNGULO MAESTRO + TORSIÓN ELÁSTICA ESCALONADA
+      // 1. CINEMÁTICA Y FÍSICA: VELOCIDAD CONTINUA PURA (CERO SALTOS DE FRAME)
       // ======================================================================
       const layerElements = [
-        document.querySelector('.layer-1'), // Capa 1: Plato central ("Cabeza")
-        document.querySelector('.layer-2'), // Capa 2: Terraza 1 ("Hombros")
-        document.querySelector('.layer-3'), // Capa 3: Terraza 2 ("Torso")
-        document.querySelector('.layer-4')  // Capa 4: Terraza base ("Base gigante")
+        document.querySelector('.layer-1'), // Capa 1: Plato central
+        document.querySelector('.layer-2'), // Capa 2: Terraza 1
+        document.querySelector('.layer-3'), // Capa 3: Terraza 2
+        document.querySelector('.layer-4')  // Capa 4: Terraza base
       ];
 
-      const BASE_SPEED = 0.055; // Velocidad de crucero lenta e hipnótica
-      let masterAngle = 45;     // Ángulo maestro global (garantiza paralelismo final exacto)
-      let masterDirection = 1;  // 1 = Horario, -1 = Antihorario
+      const BASE_SPEED = 0.055;
+      let currentDirection = 1;
 
-      // Calibración por capa (desaceleración y amortiguación elástica diferenciada)
+      // Parallax inter-capas ampliado un +300% (1.80 a 0.20)
+      // Hundimiento +10% más amplio (scaleDip: 0.988)
       const layerConfigs = [
-        { delay: 0,   swingAmp: 3.2, settleRate: 0.038, scaleDip: 0.990,  springK: 0.0050, damp: 0.965, parallaxK: 1.15 }, // Capa 1 frena en ~1.2s
-        { delay: 180, swingAmp: 2.5, settleRate: 0.024, scaleDip: 0.993,  springK: 0.0042, damp: 0.968, parallaxK: 1.05 }, // Capa 2 frena en ~2.0s
-        { delay: 360, swingAmp: 1.8, settleRate: 0.017, scaleDip: 0.996,  springK: 0.0035, damp: 0.970, parallaxK: 0.95 }, // Capa 3 frena en ~2.8s
-        { delay: 540, swingAmp: 1.2, settleRate: 0.012, scaleDip: 0.9985, springK: 0.0028, damp: 0.972, parallaxK: 0.85 }  // Capa 4 frena en ~3.8s
+        { delay: 0,   turnRate: 0.016, scaleDip: 0.988, springK: 0.0050, damp: 0.965, parallaxK: 1.80 },
+        { delay: 200, turnRate: 0.012, scaleDip: 0.991, springK: 0.0042, damp: 0.968, parallaxK: 1.28 },
+        { delay: 400, turnRate: 0.009, scaleDip: 0.994, springK: 0.0035, damp: 0.970, parallaxK: 0.72 },
+        { delay: 600, turnRate: 0.006, scaleDip: 0.997, springK: 0.0028, damp: 0.972, parallaxK: 0.20 }
       ];
 
-      // Estado dinámico por capa
       const layers = layerElements.map((el, i) => ({
         el,
-        angleOffset: 0, // Desfase transitorio relativo al ángulo maestro
+        angle: 45,
+        speed: BASE_SPEED * currentDirection,
+        targetSpeed: BASE_SPEED * currentDirection,
         scale: 1,
         targetScale: 1,
         scaleVel: 0,
@@ -637,45 +609,49 @@
       }));
 
       // ======================================================================
-      // 2. PARALLAX DINÁMICO CON SCROLL INTERPOLADO (64px de recorrido total)
+      // 2. PARALLAX DINÁMICO (+20% RECORRIDO: 78px TOTAL)
       // ======================================================================
-      let targetParallaxY = 32;  // Posición inicial rebajada (+32px en reposo)
-      let currentParallaxY = 32;
+      let targetParallaxY = 39;
+      let currentParallaxY = 39;
 
       function updateParallax() {
         const maxScroll = menuList.scrollHeight - menuList.clientHeight;
         const progress = maxScroll > 0 ? (menuList.scrollTop / maxScroll) : 0;
-        // Mapeo: de +32px en el primer plato hasta -32px en el último
-        targetParallaxY = 32 - (progress * 64);
+        targetParallaxY = 39 - (progress * 78);
       }
 
       menuList.addEventListener('scroll', updateParallax, { passive: true });
 
       // ======================================================================
-      // 3. BUCLE PRINCIPAL DE GPU (60 - 120 FPS)
+      // 3. BUCLE DE GPU FLUIDO (60 - 120 FPS)
       // ======================================================================
       function kineticLoop() {
-        // Avance continuo del ángulo maestro
-        masterAngle += masterDirection * BASE_SPEED;
-
-        // Inercia fluida del parallax (lerp)
+        // Inercia de scroll
         currentParallaxY += (targetParallaxY - currentParallaxY) * 0.08;
 
-        layers.forEach((layer) => {
-          // El desfase de torsión decae suavemente a 0 -> todas convergen al mismo ángulo maestro
-          layer.angleOffset += (0 - layer.angleOffset) * layer.config.settleRate;
-          const currentAngle = masterAngle + layer.angleOffset;
+        layers.forEach((layer, i) => {
+          const conf = layer.config;
 
-          // Recuperación tipo plastilina hiperlenta (~4-5s)
-          const scaleForce = (layer.targetScale - layer.scale) * layer.config.springK;
-          layer.scaleVel = (layer.scaleVel + scaleForce) * layer.config.damp;
+          // 1. Integración continua de aceleración angular (sin saltos instantáneos)
+          layer.speed += (layer.targetSpeed - layer.speed) * conf.turnRate;
+          layer.angle += layer.speed;
+
+          // Suave acoplamiento asintótico hacia la Capa 1 para garantizar concéntrico final
+          if (i > 0) {
+            const angleDiff = layers[0].angle - layer.angle;
+            layer.angle += angleDiff * 0.0025;
+          }
+
+          // 2. Muelle tipo plastilina hiperlenta
+          const scaleForce = (layer.targetScale - layer.scale) * conf.springK;
+          layer.scaleVel = (layer.scaleVel + scaleForce) * conf.damp;
           layer.scale += layer.scaleVel;
 
-          // Desplazamiento vertical diferenciado por capa
-          const layerY = currentParallaxY * layer.config.parallaxK;
+          // 3. Parallax 3D ampliado
+          const layerY = currentParallaxY * conf.parallaxK;
 
-          // Renderizado final en GPU
-          layer.el.style.transform = `translate(-50%, calc(-50% + ${layerY}px)) rotate(${currentAngle}deg) scale(${layer.scale})`;
+          // Renderizado final
+          layer.el.style.transform = `translate(-50%, calc(-50% + ${layerY}px)) rotate(${layer.angle}deg) scale(${layer.scale})`;
         });
 
         requestAnimationFrame(kineticLoop);
@@ -684,27 +660,24 @@
       requestAnimationFrame(kineticLoop);
 
       // ======================================================================
-      // 4. DISPARO DE REACCIÓN EN CADENA CON TORSIÓN ELÁSTICA (CARLTON KINEMATICS)
+      // 4. DISPARO DE REACCIÓN EN CADENA ESCALONADA
       // ======================================================================
       function triggerChainReaction() {
-        // Invertir rumbo del ángulo maestro
-        masterDirection *= -1;
+        currentDirection *= -1;
 
         layers.forEach((layer) => {
           if (layer.timeoutId) {
             clearTimeout(layer.timeoutId);
           }
 
-          // Inercia escalonada por capa
           layer.timeoutId = setTimeout(() => {
             const conf = layer.config;
+            // Nueva velocidad objetivo: arranca el frenado suave y progresivo
+            layer.targetSpeed = currentDirection * BASE_SPEED;
 
-            // 1. Giro elástico con arco amplio transitorio en el nuevo sentido
-            layer.angleOffset += masterDirection * conf.swingAmp;
-
-            // 2. Hundimiento imperceptible y recuperación plástica
+            // Hundimiento aumentado y recuperación lenta
             layer.scale = conf.scaleDip;
-            layer.scaleVel = -0.00025;
+            layer.scaleVel = -0.0003;
             layer.targetScale = 1.0;
           }, layer.config.delay);
         });
