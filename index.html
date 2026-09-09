@@ -1,16 +1,14 @@
-<!-- Versión: WebDesign v2.08 -->
+<!-- Versión: WebDesign v2.09 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   
-  <!-- FORZADO DE MODO OSCURO -->
-  <meta name="color-scheme" content="dark">
   <meta name="theme-color" content="#040507">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   
-  <title>Menú 3D</title>
+  <title>Menú 3D - Luxury Ceramic</title>
 
   <!-- Google Fonts: Fredoka Variable -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,11 +28,11 @@
     }
 
     :root {
-      color-scheme: dark;
       --color-btn: #BA0D36;
-      --color-btn-glow: rgba(186, 13, 54, 0.5);
-      --color-bg-base: #040507;
-      --color-text: #FFFFFF;
+      --color-btn-glow: rgba(186, 13, 54, 0.45);
+      --color-bg-menu: #EBF0F5;
+      --color-text-active: #000000;
+      --color-text-muted: #1A1D24;
       --font-fredoka: 'Fredoka', -apple-system, BlinkMacSystemFont, sans-serif;
       --ease-webflow: cubic-bezier(0.25, 1, 0.5, 1);
     }
@@ -42,14 +40,14 @@
     html, body {
       width: 100%;
       height: 100dvh;
-      background-color: var(--color-bg-base);
-      color: var(--color-text);
+      background-color: #040507;
+      color: var(--color-text-active);
       font-family: var(--font-fredoka);
       overflow: hidden;
     }
 
     /* ==========================================================================
-       2. CONTENEDOR PRINCIPAL Y FONDO AMBIENTAL
+       2. CONTENEDOR PRINCIPAL
        ========================================================================== */
     .app-container {
       position: relative;
@@ -60,23 +58,11 @@
       overflow: hidden;
       display: flex;
       flex-direction: column;
-      background-color: var(--color-bg-base);
-    }
-
-    /* Atmósfera ambiental */
-    .bg-gradient {
-      position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 100% 20%, #0c1b2e 0%, transparent 60%),
-        radial-gradient(circle at 100% 80%, #07131e 0%, transparent 55%),
-        radial-gradient(circle at 0% 50%, #030405 0%, transparent 70%),
-        var(--color-bg-base);
-      z-index: 1;
+      background-color: var(--color-bg-menu);
     }
 
     /* ==========================================================================
-       3. ZONA SUPERIOR: VISOR Y BOTÓN AR
+       3. ZONA SUPERIOR: VISOR 3D Y BOTÓN AR
        ========================================================================== */
     .viewer-section {
       position: relative;
@@ -87,8 +73,9 @@
       flex-direction: column;
       justify-content: flex-end;
       align-items: center;
-      background: radial-gradient(circle at 50% 60%, #15161b 0%, #07080a 85%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      background: radial-gradient(circle at 50% 60%, #171920 0%, #060709 88%);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.18);
     }
 
     .viewer-slot {
@@ -125,7 +112,7 @@
     }
 
     /* ==========================================================================
-       4. ZONA INFERIOR: CASCADAS CONTINUAS (IZQ SUBE / DER BAJA)
+       4. ZONA INFERIOR: FONDO DE CERÁMICA 3D Y MENÚ
        ========================================================================== */
     .menu-section {
       position: relative;
@@ -134,97 +121,123 @@
       width: 100%;
       overflow: hidden;
       padding-top: 24px;
+      background: radial-gradient(circle at 50% 45%, #F7F9FB 0%, #E2E6EC 100%);
     }
 
-    /* Contenedores de metal: opacidad 0.25 y contraste 1.55 */
-    .metal-flow-container {
+    /* Escenario cinético de las 4 capas */
+    .ceramic-viewport {
       position: absolute;
-      top: 0;
-      height: 100%;
-      z-index: 2;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       pointer-events: none;
+      z-index: 1;
       overflow: hidden;
-      opacity: 0.25;
-      filter: saturate(0.20) brightness(0.70) contrast(1.55) url(#liquid-distortion);
-      -webkit-filter: saturate(0.20) brightness(0.70) contrast(1.55) url(#liquid-distortion);
     }
 
-    /* Cascada Izquierda (28% ancho) */
-    .flow-left {
-      left: 0;
-      width: 28%;
-      -webkit-mask-image: linear-gradient(to right, #000 0%, rgba(0,0,0,0.7) 40%, transparent 100%);
-      mask-image: linear-gradient(to right, #000 0%, rgba(0,0,0,0.7) 40%, transparent 100%);
-    }
-
-    /* Cascada Derecha (48% ancho) */
-    .flow-right {
-      right: 0;
-      width: 48%;
-      -webkit-mask-image: linear-gradient(to left, #000 0%, rgba(0,0,0,0.75) 45%, transparent 100%);
-      mask-image: linear-gradient(to left, #000 0%, rgba(0,0,0,0.75) 45%, transparent 100%);
-    }
-
-    /* Pista de Cascada Continua (2 baldosas = 200% de alto para bucle seamless) */
-    .waterfall-track {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 200%;
+    /* Giro ambiental continuo */
+    .ceramic-stage {
+      position: relative;
+      width: 440px;
+      height: 440px;
+      animation: ambientSpin 80s linear infinite;
       will-change: transform;
     }
 
-    /* Izquierda: Flujo SUBIENDO */
-    .flow-left .waterfall-track {
-      animation: waterfallUp 34s linear infinite;
+    @keyframes ambientSpin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
-    /* Derecha: Flujo BAJANDO */
-    .flow-right .waterfall-track {
-      animation: waterfallDown 34s linear infinite;
+    /* Estilo común de las capas de cerámica */
+    .ceramic-layer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(1) rotate(0deg);
+      background: linear-gradient(135deg, #FFFFFF 0%, #F5F7FA 48%, #E4E8EE 100%);
+      box-shadow: 
+        14px 18px 32px rgba(22, 28, 42, 0.09),
+        4px 6px 12px rgba(22, 28, 42, 0.05),
+        inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.95),
+        inset -1px -1px 3px rgba(0, 0, 0, 0.03);
+      will-change: transform;
     }
 
-    @keyframes waterfallUp {
+    /* Dimensiones y radios concéntricos (reducidos un 10% global uniforme) */
+    .layer-4 {
+      width: 385px;
+      height: 305px;
+      border-radius: 68px;
+      z-index: 2;
+    }
+
+    .layer-3 {
+      width: 315px;
+      height: 245px;
+      border-radius: 54px;
+      z-index: 3;
+    }
+
+    .layer-2 {
+      width: 245px;
+      height: 190px;
+      border-radius: 42px;
+      z-index: 4;
+    }
+
+    .layer-1 {
+      width: 175px;
+      height: 135px;
+      border-radius: 32px;
+      z-index: 5;
+      background: linear-gradient(135deg, #FFFFFF 0%, #F8FAFC 60%, #E9EDF3 100%);
+      box-shadow: 
+        16px 20px 36px rgba(22, 28, 42, 0.12),
+        5px 7px 14px rgba(22, 28, 42, 0.06),
+        inset 1.5px 1.5px 3px rgba(255, 255, 255, 1);
+    }
+
+    /* ==========================================================================
+       DINÁMICA AL CLIC: ONDA DE ESCALA + CONTRAGIRO ESCALONADO
+       ========================================================================== */
+    .is-pulsing .layer-1 {
+      animation: ceramicWave 0.72s var(--ease-webflow) 0ms forwards;
+    }
+
+    .is-pulsing .layer-2 {
+      animation: ceramicWave 0.72s var(--ease-webflow) 55ms forwards;
+    }
+
+    .is-pulsing .layer-3 {
+      animation: ceramicWave 0.72s var(--ease-webflow) 110ms forwards;
+    }
+
+    .is-pulsing .layer-4 {
+      animation: ceramicWave 0.72s var(--ease-webflow) 165ms forwards;
+    }
+
+    @keyframes ceramicWave {
       0% {
-        transform: translateY(0%);
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+      }
+      28% {
+        transform: translate(-50%, -50%) scale(1.055) rotate(-13deg);
+      }
+      62% {
+        transform: translate(-50%, -50%) scale(0.975) rotate(3deg);
       }
       100% {
-        transform: translateY(-50%);
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
       }
     }
 
-    @keyframes waterfallDown {
-      0% {
-        transform: translateY(-50%);
-      }
-      100% {
-        transform: translateY(0%);
-      }
-    }
-
-    /* Baldosas de textura nativa vertical */
-    .metal-tile {
-      position: relative;
-      width: 100%;
-      height: 50%;
-      overflow: hidden;
-    }
-
-    /* Baldosa B invertida verticalmente para encaje seamless continuo */
-    .metal-tile.mirror {
-      transform: scaleY(-1);
-    }
-
-    .metal-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-    }
-
-    /* Fades de scroll superior e inferior */
+    /* Fades de scroll superior e inferior adaptados al tono cerámico */
     .fade-top, .fade-bottom {
       position: absolute;
       left: 0;
@@ -236,16 +249,16 @@
 
     .fade-top {
       top: 0;
-      background: linear-gradient(to bottom, var(--color-bg-base) 10%, rgba(4, 5, 7, 0) 100%);
+      background: linear-gradient(to bottom, rgba(235, 240, 245, 0.95) 10%, rgba(235, 240, 245, 0) 100%);
     }
 
     .fade-bottom {
       bottom: 0;
-      background: linear-gradient(to top, var(--color-bg-base) 15%, rgba(4, 5, 7, 0) 100%);
+      background: linear-gradient(to top, rgba(235, 240, 245, 0.95) 15%, rgba(235, 240, 245, 0) 100%);
     }
 
     /* ==========================================================================
-       5. LISTA DE PLATOS, CRISTAL ACLARADO Y LÍNEA ROJA (DESPLAZADOS -6px)
+       5. LISTA DE PLATOS, CRISTAL ESMERILADO Y TIPOGRAFÍA
        ========================================================================== */
     .menu-list {
       position: relative;
@@ -270,7 +283,7 @@
       z-index: 10;
     }
 
-    /* CRISTAL (Nace en left: 33px y aclarado un 10%) */
+    /* CRISTAL ESMERILADO (FROSTED GLASS) */
     .glass-overlay {
       position: absolute;
       left: 33px;
@@ -279,9 +292,9 @@
       bottom: 0;
       background: linear-gradient(
         90deg, 
-        rgba(255, 255, 255, 0.26) 0%, 
-        rgba(255, 255, 255, 0.08) 55%, 
-        transparent 100%
+        rgba(255, 255, 255, 0.65) 0%, 
+        rgba(255, 255, 255, 0.35) 55%, 
+        rgba(255, 255, 255, 0.05) 100%
       );
       backdrop-filter: blur(0px);
       -webkit-backdrop-filter: blur(0px);
@@ -294,14 +307,13 @@
       z-index: 5;
     }
 
-    /* Al activarse: Fade progresivo suave del cristal */
     .menu-item.active .glass-overlay {
       opacity: 1;
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
     }
 
-    /* ESPECULARES SUPERIOR E INFERIOR (0.5px) */
+    /* ESPECULARES SUPERIOR E INFERIOR */
     .specular-top, .specular-bottom {
       position: absolute;
       left: 0;
@@ -313,15 +325,15 @@
 
     .specular-top {
       top: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.35) 50%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.9) 35%, rgba(0, 0, 0, 0.08) 70%, transparent 100%);
     }
 
     .specular-bottom {
       bottom: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.35) 50%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.9) 35%, rgba(0, 0, 0, 0.08) 70%, transparent 100%);
     }
 
-    /* RECTÁNGULO ROJO (7px de ancho, en left: 26px) */
+    /* RECTÁNGULO ROJO */
     .red-indicator {
       position: absolute;
       left: 26px;
@@ -330,7 +342,7 @@
       width: 7px;
       border-radius: 0;
       background-color: var(--color-btn);
-      box-shadow: 0 0 10px rgba(186, 13, 54, 0.75);
+      box-shadow: 0 0 10px rgba(186, 13, 54, 0.45);
       opacity: 0;
       transition: opacity 0.35s var(--ease-webflow);
       z-index: 15;
@@ -354,20 +366,21 @@
       transform: translateX(40px);
     }
 
-    /* Número: 40% en reposo / 75% exclusivamente al seleccionarse */
+    /* Número: 40% en reposo / 75% activo */
     .item-number {
       font-size: 0.68rem;
       font-variation-settings: "wdth" 100, "wght" 300;
-      color: #D1D5DB;
+      color: var(--color-text-muted);
       margin-right: 18px;
       letter-spacing: 0.5px;
       width: 22px;
       opacity: 0.40;
-      transition: opacity 0.35s var(--ease-webflow);
+      transition: opacity 0.35s var(--ease-webflow), color 0.35s var(--ease-webflow);
     }
 
     .menu-item.active .item-number {
       opacity: 0.75;
+      color: var(--color-text-active);
     }
 
     /* Nombre del plato en REPOSO: Opacidad 60% */
@@ -375,39 +388,27 @@
       font-size: 1.0rem;
       font-variation-settings: "wdth" 125, "wght" 400;
       letter-spacing: 0.3px;
-      color: #FFFFFF;
+      color: var(--color-text-muted);
       opacity: 0.60;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.85);
       transition: 
         opacity 0.35s var(--ease-webflow),
+        color 0.35s var(--ease-webflow),
         font-variation-settings 0.35s var(--ease-webflow),
         text-shadow 0.35s var(--ease-webflow);
     }
 
-    /* Nombre del plato ACTIVO: Opacidad 100%, Medium 500 y Brillo */
+    /* Nombre del plato ACTIVO: Opacidad 100%, Medium 500 y Negro Puro */
     .menu-item.active .item-name {
       opacity: 1;
+      color: var(--color-text-active);
       font-variation-settings: "wdth" 125, "wght" 500;
-      text-shadow: 0 0 12px rgba(255, 255, 255, 0.35), 0 2px 8px rgba(0, 0, 0, 0.85);
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
     }
   </style>
 </head>
 <body>
 
-  <!-- FILTRO SVG ESTÁTICO (Cálculo único por GPU) -->
-  <svg style="position: absolute; width: 0; height: 0; pointer-events: none;" aria-hidden="true">
-    <defs>
-      <filter id="liquid-distortion" x="-20%" y="-20%" width="140%" height="140%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.002 0.009" numOctaves="2" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="38" xChannelSelector="R" yChannelSelector="G" />
-      </filter>
-    </defs>
-  </svg>
-
   <main class="app-container">
-    
-    <!-- Fondo ambiental oscuro -->
-    <div class="bg-gradient"></div>
 
     <!-- ZONA SUPERIOR: Visor 3D reservado + Botón AR -->
     <section class="viewer-section">
@@ -417,30 +418,16 @@
       <button type="button" class="btn-ar" id="btn-ar">Ver en tu mesa</button>
     </section>
 
-    <!-- ZONA INFERIOR: Menú de 15 Platos + Cascadas Continuas -->
+    <!-- ZONA INFERIOR: Fondo de Cerámica 3D y Menú -->
     <section class="menu-section">
       
-      <!-- Cascada Izquierda (28% ancho - Sube) -->
-      <div class="metal-flow-container flow-left">
-        <div class="waterfall-track">
-          <div class="metal-tile">
-            <img src="./metal.jpg" alt="Metal Izquierda" class="metal-img">
-          </div>
-          <div class="metal-tile mirror">
-            <img src="./metal.jpg" alt="Metal Izquierda Espejo" class="metal-img">
-          </div>
-        </div>
-      </div>
-
-      <!-- Cascada Derecha (48% ancho - Baja) -->
-      <div class="metal-flow-container flow-right">
-        <div class="waterfall-track">
-          <div class="metal-tile">
-            <img src="./metal.jpg" alt="Metal Derecha" class="metal-img">
-          </div>
-          <div class="metal-tile mirror">
-            <img src="./metal.jpg" alt="Metal Derecha Espejo" class="metal-img">
-          </div>
+      <!-- Escenario 3D de 4 Capas de Cerámica Concéntricas -->
+      <div class="ceramic-viewport">
+        <div class="ceramic-stage" id="ceramic-stage">
+          <div class="ceramic-layer layer-4"></div>
+          <div class="ceramic-layer layer-3"></div>
+          <div class="ceramic-layer layer-2"></div>
+          <div class="ceramic-layer layer-1"></div>
         </div>
       </div>
 
@@ -640,12 +627,18 @@
     document.addEventListener('DOMContentLoaded', () => {
       const menuItems = document.querySelectorAll('.menu-item');
       const btnAr = document.getElementById('btn-ar');
+      const ceramicStage = document.getElementById('ceramic-stage');
 
-      // Cambio de plato activo
+      // Cambio de plato y disparo de onda física escalonada
       menuItems.forEach((item) => {
         item.addEventListener('click', () => {
           menuItems.forEach(i => i.classList.remove('active'));
           item.classList.add('active');
+
+          // Reinicio limpio de la animación de onda (staggered pulse + contragiro)
+          ceramicStage.classList.remove('is-pulsing');
+          void ceramicStage.offsetWidth; // Forzar reflow para re-disparo instantáneo
+          ceramicStage.classList.add('is-pulsing');
         });
       });
 
