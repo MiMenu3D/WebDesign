@@ -1,4 +1,4 @@
-<!-- Versión: WebDesign v2.16 -->
+<!-- Versión: WebDesign v2.17 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -109,8 +109,7 @@
       justify-content: center;
     }
 
-    /* Texto elevado exactamente 1px */
-    .btn-ar-text {
+    .btn-ar span {
       display: inline-block;
       transform: translateY(-1px);
     }
@@ -142,7 +141,7 @@
       overflow: hidden;
     }
 
-    /* Estructura común: Luz longitudinal a 90deg (extremo corto a extremo corto) */
+    /* Estructura común: Luz longitudinal a 90deg */
     .ceramic-layer {
       position: absolute;
       top: 50%;
@@ -166,7 +165,7 @@
         inset 0px 1px 2px rgba(255, 255, 255, 0.85);
     }
 
-    /* CAPA 2: Terraza 1 (+130px ancho/alto | Radio: 117px | Bisel orgánico) */
+    /* CAPA 2: Terraza 1 (+130px ancho/alto | Radio: 117px) */
     .layer-2 {
       width: 430px;
       height: 355px;
@@ -179,7 +178,7 @@
         inset -16px 0px 24px rgba(255, 255, 255, 0.88);
     }
 
-    /* CAPA 3: Terraza 2 (+130px ancho/alto | Radio: 182px | Valle suave) */
+    /* CAPA 3: Terraza 2 (+130px ancho/alto | Radio: 182px) */
     .layer-3 {
       width: 560px;
       height: 485px;
@@ -192,7 +191,7 @@
         inset -20px 0px 30px rgba(255, 255, 255, 0.82);
     }
 
-    /* CAPA 4: Base gigante (+130px ancho/alto | Radio: 247px | Duna de fondo) */
+    /* CAPA 4: Base gigante (+130px ancho/alto | Radio: 247px) */
     .layer-4 {
       width: 690px;
       height: 615px;
@@ -206,7 +205,7 @@
     }
 
     /* ==========================================================================
-       5. LISTA DE PLATOS Y MÁSCARA DE FUNDIDO NATIVA
+       5. LISTA DE PLATOS Y MÁSCARA DE FUNDIDO FLUIDA
        ========================================================================== */
     .menu-list {
       position: relative;
@@ -233,21 +232,46 @@
       z-index: 10;
     }
 
-    /* LIQUID GLASS: Blur 4px nativo + refracción óptica limpia */
+    /* PROYECCIÓN CÁUSTICA (Debajo del cristal sobre el fondo - 300% más intensa) */
+    .caustic-glow {
+      position: absolute;
+      right: 14px;
+      bottom: -4px;
+      width: 160px;
+      height: 28px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.98) 0%, rgba(220, 235, 255, 0.75) 45%, rgba(186, 13, 54, 0.15) 75%, transparent 100%);
+      filter: blur(5px);
+      box-shadow: 
+        0 4px 18px rgba(255, 255, 255, 0.95),
+        0 0 28px rgba(200, 225, 255, 0.75),
+        0 0 12px rgba(186, 13, 54, 0.25);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s var(--ease-webflow), transform 0.35s var(--ease-webflow);
+      z-index: 3;
+    }
+
+    .menu-item.active .caustic-glow {
+      opacity: 1;
+      transform: translateY(2px) scale(1.12);
+    }
+
+    /* LIQUID GLASS: Cristal líquido con Blur nativo y Refracción */
     .glass-overlay {
       position: absolute;
       left: 33px;
       right: 0;
       top: 0;
       bottom: 0;
-      background: rgba(255, 255, 255, 0.04);
-      backdrop-filter: blur(0px);
-      -webkit-backdrop-filter: blur(0px);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.22) 0%, rgba(240, 245, 250, 0.06) 100%);
+      backdrop-filter: blur(8px) saturate(130%);
+      -webkit-backdrop-filter: blur(8px) saturate(130%);
       opacity: 0;
       pointer-events: none;
       box-shadow: 
-        0 8px 24px rgba(18, 25, 40, 0.06),
-        inset 1.5px 2px 3px rgba(255, 255, 255, 0.90),
+        0 8px 24px rgba(18, 25, 40, 0.07),
+        inset 1.5px 2px 3px rgba(255, 255, 255, 0.95),
         inset -1.5px -2px 4px rgba(18, 25, 40, 0.04);
       transition: 
         backdrop-filter 0.35s var(--ease-webflow),
@@ -258,43 +282,14 @@
 
     .menu-item.active .glass-overlay {
       opacity: 1;
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
     }
 
-    /* Lente de distorsión líquida SVG (+300% de escala) */
+    /* Refracción óptica interior del cristal */
     .liquid-refraction {
       position: absolute;
       inset: 0;
-      opacity: 0;
+      background: radial-gradient(ellipse at 35% 25%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 65%);
       pointer-events: none;
-      filter: url(#liquid-lens);
-      transition: opacity 0.35s var(--ease-webflow);
-      z-index: 4;
-    }
-
-    .menu-item.active .liquid-refraction {
-      opacity: 1;
-    }
-
-    /* PROYECCIÓN CÁUSTICA: Foco de luz refractada en la zona derecha del fondo */
-    .caustic-glow {
-      position: absolute;
-      right: 20px;
-      bottom: -6px;
-      width: 160px;
-      height: 28px;
-      background: radial-gradient(ellipse at 65% 50%, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.32) 45%, transparent 75%);
-      filter: blur(5px);
-      box-shadow: 0 0 18px rgba(255, 255, 255, 0.75);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.35s var(--ease-webflow);
-      z-index: 3;
-    }
-
-    .menu-item.active .caustic-glow {
-      opacity: 1;
     }
 
     /* ESPECULARES SUPERIOR E INFERIOR */
@@ -309,12 +304,12 @@
 
     .specular-top {
       top: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.90) 35%, rgba(0, 0, 0, 0.05) 70%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.95) 35%, rgba(0, 0, 0, 0.05) 70%, transparent 100%);
     }
 
     .specular-bottom {
       bottom: 0;
-      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.85) 35%, rgba(0, 0, 0, 0.04) 70%, transparent 100%);
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.90) 35%, rgba(0, 0, 0, 0.04) 70%, transparent 100%);
     }
 
     /* RECTÁNGULO ROJO */
@@ -324,7 +319,6 @@
       top: 0;
       bottom: 0;
       width: 7px;
-      border-radius: 0;
       background-color: var(--color-btn);
       box-shadow: 0 0 10px rgba(186, 13, 54, 0.45);
       opacity: 0;
@@ -367,7 +361,7 @@
       color: var(--color-text-active);
     }
 
-    /* Nombre del plato en REPOSO: Opacidad 60% */
+    /* Nombre del plato en REPOSO */
     .item-name {
       font-size: 1.0rem;
       font-variation-settings: "wdth" 125, "wght" 400;
@@ -381,7 +375,7 @@
         text-shadow 0.35s var(--ease-webflow);
     }
 
-    /* Nombre del plato ACTIVO: Opacidad 100%, Medium 500 y Negro Puro */
+    /* Nombre del plato ACTIVO */
     .menu-item.active .item-name {
       opacity: 1;
       color: var(--color-text-active);
@@ -392,16 +386,6 @@
 </head>
 <body>
 
-  <!-- Filtro SVG: Distorsión de Lente Líquida aumentada un +300% (scale=260) -->
-  <svg style="position: absolute; width: 0; height: 0; pointer-events: none;">
-    <defs>
-      <filter id="liquid-lens" x="-50%" y="-50%" width="200%" height="200%">
-        <feTurbulence type="fractalNoise" baseFrequency="0.004 0.0012" numOctaves="2" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="260" xChannelSelector="R" yChannelSelector="G" result="displaced" />
-      </filter>
-    </defs>
-  </svg>
-
   <main class="app-container">
 
     <!-- ZONA SUPERIOR: Visor 3D reservado + Botón AR -->
@@ -409,9 +393,7 @@
       <div class="viewer-slot">
         <!-- Espacio reservado para <model-viewer> -->
       </div>
-      <button type="button" class="btn-ar" id="btn-ar">
-        <span class="btn-ar-text">Ver en tu mesa</span>
-      </button>
+      <button type="button" class="btn-ar" id="btn-ar"><span>Ver en tu mesa</span></button>
     </section>
 
     <!-- ZONA INFERIOR: Fondo de Cerámica 3D y Menú -->
@@ -425,13 +407,13 @@
         <div class="ceramic-layer layer-1"></div>
       </div>
 
-      <!-- Lista completa de 15 platos con difuminado y cáusticas -->
+      <!-- Lista de platos -->
       <ul class="menu-list" id="menu-list">
         
         <li class="menu-item active" data-index="01">
           <div class="caustic-glow"></div>
-          <div class="liquid-refraction"></div>
           <div class="glass-overlay">
+            <div class="liquid-refraction"></div>
             <div class="specular-top"></div>
             <div class="specular-bottom"></div>
           </div>
@@ -444,8 +426,8 @@
 
         <li class="menu-item" data-index="02">
           <div class="caustic-glow"></div>
-          <div class="liquid-refraction"></div>
           <div class="glass-overlay">
+            <div class="liquid-refraction"></div>
             <div class="specular-top"></div>
             <div class="specular-bottom"></div>
           </div>
@@ -458,8 +440,8 @@
 
         <li class="menu-item" data-index="03">
           <div class="caustic-glow"></div>
-          <div class="liquid-refraction"></div>
           <div class="glass-overlay">
+            <div class="liquid-refraction"></div>
             <div class="specular-top"></div>
             <div class="specular-bottom"></div>
           </div>
@@ -472,8 +454,8 @@
 
         <li class="menu-item" data-index="04">
           <div class="caustic-glow"></div>
-          <div class="liquid-refraction"></div>
           <div class="glass-overlay">
+            <div class="liquid-refraction"></div>
             <div class="specular-top"></div>
             <div class="specular-bottom"></div>
           </div>
@@ -486,8 +468,8 @@
 
         <li class="menu-item" data-index="05">
           <div class="caustic-glow"></div>
-          <div class="liquid-refraction"></div>
           <div class="glass-overlay">
+            <div class="liquid-refraction"></div>
             <div class="specular-top"></div>
             <div class="specular-bottom"></div>
           </div>
@@ -500,8 +482,8 @@
 
         <li class="menu-item" data-index="06">
           <div class="caustic-glow"></div>
-          <div class="liquid-refraction"></div>
           <div class="glass-overlay">
+            <div class="liquid-refraction"></div>
             <div class="specular-top"></div>
             <div class="specular-bottom"></div>
           </div>
@@ -514,8 +496,8 @@
 
         <li class="menu-item" data-index="07">
           <div class="caustic-glow"></div>
-          <div class="liquid-refraction"></div>
           <div class="glass-overlay">
+            <div class="liquid-refraction"></div>
             <div class="specular-top"></div>
             <div class="specular-bottom"></div>
           </div>
@@ -528,8 +510,8 @@
 
         <li class="menu-item" data-index="08">
           <div class="caustic-glow"></div>
-          <div class="liquid-refraction"></div>
           <div class="glass-overlay">
+            <div class="liquid-refraction"></div>
             <div class="specular-top"></div>
             <div class="specular-bottom"></div>
           </div>
@@ -542,8 +524,8 @@
 
         <li class="menu-item" data-index="09">
           <div class="caustic-glow"></div>
-          <div class="liquid-refraction"></div>
           <div class="glass-overlay">
+            <div class="liquid-refraction"></div>
             <div class="specular-top"></div>
             <div class="specular-bottom"></div>
           </div>
@@ -556,8 +538,8 @@
 
         <li class="menu-item" data-index="10">
           <div class="caustic-glow"></div>
-          <div class="liquid-refraction"></div>
           <div class="glass-overlay">
+            <div class="liquid-refraction"></div>
             <div class="specular-top"></div>
             <div class="specular-bottom"></div>
           </div>
@@ -570,8 +552,8 @@
 
         <li class="menu-item" data-index="11">
           <div class="caustic-glow"></div>
-          <div class="liquid-refraction"></div>
           <div class="glass-overlay">
+            <div class="liquid-refraction"></div>
             <div class="specular-top"></div>
             <div class="specular-bottom"></div>
           </div>
@@ -584,8 +566,8 @@
 
         <li class="menu-item" data-index="12">
           <div class="caustic-glow"></div>
-          <div class="liquid-refraction"></div>
           <div class="glass-overlay">
+            <div class="liquid-refraction"></div>
             <div class="specular-top"></div>
             <div class="specular-bottom"></div>
           </div>
@@ -598,8 +580,8 @@
 
         <li class="menu-item" data-index="13">
           <div class="caustic-glow"></div>
-          <div class="liquid-refraction"></div>
           <div class="glass-overlay">
+            <div class="liquid-refraction"></div>
             <div class="specular-top"></div>
             <div class="specular-bottom"></div>
           </div>
@@ -612,8 +594,8 @@
 
         <li class="menu-item" data-index="14">
           <div class="caustic-glow"></div>
-          <div class="liquid-refraction"></div>
           <div class="glass-overlay">
+            <div class="liquid-refraction"></div>
             <div class="specular-top"></div>
             <div class="specular-bottom"></div>
           </div>
@@ -626,8 +608,8 @@
 
         <li class="menu-item" data-index="15">
           <div class="caustic-glow"></div>
-          <div class="liquid-refraction"></div>
           <div class="glass-overlay">
+            <div class="liquid-refraction"></div>
             <div class="specular-top"></div>
             <div class="specular-bottom"></div>
           </div>
@@ -650,7 +632,7 @@
       const btnAr = document.getElementById('btn-ar');
 
       // ======================================================================
-      // 1. CINEMÁTICA: IMPULSO ANGULAR (BOOST) + DESACELERACIÓN CONTINUA
+      // 1. CINEMÁTICA Y FÍSICA
       // ======================================================================
       const layerElements = [
         document.querySelector('.layer-1'), // Capa 1: Plato central
@@ -659,17 +641,16 @@
         document.querySelector('.layer-4')  // Capa 4: Terraza base
       ];
 
-      const BASE_SPEED = 0.055;
+      // Velocidad base aumentada un +15% (0.055 -> 0.06325)
+      const BASE_SPEED = 0.06325;
       let currentDirection = 1;
 
-      // Parallax inter-platos ampliado +10% (1.88 a 0.12)
-      // Hundimiento +15% ampliado (scaleDip: 0.986)
-      // Retraso entre capas reducido un -25% (150ms step)
+      // Intensidad de compresión (scaleDip) aumentada un 20%
       const layerConfigs = [
-        { delay: 0,   boostFactor: 2.2, turnRate: 0.022, scaleDip: 0.986, springK: 0.0050, damp: 0.965, parallaxK: 1.88 },
-        { delay: 150, boostFactor: 1.8, turnRate: 0.016, scaleDip: 0.989, springK: 0.0042, damp: 0.968, parallaxK: 1.31 },
-        { delay: 300, boostFactor: 1.4, turnRate: 0.011, scaleDip: 0.993, springK: 0.0035, damp: 0.970, parallaxK: 0.69 },
-        { delay: 450, boostFactor: 1.1, turnRate: 0.008, scaleDip: 0.996, springK: 0.0028, damp: 0.972, parallaxK: 0.12 }
+        { delay: 0,   turnRate: 0.016, scaleDip: 0.985, springK: 0.0050, damp: 0.965, parallaxK: 1.80, boostMult: 2.50 },
+        { delay: 200, turnRate: 0.012, scaleDip: 0.989, springK: 0.0042, damp: 0.968, parallaxK: 1.28, boostMult: 2.10 },
+        { delay: 400, turnRate: 0.009, scaleDip: 0.993, springK: 0.0035, damp: 0.970, parallaxK: 0.72, boostMult: 1.70 },
+        { delay: 600, turnRate: 0.006, scaleDip: 0.996, springK: 0.0028, damp: 0.972, parallaxK: 0.20, boostMult: 1.30 }
       ];
 
       const layers = layerElements.map((el, i) => ({
@@ -685,7 +666,7 @@
       }));
 
       // ======================================================================
-      // 2. PARALLAX DINÁMICO (78px TOTAL)
+      // 2. PARALLAX DINÁMICO
       // ======================================================================
       let targetParallaxY = 39;
       let currentParallaxY = 39;
@@ -699,30 +680,31 @@
       menuList.addEventListener('scroll', updateParallax, { passive: true });
 
       // ======================================================================
-      // 3. BUCLE PRINCIPAL DE GPU (60 - 120 FPS)
+      // 3. BUCLE DE GPU FLUIDO (60 - 120 FPS)
       // ======================================================================
       function kineticLoop() {
-        currentParallaxY += (targetParallaxY - currentParallaxY) * 0.08;
+        // Inercia de scroll reducida un 30% (0.08 -> 0.056)
+        currentParallaxY += (targetParallaxY - currentParallaxY) * 0.056;
 
         layers.forEach((layer, i) => {
           const conf = layer.config;
 
-          // Desaceleración suave del impulso inicial hacia la velocidad de crucero
+          // Integración angular con frenado/aceleración suave
           layer.speed += (layer.targetSpeed - layer.speed) * conf.turnRate;
           layer.angle += layer.speed;
 
-          // Acoplamiento elástico asintótico hacia la Capa 1 (paralelismo final concéntrico)
+          // Acoplamiento asintótico hacia la Capa 1
           if (i > 0) {
             const angleDiff = layers[0].angle - layer.angle;
             layer.angle += angleDiff * 0.0025;
           }
 
-          // Recuperación elástica tipo plastilina hiperlenta
+          // Muelle de compresión y recuperación
           const scaleForce = (layer.targetScale - layer.scale) * conf.springK;
           layer.scaleVel = (layer.scaleVel + scaleForce) * conf.damp;
           layer.scale += layer.scaleVel;
 
-          // Parallax 3D
+          // Parallax vertical
           const layerY = currentParallaxY * conf.parallaxK;
 
           // Renderizado final
@@ -735,7 +717,7 @@
       requestAnimationFrame(kineticLoop);
 
       // ======================================================================
-      // 4. DISPARO DE REACCIÓN EN CADENA (IMPULSO + ONDA)
+      // 4. DISPARO DE REACCIÓN EN CADENA ESCALONADA
       // ======================================================================
       function triggerChainReaction() {
         currentDirection *= -1;
@@ -747,14 +729,14 @@
 
           layer.timeoutId = setTimeout(() => {
             const conf = layer.config;
-
-            // 1. Inyección de impulso inicial acelerado (Boost continuo)
-            layer.speed = currentDirection * BASE_SPEED * conf.boostFactor;
+            
+            // Impulso angular al pulsar aumentado un +40%
+            layer.speed = currentDirection * (BASE_SPEED * conf.boostMult);
             layer.targetSpeed = currentDirection * BASE_SPEED;
 
-            // 2. Hundimiento aumentado (+15%) y retorno hiperlento
+            // Compresión elástica aumentada (+20%)
             layer.scale = conf.scaleDip;
-            layer.scaleVel = -0.00035;
+            layer.scaleVel = -0.0006;
             layer.targetScale = 1.0;
           }, layer.config.delay);
         });
