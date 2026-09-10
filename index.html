@@ -1,4 +1,4 @@
-<!-- Versión: WebDesign v2.24 -->
+<!-- Versión: WebDesign v2.25 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,7 +17,7 @@
 
   <style>
     /* ==========================================================================
-       1. RESET Y VARIABLES GLOBALES
+       1. RESET Y VARIABLES GLOBALES (UNIDADES RESPONSIVAS DE PANTALLA)
        ========================================================================== */
     *, *::before, *::after {
       box-sizing: border-box;
@@ -89,7 +89,7 @@
     /* Botón "Ver en tu mesa" */
     .btn-ar {
       position: absolute;
-      bottom: -19px;
+      bottom: -1.2rem;
       z-index: 50;
       background-color: var(--color-btn);
       color: #FFFFFF;
@@ -97,8 +97,8 @@
       font-variation-settings: "wdth" 105, "wght" 400;
       font-size: 1.02rem;
       letter-spacing: 0.3px;
-      padding: 11px 28px;
-      border-radius: 10px;
+      padding: 0.7rem 1.75rem;
+      border-radius: 0.65rem;
       border: none;
       outline: none;
       cursor: pointer;
@@ -120,7 +120,7 @@
     }
 
     /* ==========================================================================
-       4. ZONA INFERIOR: CERÁMICA NEUMÓRFICA 3D (BASE NEUTRA CON SOMBRAS EXTENDIDAS)
+       4. ZONA INFERIOR: CERÁMICA NEUMÓRFICA 3D (SOMBRAS Y LUCES 100% HOMOGÉNEAS)
        ========================================================================== */
     .menu-section {
       position: relative;
@@ -128,7 +128,7 @@
       flex: 1;
       width: 100%;
       overflow: hidden;
-      padding-top: 24px;
+      padding-top: 1.5rem;
       background: radial-gradient(circle at 50% 45%, #F8FAFC 0%, #E3E8EE 100%);
     }
 
@@ -141,7 +141,7 @@
       overflow: hidden;
     }
 
-    /* Estructura común: Luz longitudinal neutra amplia */
+    /* Estructura común: Luz longitudinal amplia y neutra */
     .ceramic-layer {
       position: absolute;
       top: 50%;
@@ -151,57 +151,57 @@
       will-change: transform;
     }
 
-    /* CAPA 1: Plato central (255x191px, r: 44px) */
+    /* TODAS LAS CAPAS CON LA MISMA INTENSIDAD HOMOGÉNEA DE SOMBRA Y LUZ */
     .layer-1 {
       width: 255px;
       height: 191px;
       border-radius: 44px;
       z-index: 5;
       box-shadow: 
-        8px 14px 24px rgba(18, 25, 40, 0.08),
-        2px 4px 8px rgba(18, 25, 40, 0.03),
-        inset 30px 0px 40px rgba(158, 172, 190, 0.38),
-        inset -30px 0px 40px rgba(255, 255, 255, 0.96),
+        8px 14px 24px rgba(18, 25, 40, 0.07),
+        2px 4px 8px rgba(18, 25, 40, 0.025),
+        inset 34px 0px 44px rgba(160, 174, 192, 0.30),
+        inset -34px 0px 44px rgba(255, 255, 255, 0.98),
         inset 0px 2px 4px rgba(255, 255, 255, 0.90);
     }
 
-    /* CAPA 2: Terraza 1 (343x280px, r: 80px) */
     .layer-2 {
       width: 343px;
       height: 280px;
       border-radius: 80px;
       z-index: 4;
       box-shadow: 
-        12px 18px 30px rgba(18, 25, 40, 0.065),
-        3px 5px 10px rgba(18, 25, 40, 0.025),
-        inset 36px 0px 48px rgba(158, 172, 190, 0.28),
-        inset -36px 0px 48px rgba(255, 255, 255, 0.90);
+        11px 17px 28px rgba(18, 25, 40, 0.06),
+        3px 5px 9px rgba(18, 25, 40, 0.02),
+        inset 34px 0px 44px rgba(160, 174, 192, 0.30),
+        inset -34px 0px 44px rgba(255, 255, 255, 0.98),
+        inset 0px 2px 4px rgba(255, 255, 255, 0.90);
     }
 
-    /* CAPA 3: Terraza 2 (432x368px, r: 124px) */
     .layer-3 {
       width: 432px;
       height: 368px;
       border-radius: 124px;
       z-index: 3;
       box-shadow: 
-        16px 24px 38px rgba(18, 25, 40, 0.05),
-        4px 7px 14px rgba(18, 25, 40, 0.02),
-        inset 42px 0px 56px rgba(158, 172, 190, 0.20),
-        inset -42px 0px 56px rgba(255, 255, 255, 0.85);
+        15px 22px 35px rgba(18, 25, 40, 0.05),
+        4px 7px 12px rgba(18, 25, 40, 0.018),
+        inset 34px 0px 44px rgba(160, 174, 192, 0.30),
+        inset -34px 0px 44px rgba(255, 255, 255, 0.98),
+        inset 0px 2px 4px rgba(255, 255, 255, 0.90);
     }
 
-    /* CAPA 4: Base gigante (520x456px, r: 168px) */
     .layer-4 {
       width: 520px;
       height: 456px;
       border-radius: 168px;
       z-index: 2;
       box-shadow: 
-        22px 32px 50px rgba(18, 25, 40, 0.04),
-        6px 10px 18px rgba(18, 25, 40, 0.015),
-        inset 48px 0px 64px rgba(158, 172, 190, 0.15),
-        inset -48px 0px 64px rgba(255, 255, 255, 0.78);
+        20px 28px 45px rgba(18, 25, 40, 0.04),
+        5px 9px 15px rgba(18, 25, 40, 0.012),
+        inset 34px 0px 44px rgba(160, 174, 192, 0.30),
+        inset -34px 0px 44px rgba(255, 255, 255, 0.98),
+        inset 0px 2px 4px rgba(255, 255, 255, 0.90);
     }
 
     /* Fades de scroll desacoplados */
@@ -209,7 +209,7 @@
       position: absolute;
       left: 0;
       right: 0;
-      height: 44px;
+      height: 2.75rem;
       z-index: 25;
       pointer-events: none;
     }
@@ -225,7 +225,7 @@
     }
 
     /* ==========================================================================
-       5. LISTA DE PLATOS, CRISTAL SANTO GRIAL (v2.11 + v2.16) Y CARD EXPANDIBLE
+       5. LISTA DE PLATOS, CRISTAL SANTO GRIAL Y CARD EXPANDIBLE FLUIDA
        ========================================================================== */
     .menu-list {
       position: relative;
@@ -234,7 +234,7 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       list-style: none;
-      padding: 16px 0 80px 0;
+      padding: 1rem 0 5rem 0;
       scrollbar-width: none;
     }
 
@@ -242,32 +242,38 @@
       display: none;
     }
 
+    /* BLOQUEO DINÁMICO DE SCROLL CON CARD DESPLEGADA */
+    .menu-list.scroll-locked {
+      overflow-y: hidden !important;
+      touch-action: none;
+    }
+
     /* FILA BASE */
     .menu-item {
       position: relative;
       width: 100%;
-      height: 52px;
+      height: 3.25rem;
       cursor: pointer;
       z-index: 10;
-      overflow: visible;
-      transition: height 0.4s var(--ease-webflow), margin-bottom 0.4s var(--ease-webflow);
+      overflow: hidden;
+      will-change: height;
+      transition: height 0.42s var(--ease-webflow), margin-bottom 0.42s var(--ease-webflow);
     }
 
-    /* ESTADO CARD EXPANDIDA (4.5 botones de altura: 234px) */
+    /* ESTADO CARD EXPANDIDA (ALTURA ~4.5 FILAS = 14.6rem) */
     .menu-item.expanded {
-      height: 234px;
+      height: 14.6rem;
       z-index: 30;
-      margin-bottom: 8px;
+      margin-bottom: 0.5rem;
     }
 
     /* 1. SOMBRA AMBIENTAL BAJO EL CRISTAL */
     .glass-shadow {
       position: absolute;
-      left: 33px;
+      left: 2rem;
       right: 0;
       top: 0;
       bottom: 0;
-      border-radius: 0;
       opacity: 0;
       pointer-events: none;
       box-shadow: 
@@ -281,40 +287,40 @@
       opacity: 1;
     }
 
-    /* 2. CÁUSTICA 1 (EXTERIOR): REUBICADA +10px ARRIBA (bottom: -13px) Y +30px DERECHA (right: 34px) */
+    /* 2. CÁUSTICA 1 (EXTERIOR): +20% INTENSIDAD Y DESPLAZADA AL BORDE DERECHO EN % */
     .caustic-bg {
       position: absolute;
-      right: 34px;
-      bottom: -13px;
-      width: 140px;
-      height: 26px;
+      right: 1.5%;
+      bottom: -0.8rem;
+      width: 8.75rem;
+      height: 1.65rem;
       border-radius: 50%;
-      background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.85) 25%, rgba(255, 255, 255, 0.30) 55%, rgba(255, 255, 255, 0) 75%);
-      filter: blur(2.5px);
+      background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.95) 28%, rgba(255, 255, 255, 0.42) 58%, rgba(255, 255, 255, 0) 78%);
+      filter: blur(2px);
       mix-blend-mode: screen;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.35s var(--ease-webflow), transform 0.35s var(--ease-webflow), bottom 0.4s var(--ease-webflow);
+      transition: opacity 0.35s var(--ease-webflow), transform 0.35s var(--ease-webflow);
       z-index: 4;
     }
 
     .menu-item.active .caustic-bg {
       opacity: 1;
-      transform: translateY(1px) scale(1.08);
+      transform: translateY(1px) scale(1.10);
     }
 
-    /* 3. CRISTAL LÍQUIDO (BLUR POTENTE v2.11 + BISELES v2.16) */
+    /* 3. CRISTAL LÍQUIDO TRANSLÚCIDO Y ELEGANTE (BLUR FUNCIONAL v2.11 + BISEL v2.16) */
     .glass-overlay {
       position: absolute;
-      left: 33px;
+      left: 2rem;
       right: 0;
       top: 0;
       bottom: 0;
       background: linear-gradient(
         90deg, 
-        rgba(255, 255, 255, 0.70) 0%, 
-        rgba(255, 255, 255, 0.40) 55%, 
-        rgba(255, 255, 255, 0.08) 100%
+        rgba(255, 255, 255, 0.42) 0%, 
+        rgba(255, 255, 255, 0.22) 55%, 
+        rgba(255, 255, 255, 0.04) 100%
       );
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
@@ -323,7 +329,7 @@
       overflow: hidden;
       box-shadow: 
         0 8px 24px rgba(18, 25, 40, 0.06),
-        inset 1.5px 2px 3px rgba(255, 255, 255, 0.90),
+        inset 1.5px 2px 3px rgba(255, 255, 255, 0.92),
         inset -1.5px -2px 4px rgba(18, 25, 40, 0.04);
       transition: opacity 0.35s var(--ease-webflow);
       z-index: 5;
@@ -333,20 +339,19 @@
       opacity: 1;
     }
 
-    /* 4. CÁUSTICA 2 (INTERIOR): DIFUSIÓN AMPLIA NATURAL Y 100% BLANCA */
+    /* 4. CÁUSTICA 2 (INTERIOR): +20% INTENSIDAD, 100% BLANCA Y EXTENDIDA A LA DERECHA */
     .caustic-glass {
       position: absolute;
-      right: 18px;
-      bottom: 4px;
-      width: 130px;
-      height: 22px;
+      right: 1.5%;
+      bottom: 0.25rem;
+      width: 8.2rem;
+      height: 1.4rem;
       border-radius: 50%;
-      background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.55) 35%, rgba(255, 255, 255, 0.15) 65%, transparent 85%);
-      filter: blur(2.5px);
+      background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.72) 35%, rgba(255, 255, 255, 0.22) 65%, transparent 85%);
+      filter: blur(2px);
       mix-blend-mode: overlay;
-      opacity: 0.85;
+      opacity: 0.95;
       pointer-events: none;
-      transition: bottom 0.4s var(--ease-webflow);
     }
 
     /* ESPECULARES SUPERIOR E INFERIOR (v2.16) */
@@ -369,10 +374,10 @@
       background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.90) 35%, rgba(0, 0, 0, 0.04) 70%, transparent 100%);
     }
 
-    /* RECTÁNGULO ROJO INDICADOR */
+    /* RECTÁNGULO ROJO INDICADOR (MITAD DE GROSOR EN CARD EXPANDIDA) */
     .red-indicator {
       position: absolute;
-      left: 26px;
+      left: 1.65rem;
       top: 0;
       bottom: 0;
       width: 4.7px;
@@ -380,7 +385,7 @@
       background-color: var(--color-btn);
       box-shadow: 0 0 10px rgba(186, 13, 54, 0.45);
       opacity: 0;
-      transition: opacity 0.35s var(--ease-webflow);
+      transition: opacity 0.35s var(--ease-webflow), width 0.35s var(--ease-webflow);
       z-index: 15;
     }
 
@@ -388,7 +393,11 @@
       opacity: 1;
     }
 
-    /* ESTRUCTURA INTERNA DE CONTENIDO */
+    .menu-item.expanded .red-indicator {
+      width: 2.35px; /* Mitad de grosor */
+    }
+
+    /* ESTRUCTURA INTERNA */
     .item-wrapper {
       position: relative;
       z-index: 20;
@@ -401,16 +410,16 @@
     /* CABECERA DE LA FILA */
     .item-header {
       position: relative;
-      height: 52px;
-      min-height: 52px;
+      height: 3.25rem;
+      min-height: 3.25rem;
       display: flex;
       align-items: center;
-      padding: 0 24px;
+      padding: 0 1.5rem;
       transition: transform 0.35s var(--ease-webflow);
     }
 
     .menu-item.active .item-header {
-      transform: translateX(40px);
+      transform: translateX(2.5rem);
     }
 
     /* Número del plato */
@@ -418,9 +427,9 @@
       font-size: 0.68rem;
       font-variation-settings: "wdth" 100, "wght" 300;
       color: var(--color-text-muted);
-      margin-right: 18px;
+      margin-right: 1.1rem;
       letter-spacing: 0.5px;
-      width: 22px;
+      width: 1.4rem;
       opacity: 0.40;
       transition: opacity 0.35s var(--ease-webflow), color 0.35s var(--ease-webflow);
     }
@@ -456,7 +465,7 @@
     .item-meta {
       position: relative;
       margin-left: auto;
-      padding-right: 48px;
+      padding-right: 2.8rem;
       display: flex;
       align-items: center;
       justify-content: flex-end;
@@ -466,9 +475,9 @@
     /* ICONO "i" DE INFORMACIÓN */
     .info-icon {
       position: absolute;
-      right: 48px;
-      width: 18px;
-      height: 18px;
+      right: 2.8rem;
+      width: 1.15rem;
+      height: 1.15rem;
       border-radius: 50%;
       border: 1.2px solid rgba(0, 0, 0, 0.45);
       color: rgba(0, 0, 0, 0.65);
@@ -480,7 +489,7 @@
       font-variation-settings: "wdth" 100, "wght" 500;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s var(--ease-webflow), transform 0.3s var(--ease-webflow);
+      transition: opacity 0.25s var(--ease-webflow), transform 0.25s var(--ease-webflow);
     }
 
     .info-icon span {
@@ -493,17 +502,17 @@
 
     .menu-item.expanded .info-icon {
       opacity: 0;
-      transform: scale(0.7);
+      transform: scale(0.65);
     }
 
-    /* PRECIO DEL PLATO EN LIGHT ("18€") */
+    /* PRECIO DEL PLATO EN ROJO CORPORATIVO Y PESO MEDIUM (18€) */
     .item-price {
       position: absolute;
-      right: 48px;
-      font-size: 1.05rem;
+      right: 2.8rem;
+      font-size: 1.08rem;
       font-family: var(--font-fredoka);
-      font-variation-settings: "wdth" 110, "wght" 300;
-      color: var(--color-text-active);
+      font-variation-settings: "wdth" 110, "wght" 500;
+      color: var(--color-btn);
       letter-spacing: 0.5px;
       opacity: 0;
       pointer-events: none;
@@ -512,32 +521,34 @@
     }
 
     .menu-item.expanded .item-price {
-      opacity: 0.95;
+      opacity: 1;
       transform: translateY(0);
     }
 
-    /* CUERPO DEL CARD EXPANDIDO (6 LÍNEAS LOREM IPSUM) */
+    /* CUERPO DEL CARD: FADE-IN PRECISO A PARTIR DE 2/3 DEL DESPLIEGUE (DELAY 260ms) */
     .card-body {
-      padding: 6px 36px 20px 84px;
+      padding: 0.4rem 2.2rem 1.4rem 5.25rem;
       opacity: 0;
       pointer-events: none;
-      transform: translateY(-6px);
-      transition: opacity 0.35s var(--ease-webflow) 0.06s, transform 0.35s var(--ease-webflow) 0.06s;
+      transform: translateY(-4px);
+      transition: opacity 0.16s ease-out 0s, transform 0.16s ease-out 0s;
     }
 
     .menu-item.expanded .card-body {
       opacity: 1;
       pointer-events: auto;
       transform: translateY(0);
+      transition: opacity 0.16s ease-out 0.26s, transform 0.16s ease-out 0.26s;
     }
 
+    /* TEXTO DESCRIPTIVO +2 PUNTOS MÁS GRANDE (0.92rem) Y MÁXIMA LEGIBILIDAD */
     .card-text {
-      font-size: 0.78rem;
-      line-height: 1.52;
-      letter-spacing: 0.25px;
-      color: #2D333D;
-      font-variation-settings: "wdth" 105, "wght" 350;
-      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+      font-size: 0.92rem;
+      line-height: 1.54;
+      letter-spacing: 0.2px;
+      color: #1E232B;
+      font-variation-settings: "wdth" 105, "wght" 400;
+      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85);
     }
   </style>
 </head>
@@ -973,7 +984,7 @@
       const btnAr = document.getElementById('btn-ar');
 
       // ======================================================================
-      // 1. CINEMÁTICA Y FÍSICA: INERCIA PESADA + COMPRESIÓN CON HOLD DE 200ms
+      // 1. CINEMÁTICA Y FÍSICA: INERCIA PESADA + HOLD DE 200ms
       // ======================================================================
       const layerElements = [
         document.querySelector('.layer-1'),
@@ -1041,7 +1052,7 @@
             layer.angle += angleDiff * 0.012;
           }
 
-          // Escala: 1 bajada rápida + Hold 200ms + 1 retorno suave al doble de duración (lerpRate 0.0275)
+          // Escala: 1 bajada rápida + Hold 200ms + 1 retorno suave al doble de duración
           const lerpRate = layer.isCompressing ? 0.22 : 0.0275;
           layer.scale += (layer.targetScale - layer.scale) * lerpRate;
 
@@ -1077,7 +1088,7 @@
             layer.isCompressing = true;
             layer.targetScale = conf.scaleDip;
 
-            // FASE 2: Hold de 200ms en compresión máxima + Retorno lento continuo (~180ms + 200ms = 380ms)
+            // FASE 2: Hold de 200ms en compresión máxima + Retorno lento continuo (180ms + 200ms = 380ms)
             layer.recoveryTimeoutId = setTimeout(() => {
               layer.isCompressing = false;
               layer.targetScale = 1.0;
@@ -1088,10 +1099,11 @@
       }
 
       // ======================================================================
-      // 5. INTERACCIÓN DE LISTA, EXPANSION DE CARD Y CIERRE
+      // 5. INTERACCIÓN DE LISTA, EXPANSION DE CARD Y BLOQUEO DE SCROLL
       // ======================================================================
       function collapseAllCards() {
         menuItems.forEach((i) => i.classList.remove('expanded'));
+        menuList.classList.remove('scroll-locked');
       }
 
       menuItems.forEach((item) => {
@@ -1102,10 +1114,13 @@
           if (isCurrentlyActive) {
             // SEGUNDO TOQUE: Alterna despliegue de Card
             if (isCurrentlyExpanded) {
-              item.classList.remove('expanded');
+              collapseAllCards();
             } else {
               collapseAllCards();
               item.classList.add('expanded');
+
+              // Bloquear el scroll mientras el Card está abierto
+              menuList.classList.add('scroll-locked');
 
               // Posicionamiento a 25px por debajo del visor / botón rojo
               setTimeout(() => {
@@ -1126,21 +1141,6 @@
           }
         });
       });
-
-      // CIERRE POR SCROLL O ARRASTRE
-      menuList.addEventListener('touchmove', () => {
-        const openCard = document.querySelector('.menu-item.expanded');
-        if (openCard) {
-          openCard.classList.remove('expanded');
-        }
-      }, { passive: true });
-
-      menuList.addEventListener('wheel', () => {
-        const openCard = document.querySelector('.menu-item.expanded');
-        if (openCard) {
-          openCard.classList.remove('expanded');
-        }
-      }, { passive: true });
 
       // Disparador AR
       btnAr.addEventListener('click', () => {
