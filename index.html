@@ -1,4 +1,4 @@
-<!-- Versión: WebDesign v2.31 -->
+<!-- Versión: WebDesign v2.32 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -224,7 +224,7 @@
     }
 
     /* ==========================================================================
-       5. LISTA DE PLATOS Y CARD FLUIDA (ACCELERACIÓN GPU PURA + BLUR SANTO GRIAL)
+       5. LISTA DE PLATOS Y CARD FLUIDA (ACCELERACIÓN GPU PURA + BLUR 6px)
        ========================================================================== */
     .menu-list {
       position: relative;
@@ -233,17 +233,12 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       list-style: none;
-      padding: 0.8rem 0 0.8rem 0; /* Ajuste limpio en reposo sin holguras muertas */
+      padding: 0.8rem 0 0.3rem 0; /* Sin holguras muertas en reposo */
       scrollbar-width: none;
     }
 
     .menu-list::-webkit-scrollbar {
       display: none;
-    }
-
-    /* Inyección dinámica matemática de altura (calc(60dvh - 3.25rem)) para scroll sin topes físicos */
-    .menu-list.has-expanded {
-      padding-bottom: calc(60dvh - 3.25rem) !important;
     }
 
     /* FILA BASE */
@@ -277,7 +272,7 @@
       box-shadow: 
         0 0.875rem 1.75rem rgba(18, 25, 40, 0.12),
         0 0.25rem 0.625rem rgba(18, 25, 40, 0.06);
-      transition: opacity 0.35s var(--ease-webflow), right 0.18s var(--ease-webflow), border-radius 0.18s var(--ease-webflow);
+      transition: opacity 0.35s var(--ease-webflow), right 0.06s ease-out, border-radius 0.06s ease-out;
       z-index: 2;
     }
 
@@ -320,7 +315,7 @@
       bottom: -0.5rem;
     }
 
-    /* 3. CRISTAL LÍQUIDO (BLUR 8px BLINDADO SOBRE CERÁMICA) */
+    /* 3. CRISTAL LÍQUIDO: BLUR 6px + MENOS LAVADO BLANCO */
     .glass-overlay {
       position: absolute;
       left: 2rem;
@@ -330,12 +325,12 @@
       border-radius: 0;
       background: linear-gradient(
         90deg, 
-        rgba(255, 255, 255, 0.40) 0%, 
-        rgba(255, 255, 255, 0.18) 55%, 
-        rgba(255, 255, 255, 0.03) 100%
+        rgba(255, 255, 255, 0.24) 0%, 
+        rgba(255, 255, 255, 0.08) 55%, 
+        rgba(255, 255, 255, 0.02) 100%
       );
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       opacity: 0;
       pointer-events: none;
       overflow: hidden;
@@ -343,7 +338,7 @@
         0 0.5rem 1.5rem rgba(18, 25, 40, 0.06),
         inset 0.09375rem 0.125rem 0.1875rem rgba(255, 255, 255, 0.92),
         inset -0.09375rem -0.125rem 0.25rem rgba(18, 25, 40, 0.04);
-      transition: opacity 0.35s var(--ease-webflow), right 0.18s var(--ease-webflow), border-radius 0.18s var(--ease-webflow);
+      transition: opacity 0.35s var(--ease-webflow), right 0.06s ease-out, border-radius 0.06s ease-out;
       z-index: 5;
     }
 
@@ -391,7 +386,7 @@
       background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.90) 35%, rgba(0, 0, 0, 0.04) 70%, transparent 100%);
     }
 
-    /* LÍNEA ROJA: SALIDA INSTANTÁNEA (0.06s) AL EXPANDIR */
+    /* LÍNEA ROJA: DESAPARICIÓN INSTANTÁNEA (0.06s) AL EXPANDIR */
     .red-indicator {
       position: absolute;
       left: 1.65rem;
@@ -411,7 +406,7 @@
 
     .menu-item.expanded .red-indicator {
       opacity: 0 !important;
-      transition: opacity 0.06s ease-out; /* Desaparición ultra-rápida */
+      transition: opacity 0.06s ease-out;
     }
 
     /* ESTRUCTURA INTERIOR */
@@ -480,7 +475,7 @@
       text-shadow: 0 0.0625rem 0.125rem rgba(255, 255, 255, 0.8);
     }
 
-    /* ZONA DERECHA: HAMBURGUESA CON SALIDA INSTANTÁNEA (0.06s) AL EXPANDIR */
+    /* ZONA DERECHA: HAMBURGUESA */
     .item-meta {
       position: absolute;
       right: 2.4rem;
@@ -521,13 +516,13 @@
     .menu-item.expanded .more-info-icon {
       opacity: 0;
       transform: scale(0.6);
-      transition: opacity 0.06s ease-out, transform 0.06s ease-out; /* Desaparición instantánea */
+      transition: opacity 0.06s ease-out, transform 0.06s ease-out;
     }
 
-    /* CUERPO DEL CARD: ALINEACIÓN ESTRICTA CON EL NÚMERO (3.9rem) */
+    /* CUERPO DEL CARD: ALINEADO VERTICALMENTE CON EL NÚMERO (3.9rem) */
     .card-body {
       position: relative;
-      padding: 0.2rem 2.8rem 1.4rem 3.9rem; /* Alineado verticalmente con .item-number */
+      padding: 0.2rem 2.8rem 1.4rem 3.9rem;
       opacity: 0;
       pointer-events: none;
       transform: translateY(-0.25rem);
@@ -562,7 +557,7 @@
       display: none;
     }
 
-    /* PISTA Y ESFERA BLANCA */
+    /* PISTA Y GUÍA OSCURA VERTICAL */
     .card-scroll-track {
       position: absolute;
       right: 0.3rem;
@@ -570,6 +565,18 @@
       bottom: 2.6rem;
       width: 0.6rem;
       pointer-events: none;
+      display: flex;
+      justify-content: center;
+    }
+
+    .card-scroll-track::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 0.10rem;
+      background-color: rgba(0, 0, 0, 0.14);
+      border-radius: 0.1rem;
     }
 
     .card-scroll-dot {
@@ -598,14 +605,14 @@
       max-width: 86%;
     }
 
-    /* PRECIO: EQUIDISTANCIA SIMÉTRICA RESPECTO AL CRISTAL (1.2rem del borde dcho e inferior) + 2.10rem */
+    /* PRECIO: EQUIDISTANCIA Y TAMAÑO CALIBRADO (1.80rem, right: 2.85rem, bottom: 0.65rem) */
     .card-price {
       position: absolute;
-      right: 3.2rem; /* 2rem cristal + 1.2rem margen interior */
-      bottom: 1.2rem; /* 1.2rem del borde inferior */
-      font-size: 2.10rem; /* Escala aumentada según especificación */
+      right: 2.85rem;
+      bottom: 0.65rem;
+      font-size: 1.80rem;
       font-family: var(--font-fredoka);
-      font-variation-settings: "wdth" 105, "wght" 300; /* Fredoka Light */
+      font-variation-settings: "wdth" 105, "wght" 300;
       color: #000000;
       letter-spacing: 0.02rem;
       opacity: 0;
@@ -1352,11 +1359,11 @@
       });
 
       // ======================================================================
-      // 6. GESTOS TÁCTILES Y COREOGRAFÍA DESACOPLADA (OPCIÓN C A 60-120 FPS)
+      // 6. GESTOS TÁCTILES Y CONTROL DE EXPANSION DINÁMICA
       // ======================================================================
       function collapseAllCards() {
         menuItems.forEach((i) => i.classList.remove('expanded'));
-        menuList.classList.remove('has-expanded');
+        menuList.style.paddingBottom = '0.3rem'; // Reset limpio a reposo
       }
 
       let touchStartY = 0;
@@ -1379,7 +1386,6 @@
 
       menuItems.forEach((item) => {
         item.addEventListener('click', () => {
-          // Si el usuario está realizando scroll de lectura, ignoramos el clic
           if (isTouchDragging) {
             return;
           }
@@ -1388,41 +1394,47 @@
           const isCurrentlyExpanded = item.classList.contains('expanded');
 
           if (isCurrentlyActive) {
-            // SEGUNDO TOQUE: Alterna Card (Sin perturbación del fondo cinético)
+            // SEGUNDO TOQUE: Alterna Card (Sin perturbación de fondo)
             if (isCurrentlyExpanded) {
               collapseAllCards();
             } else {
               collapseAllCards();
-              
-              // 1. Inyección instantánea de headroom matemático para permitir recorrido pleno
-              menuList.classList.add('has-expanded');
 
-              // 2. FASE 1: Inicia el scroll de subida hacia la cota bajo el botón AR
-              const targetScroll = item.offsetTop - 10;
+              // 1. Cálculo matemático de holgura dinámica exacta (Cero espacio sobrante)
+              const targetScroll = Math.max(0, item.offsetTop - 10);
+              const fontSize = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+              const expansionDiff = (14.8 - 3.25) * fontSize;
+              const estimatedScrollHeight = menuList.scrollHeight + expansionDiff;
+              const maxNaturalScroll = estimatedScrollHeight - menuList.clientHeight;
+              const neededPadding = Math.max(0, targetScroll - maxNaturalScroll);
+
+              if (neededPadding > 0) {
+                menuList.style.paddingBottom = `${neededPadding + 10}px`;
+              } else {
+                menuList.style.paddingBottom = '0.3rem';
+              }
+
+              // 2. Expansión y Scroll sincronizados en el mismo fotograma (Arquitectura v2.29)
+              item.classList.add('expanded');
+
+              const wrap = item.querySelector('.card-scroll-wrap');
+              if (wrap) {
+                wrap.scrollTop = 0;
+                updateCardScrollDot(wrap);
+              }
+
               menuList.scrollTo({
-                top: Math.max(0, targetScroll),
+                top: targetScroll,
                 behavior: 'smooth'
               });
-
-              // 3. FASE 2: Despliegue de altura desacoplado a ~110ms para evitar picos concurrentes
-              setTimeout(() => {
-                item.classList.add('expanded');
-
-                // Reinicio de scroll y micro-esfera al tope absoluto
-                const wrap = item.querySelector('.card-scroll-wrap');
-                if (wrap) {
-                  wrap.scrollTop = 0;
-                  updateCardScrollDot(wrap);
-                }
-              }, 110);
             }
           } else {
-            // PRIMER TOQUE: Selección simple (1 fila, cero saltos verticales)
+            // PRIMER TOQUE: Selección simple (1 fila)
             collapseAllCards();
             menuItems.forEach((i) => i.classList.remove('active'));
             item.classList.add('active');
             
-            // Física reactiva exclusiva del primer toque
+            // Reacción física del fondo exclusiva del primer toque
             triggerChainReaction();
           }
         });
