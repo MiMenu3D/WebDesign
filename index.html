@@ -1,4 +1,4 @@
-<!-- Versión: WebDesign v2.29 -->
+<!-- Versión: WebDesign v2.30 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -30,9 +30,9 @@
     :root {
       --color-btn: #BA0D36;
       --color-btn-glow: rgba(186, 13, 54, 0.45);
-      --color-bg-base: #EEF0F2;
+      --color-bg-base: #EEF2F6;
       --color-text-active: #000000;
-      --color-text-muted: #1A1A1A;
+      --color-text-muted: #1A1D24;
       --font-fredoka: 'Fredoka', -apple-system, BlinkMacSystemFont, sans-serif;
       --ease-webflow: cubic-bezier(0.25, 1, 0.5, 1);
     }
@@ -73,7 +73,7 @@
       flex-direction: column;
       justify-content: flex-end;
       align-items: center;
-      background: radial-gradient(circle at 50% 60%, #17181C 0%, #060608 88%);
+      background: radial-gradient(circle at 50% 60%, #171920 0%, #060709 88%);
       border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.12);
       box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.18);
     }
@@ -120,7 +120,7 @@
     }
 
     /* ==========================================================================
-       4. ZONA INFERIOR: CERÁMICA MONOCROMÁTICA 100% NEUTRA (INICIO ILUMINADO 225°)
+       4. ZONA INFERIOR: CERÁMICA 3D (40% AZULADO + ARRANQUE ILUMINADO 225°)
        ========================================================================== */
     .menu-section {
       position: relative;
@@ -129,7 +129,7 @@
       width: 100%;
       overflow: hidden;
       padding-top: 1.5rem;
-      background: radial-gradient(circle at 50% 45%, #F7F7F7 0%, #E2E2E2 100%);
+      background: radial-gradient(circle at 50% 45%, #F8FAFC 0%, #E2E8EE 100%);
     }
 
     /* Escenario cinético */
@@ -141,14 +141,14 @@
       overflow: hidden;
     }
 
-    /* Capas cerámicas monocromáticas (cero azul) con rampa de caída amplia */
+    /* Capas cerámicas con caída continua y luz a 90° */
     .ceramic-layer {
       position: absolute;
       top: 50%;
       left: 50%;
       transform-origin: center center;
       will-change: transform;
-      background: linear-gradient(90deg, #D0D0D0 0%, #DFDFDF 25%, #EBEBEB 50%, #F8F8F8 78%, #FFFFFF 100%);
+      background: linear-gradient(90deg, #CCD6E0 0%, #DCE4EC 25%, #E8EFF5 50%, #F5F8FA 78%, #FFFFFF 100%);
     }
 
     /* CAPA 1: Terraza central */
@@ -158,10 +158,10 @@
       border-radius: 2.75rem;
       z-index: 5;
       box-shadow: 
-        0.5rem 0.875rem 1.5rem rgba(0, 0, 0, 0.08),
-        0.125rem 0.25rem 0.5rem rgba(0, 0, 0, 0.03),
+        0.5rem 0.875rem 1.5rem rgba(18, 25, 40, 0.08),
+        0.125rem 0.25rem 0.5rem rgba(18, 25, 40, 0.03),
         inset -0.75rem -0.75rem 2rem rgba(255, 255, 255, 0.90),
-        inset 0.75rem 0.75rem 2rem rgba(160, 160, 160, 0.35);
+        inset 0.75rem 0.75rem 2rem rgba(165, 180, 198, 0.35);
     }
 
     /* CAPA 2: Terraza 1 */
@@ -171,10 +171,10 @@
       border-radius: 5rem;
       z-index: 4;
       box-shadow: 
-        0.75rem 1.125rem 1.875rem rgba(0, 0, 0, 0.065),
-        0.1875rem 0.3125rem 0.625rem rgba(0, 0, 0, 0.025),
+        0.75rem 1.125rem 1.875rem rgba(18, 25, 40, 0.065),
+        0.1875rem 0.3125rem 0.625rem rgba(18, 25, 40, 0.025),
         inset -1rem -1rem 2.5rem rgba(255, 255, 255, 0.85),
-        inset 1rem 1rem 2.5rem rgba(160, 160, 160, 0.30);
+        inset 1rem 1rem 2.5rem rgba(165, 180, 198, 0.30);
     }
 
     /* CAPA 3: Terraza 2 */
@@ -184,10 +184,10 @@
       border-radius: 7.75rem;
       z-index: 3;
       box-shadow: 
-        1rem 1.5rem 2.375rem rgba(0, 0, 0, 0.05),
-        0.25rem 0.4375rem 0.875rem rgba(0, 0, 0, 0.02),
+        1rem 1.5rem 2.375rem rgba(18, 25, 40, 0.05),
+        0.25rem 0.4375rem 0.875rem rgba(18, 25, 40, 0.02),
         inset -1.25rem -1.25rem 3rem rgba(255, 255, 255, 0.80),
-        inset 1.25rem 1.25rem 3rem rgba(160, 160, 160, 0.25);
+        inset 1.25rem 1.25rem 3rem rgba(165, 180, 198, 0.25);
     }
 
     /* CAPA 4: Base exterior */
@@ -197,10 +197,10 @@
       border-radius: 10.5rem;
       z-index: 2;
       box-shadow: 
-        1.375rem 2rem 3.125rem rgba(0, 0, 0, 0.04),
-        0.375rem 0.625rem 1.125rem rgba(0, 0, 0, 0.015),
+        1.375rem 2rem 3.125rem rgba(18, 25, 40, 0.04),
+        0.375rem 0.625rem 1.125rem rgba(18, 25, 40, 0.015),
         inset -1.5rem -1.5rem 3.5rem rgba(255, 255, 255, 0.75),
-        inset 1.5rem 1.5rem 3.5rem rgba(160, 160, 160, 0.20);
+        inset 1.5rem 1.5rem 3.5rem rgba(165, 180, 198, 0.20);
     }
 
     /* Fades de scroll */
@@ -215,16 +215,16 @@
 
     .fade-top {
       top: 0;
-      background: linear-gradient(to bottom, rgba(247, 247, 247, 0.95) 15%, rgba(247, 247, 247, 0) 100%);
+      background: linear-gradient(to bottom, rgba(248, 250, 252, 0.95) 15%, rgba(248, 250, 252, 0) 100%);
     }
 
     .fade-bottom {
       bottom: 0;
-      background: linear-gradient(to top, rgba(226, 226, 226, 0.95) 20%, rgba(226, 226, 226, 0) 100%);
+      background: linear-gradient(to top, rgba(226, 232, 238, 0.95) 20%, rgba(226, 232, 238, 0) 100%);
     }
 
     /* ==========================================================================
-       5. LISTA DE PLATOS Y CARD EXPANDIBLE ESTILO WEBFLOW (BLUR 8px RESTAURADO)
+       5. LISTA DE PLATOS Y CARD FLUIDA (ACCELERACIÓN GPU PURA + BLUR SANTO GRIAL)
        ========================================================================== */
     .menu-list {
       position: relative;
@@ -233,35 +233,35 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       list-style: none;
-      padding: 0.8rem 0 3.5rem 0;
+      padding: 0.8rem 0 0.5rem 0; /* Sin espacio muerto en reposo */
       scrollbar-width: none;
-      transition: padding-bottom 0.38s var(--ease-webflow);
     }
 
     .menu-list::-webkit-scrollbar {
       display: none;
     }
 
-    /* Espacio extra inyectado solo con Card abierta */
+    /* Inyección de altura instantánea (0ms) para scroll completo sin recortes */
     .menu-list.has-expanded {
-      padding-bottom: 16rem;
+      padding-bottom: 16rem !important;
     }
 
-    /* FILA BASE: Sin contain: layout ni will-change que rompan el backdrop-filter */
+    /* FILA BASE: Sin contain ni will-change que anulen el backdrop-filter */
     .menu-item {
       position: relative;
       width: 100%;
       height: 3.25rem;
       cursor: pointer;
       z-index: 10;
-      transition: height 0.38s var(--ease-webflow), margin 0.38s var(--ease-webflow);
+      margin: 0; /* Margen estrictamente inmutable en todos los estados */
+      transition: height 0.38s var(--ease-webflow);
     }
 
-    /* CARD EXPANDIDA */
+    /* CARD EXPANDIDA (CERO DESPLAZAMIENTOS DE MARGEN) */
     .menu-item.expanded {
       height: 14.8rem;
       z-index: 30;
-      margin: 0.6rem 0;
+      margin: 0;
     }
 
     /* 1. SOMBRA AMBIENTAL BAJO EL CRISTAL */
@@ -275,8 +275,8 @@
       opacity: 0;
       pointer-events: none;
       box-shadow: 
-        0 0.875rem 1.75rem rgba(0, 0, 0, 0.10),
-        0 0.25rem 0.625rem rgba(0, 0, 0, 0.05);
+        0 0.875rem 1.75rem rgba(18, 25, 40, 0.12),
+        0 0.25rem 0.625rem rgba(18, 25, 40, 0.06);
       transition: opacity 0.35s var(--ease-webflow), right 0.18s var(--ease-webflow), border-radius 0.18s var(--ease-webflow);
       z-index: 2;
     }
@@ -290,11 +290,11 @@
       right: 2rem;
       border-radius: 0.875rem;
       box-shadow: 
-        0 1.125rem 2.25rem rgba(0, 0, 0, 0.12),
-        0 0.375rem 0.875rem rgba(0, 0, 0, 0.06);
+        0 1.125rem 2.25rem rgba(18, 25, 40, 0.14),
+        0 0.375rem 0.875rem rgba(18, 25, 40, 0.08);
     }
 
-    /* 2. CÁUSTICA 1 (EXTERIOR) */
+    /* 2. CÁUSTICA 1 (EXTERIOR): GRADIENTE ALFA PURO (CERO MIX-BLEND-MODE PARA NO AISLAR EL BLUR) */
     .caustic-bg {
       position: absolute;
       right: 1.5rem;
@@ -302,9 +302,8 @@
       width: 8.5rem;
       height: 1.6rem;
       border-radius: 50%;
-      background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.95) 28%, rgba(255, 255, 255, 0.42) 58%, rgba(255, 255, 255, 0) 78%);
-      filter: blur(2.2px);
-      mix-blend-mode: screen;
+      background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.60) 30%, rgba(255, 255, 255, 0.18) 60%, transparent 80%);
+      filter: blur(2.5px);
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.35s var(--ease-webflow), transform 0.35s var(--ease-webflow);
@@ -321,7 +320,7 @@
       bottom: -0.5rem;
     }
 
-    /* 3. CRISTAL LÍQUIDO (BLUR 8px 100% OPERATIVO) */
+    /* 3. CRISTAL LÍQUIDO (BLUR 8px 100% OPERATIVO SOBRE CERÁMICA) */
     .glass-overlay {
       position: absolute;
       left: 2rem;
@@ -341,9 +340,9 @@
       pointer-events: none;
       overflow: hidden;
       box-shadow: 
-        0 0.5rem 1.5rem rgba(0, 0, 0, 0.05),
+        0 0.5rem 1.5rem rgba(18, 25, 40, 0.06),
         inset 0.09375rem 0.125rem 0.1875rem rgba(255, 255, 255, 0.92),
-        inset -0.09375rem -0.125rem 0.25rem rgba(0, 0, 0, 0.03);
+        inset -0.09375rem -0.125rem 0.25rem rgba(18, 25, 40, 0.04);
       transition: opacity 0.35s var(--ease-webflow), right 0.18s var(--ease-webflow), border-radius 0.18s var(--ease-webflow);
       z-index: 5;
     }
@@ -358,7 +357,7 @@
       border-radius: 0.875rem;
     }
 
-    /* 4. CÁUSTICA 2 (INTERIOR) */
+    /* 4. CÁUSTICA 2 (INTERIOR): GRADIENTE ALFA PURO */
     .caustic-glass {
       position: absolute;
       right: 1.5rem;
@@ -366,9 +365,8 @@
       width: 8rem;
       height: 1.4rem;
       border-radius: 50%;
-      background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.72) 35%, rgba(255, 255, 255, 0.22) 65%, transparent 85%);
+      background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.45) 35%, rgba(255, 255, 255, 0.12) 65%, transparent 85%);
       filter: blur(2px);
-      mix-blend-mode: overlay;
       opacity: 0.95;
       pointer-events: none;
     }
@@ -426,7 +424,7 @@
       flex-direction: column;
     }
 
-    /* CABECERA (POSICIÓN VERTICAL ESTABLE) */
+    /* CABECERA (ALTURA Y POSICIÓN VERTICAL TOTALMENTE INMUTABLES) */
     .item-header {
       position: relative;
       height: 3.25rem;
@@ -482,19 +480,19 @@
       text-shadow: 0 0.0625rem 0.125rem rgba(255, 255, 255, 0.8);
     }
 
-    /* ZONA DERECHA: HAMBURGUESA Y PRECIO LIGHT ALINEADO AL BORDE SUPERIOR */
+    /* ZONA DERECHA: HAMBURGUESA DEVUELTA A SU POSICIÓN ORIGINAL */
     .item-meta {
       position: absolute;
-      right: 5.6rem; /* Situado dentro del margen del cristal expandido */
+      right: 2.4rem; /* Posición original recuperada */
       top: 0;
       bottom: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 3.2rem;
+      width: 2.8rem;
     }
 
-    /* ICONO "MÁS INFO" */
+    /* ICONO "MÁS INFO" (3 BARRAS APILADAS) */
     .more-info-icon {
       position: absolute;
       display: flex;
@@ -525,26 +523,7 @@
       transform: scale(0.6);
     }
 
-    /* PRECIO: TIPOGRAFÍA LIGHT, MÁS GRANDE Y ALINEADO CON LA PARTE SUPERIOR DEL TÍTULO */
-    .item-price {
-      position: absolute;
-      font-size: 1.35rem;
-      font-family: var(--font-fredoka);
-      font-variation-settings: "wdth" 105, "wght" 300; /* Fredoka Light */
-      color: #000000;
-      letter-spacing: 0.02rem;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(-0.125rem); /* Alineación rasante superior con item-name */
-      transition: opacity 0.18s ease-out, transform 0.18s ease-out;
-    }
-
-    .menu-item.expanded .item-price {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    /* CUERPO DEL CARD */
+    /* CUERPO DEL CARD (DESVANECIMIENTO SUAVE A 60 FPS) */
     .card-body {
       position: relative;
       padding: 0.2rem 2.8rem 1.4rem 2.4rem;
@@ -558,10 +537,10 @@
       opacity: 1;
       pointer-events: auto;
       transform: translateY(0);
-      transition: opacity 0.16s ease-out 0.22s, transform 0.16s ease-out 0.22s;
+      transition: opacity 0.18s ease-out 0.18s, transform 0.18s ease-out 0.18s;
     }
 
-    /* CONTENEDOR CON MICRO-ESFERA PERSONALIZADA DE RECORRIDO COMPLETO */
+    /* CONTENEDOR DE SCROLL */
     .card-scroll-container {
       position: relative;
       width: 100%;
@@ -571,8 +550,8 @@
     .card-scroll-wrap {
       height: 100%;
       overflow-y: auto;
-      padding-right: 1.4rem;
-      padding-bottom: 2.2rem;
+      padding-right: 1.6rem;
+      padding-bottom: 2.6rem;
       -webkit-mask-image: linear-gradient(to bottom, black 0%, black 72%, transparent 100%);
       mask-image: linear-gradient(to bottom, black 0%, black 72%, transparent 100%);
       scrollbar-width: none;
@@ -582,24 +561,24 @@
       display: none;
     }
 
-    /* PISTA Y ESFERA BLANCA (0.65 OPACIDAD + SOMBRA MULTIDIRECCIONAL) */
+    /* PISTA Y ESFERA BLANCA MÁS GRANDE CON SOMBRA PROFUNDA (OPACIDAD 0.88) */
     .card-scroll-track {
       position: absolute;
-      right: 0.2rem;
-      top: 0.15rem;
-      bottom: 1.8rem;
-      width: 0.45rem;
+      right: 0.3rem;
+      top: 0.2rem;
+      bottom: 2.6rem;
+      width: 0.6rem;
       pointer-events: none;
     }
 
     .card-scroll-dot {
-      width: 0.42rem;
-      height: 0.42rem;
+      width: 0.58rem;
+      height: 0.58rem;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.65);
+      background: rgba(255, 255, 255, 0.88);
       box-shadow: 
-        0 0.0625rem 0.25rem rgba(0, 0, 0, 0.35),
-        inset 0 0 0.0625rem rgba(255, 255, 255, 0.85);
+        0 0.0625rem 0.3rem rgba(0, 0, 0, 0.45),
+        inset 0 0 0.0625rem rgba(255, 255, 255, 0.95);
       position: absolute;
       top: 0;
       left: 50%;
@@ -612,10 +591,33 @@
       font-size: 0.92rem;
       line-height: 1.54;
       letter-spacing: 0.0125rem;
-      color: #1A1A1A;
+      color: #1A1D24;
       font-variation-settings: "wdth" 105, "wght" 400;
       text-shadow: 0 0.0625rem 0.0625rem rgba(255, 255, 255, 0.85);
-      max-width: 95%;
+      max-width: 82%; /* Espacio para el precio en la esquina inferior */
+    }
+
+    /* PRECIO: ESQUINA INFERIOR DERECHA, MÁS GRANDE Y CON TIPOGRAFÍA LIGHT */
+    .card-price {
+      position: absolute;
+      right: 2.6rem;
+      bottom: 1.3rem;
+      font-size: 1.65rem;
+      font-family: var(--font-fredoka);
+      font-variation-settings: "wdth" 105, "wght" 300; /* Fredoka Light */
+      color: #000000;
+      letter-spacing: 0.02rem;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(0.2rem);
+      transition: opacity 0.18s ease-out 0s, transform 0.18s ease-out 0s;
+      z-index: 25;
+    }
+
+    .menu-item.expanded .card-price {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.18s ease-out 0.20s, transform 0.18s ease-out 0.20s;
     }
   </style>
 </head>
@@ -631,7 +633,7 @@
       <button type="button" class="btn-ar" id="btn-ar"><span>Ver en tu mesa</span></button>
     </section>
 
-    <!-- ZONA INFERIOR: Topografía Cerámica Monocromática y Menú -->
+    <!-- ZONA INFERIOR: Topografía Cerámica 3D y Menú -->
     <section class="menu-section">
       
       <!-- 4 Terrazas de Cerámica Concéntricas -->
@@ -668,7 +670,6 @@
                   <div class="bar"></div>
                   <div class="bar"></div>
                 </div>
-                <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
@@ -682,6 +683,7 @@
                   <div class="card-scroll-dot"></div>
                 </div>
               </div>
+              <div class="card-price">18€</div>
             </div>
           </div>
         </li>
@@ -705,7 +707,6 @@
                   <div class="bar"></div>
                   <div class="bar"></div>
                 </div>
-                <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
@@ -719,6 +720,7 @@
                   <div class="card-scroll-dot"></div>
                 </div>
               </div>
+              <div class="card-price">18€</div>
             </div>
           </div>
         </li>
@@ -742,7 +744,6 @@
                   <div class="bar"></div>
                   <div class="bar"></div>
                 </div>
-                <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
@@ -756,6 +757,7 @@
                   <div class="card-scroll-dot"></div>
                 </div>
               </div>
+              <div class="card-price">18€</div>
             </div>
           </div>
         </li>
@@ -779,7 +781,6 @@
                   <div class="bar"></div>
                   <div class="bar"></div>
                 </div>
-                <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
@@ -793,6 +794,7 @@
                   <div class="card-scroll-dot"></div>
                 </div>
               </div>
+              <div class="card-price">18€</div>
             </div>
           </div>
         </li>
@@ -816,7 +818,6 @@
                   <div class="bar"></div>
                   <div class="bar"></div>
                 </div>
-                <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
@@ -830,6 +831,7 @@
                   <div class="card-scroll-dot"></div>
                 </div>
               </div>
+              <div class="card-price">18€</div>
             </div>
           </div>
         </li>
@@ -853,7 +855,6 @@
                   <div class="bar"></div>
                   <div class="bar"></div>
                 </div>
-                <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
@@ -867,6 +868,7 @@
                   <div class="card-scroll-dot"></div>
                 </div>
               </div>
+              <div class="card-price">18€</div>
             </div>
           </div>
         </li>
@@ -890,7 +892,6 @@
                   <div class="bar"></div>
                   <div class="bar"></div>
                 </div>
-                <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
@@ -904,6 +905,7 @@
                   <div class="card-scroll-dot"></div>
                 </div>
               </div>
+              <div class="card-price">18€</div>
             </div>
           </div>
         </li>
@@ -927,7 +929,6 @@
                   <div class="bar"></div>
                   <div class="bar"></div>
                 </div>
-                <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
@@ -941,6 +942,7 @@
                   <div class="card-scroll-dot"></div>
                 </div>
               </div>
+              <div class="card-price">18€</div>
             </div>
           </div>
         </li>
@@ -964,7 +966,6 @@
                   <div class="bar"></div>
                   <div class="bar"></div>
                 </div>
-                <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
@@ -978,6 +979,7 @@
                   <div class="card-scroll-dot"></div>
                 </div>
               </div>
+              <div class="card-price">18€</div>
             </div>
           </div>
         </li>
@@ -1001,7 +1003,6 @@
                   <div class="bar"></div>
                   <div class="bar"></div>
                 </div>
-                <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
@@ -1015,6 +1016,7 @@
                   <div class="card-scroll-dot"></div>
                 </div>
               </div>
+              <div class="card-price">18€</div>
             </div>
           </div>
         </li>
@@ -1038,7 +1040,6 @@
                   <div class="bar"></div>
                   <div class="bar"></div>
                 </div>
-                <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
@@ -1052,6 +1053,7 @@
                   <div class="card-scroll-dot"></div>
                 </div>
               </div>
+              <div class="card-price">18€</div>
             </div>
           </div>
         </li>
@@ -1075,7 +1077,6 @@
                   <div class="bar"></div>
                   <div class="bar"></div>
                 </div>
-                <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
@@ -1089,6 +1090,7 @@
                   <div class="card-scroll-dot"></div>
                 </div>
               </div>
+              <div class="card-price">18€</div>
             </div>
           </div>
         </li>
@@ -1112,7 +1114,6 @@
                   <div class="bar"></div>
                   <div class="bar"></div>
                 </div>
-                <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
@@ -1126,6 +1127,7 @@
                   <div class="card-scroll-dot"></div>
                 </div>
               </div>
+              <div class="card-price">18€</div>
             </div>
           </div>
         </li>
@@ -1149,7 +1151,6 @@
                   <div class="bar"></div>
                   <div class="bar"></div>
                 </div>
-                <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
@@ -1163,6 +1164,7 @@
                   <div class="card-scroll-dot"></div>
                 </div>
               </div>
+              <div class="card-price">18€</div>
             </div>
           </div>
         </li>
@@ -1186,7 +1188,6 @@
                   <div class="bar"></div>
                   <div class="bar"></div>
                 </div>
-                <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
@@ -1200,6 +1201,7 @@
                   <div class="card-scroll-dot"></div>
                 </div>
               </div>
+              <div class="card-price">18€</div>
             </div>
           </div>
         </li>
@@ -1216,7 +1218,7 @@
       const btnAr = document.getElementById('btn-ar');
 
       // ======================================================================
-      // 1. CINEMÁTICA Y FÍSICA: ARRANQUE ILUMINADO EN 225° + INERCIA PESADA
+      // 1. CINEMÁTICA Y FÍSICA: ARRANQUE EN 225° + INERCIA PESADA (40% AZULADO)
       // ======================================================================
       const layerElements = [
         document.querySelector('.layer-1'),
@@ -1235,7 +1237,7 @@
         { delay: 510, twistPower: 0.12, twistDamp: 0.968, scaleDip: 0.989, parallaxK: 0.20 }
       ];
 
-      // Ángulo inicial en 225° (rotación de 180° para iniciar con la cara iluminada arriba)
+      // Ángulo inicial 225°: arranca mostrando la zona iluminada en la parte superior
       const layers = layerElements.map((el, i) => ({
         el,
         angle: 225,
@@ -1284,14 +1286,14 @@
             layer.angle += angleDiff * 0.012;
           }
 
-          // Rampa de escala continua
+          // Rampa de escala viscoelástica
           const lerpRate = layer.isCompressing ? 0.22 : 0.0275;
           layer.scale += (layer.targetScale - layer.scale) * lerpRate;
 
           // Micro-parallax diferencial
           const layerY = currentParallaxY * conf.parallaxK;
 
-          // Renderizado acelerado
+          // Renderizado final
           layer.el.style.transform = `translate(-50%, calc(-50% + ${layerY}px)) rotate(${layer.angle}deg) scale(${layer.scale})`;
         });
 
@@ -1328,7 +1330,7 @@
       }
 
       // ======================================================================
-      // 5. CONTROLADOR DE MICRO-ESFERA DE SCROLL EN CARD (RECORRIDO 0% A 100%)
+      // 5. CONTROLADOR DE MICRO-ESFERA DE SCROLL EN CARD (0% A 100%)
       // ======================================================================
       function updateCardScrollDot(wrap) {
         const container = wrap.closest('.card-scroll-container');
@@ -1349,14 +1351,14 @@
       });
 
       // ======================================================================
-      // 6. INTERACCIÓN DE LISTA Y EXPANSIÓN SINCRÓNICA A 60 FPS
+      // 6. GESTOS TÁCTILES (TAP VS DRAG) Y EXPANSIÓN SINCRÓNICA A 60 FPS
       // ======================================================================
       function collapseAllCards() {
         menuItems.forEach((i) => i.classList.remove('expanded'));
         menuList.classList.remove('has-expanded');
       }
 
-      // Discriminador táctil (Tap vs Scroll)
+      // Discriminador táctil restaurado (Tap abre/cierra, Drag scrollea texto)
       let touchStartY = 0;
       let touchStartX = 0;
       let isTouchDragging = false;
@@ -1376,12 +1378,8 @@
       }, { passive: true });
 
       menuItems.forEach((item) => {
-        item.addEventListener('click', (e) => {
-          // Si el clic viene del área de texto scrolleable, no colapsamos
-          if (e.target.closest('.card-scroll-wrap')) {
-            return;
-          }
-
+        item.addEventListener('click', () => {
+          // Si es arrastre táctil para leer texto, ignoramos el clic para permitir el scroll
           if (isTouchDragging) {
             return;
           }
@@ -1396,16 +1394,18 @@
             } else {
               collapseAllCards();
               item.classList.add('expanded');
+              
+              // Inyección instantánea (0ms) de altura para evitar clamp de scroll
               menuList.classList.add('has-expanded');
 
-              // Reinicio de scroll y esfera a la posición superior absoluta
+              // Reinicio de scroll y micro-esfera al tope absoluto
               const wrap = item.querySelector('.card-scroll-wrap');
               if (wrap) {
                 wrap.scrollTop = 0;
                 updateCardScrollDot(wrap);
               }
 
-              // Scroll suave inmediato en el mismo frame
+              // Scroll suave sincronizado en el mismo fotograma
               const targetScroll = item.offsetTop - 10;
               menuList.scrollTo({
                 top: Math.max(0, targetScroll),
@@ -1414,7 +1414,7 @@
             }
             triggerChainReaction();
           } else {
-            // PRIMER TOQUE: Selección simple (1 fila)
+            // PRIMER TOQUE: Selección simple (1 fila, cero saltos verticales)
             collapseAllCards();
             menuItems.forEach((i) => i.classList.remove('active'));
             item.classList.add('active');
