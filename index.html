@@ -1,4 +1,4 @@
-<!-- Versión: WebDesign v2.28 -->
+<!-- Versión: WebDesign v2.29 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -30,9 +30,9 @@
     :root {
       --color-btn: #BA0D36;
       --color-btn-glow: rgba(186, 13, 54, 0.45);
-      --color-bg-base: #EEF2F6;
+      --color-bg-base: #EEF0F2;
       --color-text-active: #000000;
-      --color-text-muted: #1A1D24;
+      --color-text-muted: #1A1A1A;
       --font-fredoka: 'Fredoka', -apple-system, BlinkMacSystemFont, sans-serif;
       --ease-webflow: cubic-bezier(0.25, 1, 0.5, 1);
     }
@@ -73,7 +73,7 @@
       flex-direction: column;
       justify-content: flex-end;
       align-items: center;
-      background: radial-gradient(circle at 50% 60%, #171920 0%, #060709 88%);
+      background: radial-gradient(circle at 50% 60%, #17181C 0%, #060608 88%);
       border-bottom: 0.0625rem solid rgba(0, 0, 0, 0.12);
       box-shadow: 0 0.25rem 1.25rem rgba(0, 0, 0, 0.18);
     }
@@ -120,7 +120,7 @@
     }
 
     /* ==========================================================================
-       4. ZONA INFERIOR: TOPOGRAFÍA CERÁMICA CONTINUA CÓNCAVA
+       4. ZONA INFERIOR: CERÁMICA MONOCROMÁTICA 100% NEUTRA (INICIO ILUMINADO 225°)
        ========================================================================== */
     .menu-section {
       position: relative;
@@ -129,7 +129,7 @@
       width: 100%;
       overflow: hidden;
       padding-top: 1.5rem;
-      background: radial-gradient(circle at 50% 45%, #F8FAFC 0%, #E3E8EE 100%);
+      background: radial-gradient(circle at 50% 45%, #F7F7F7 0%, #E2E2E2 100%);
     }
 
     /* Escenario cinético */
@@ -141,69 +141,69 @@
       overflow: hidden;
     }
 
-    /* Capas cerámicas con caídas en rampa y vector de luz longitudinal estricto */
+    /* Capas cerámicas monocromáticas (cero azul) con rampa de caída amplia */
     .ceramic-layer {
       position: absolute;
       top: 50%;
       left: 50%;
       transform-origin: center center;
       will-change: transform;
-      background: linear-gradient(90deg, #CBD5E1 0%, #D8E1EC 25%, #E4ECF4 50%, #F5F7FA 78%, #FFFFFF 100%);
+      background: linear-gradient(90deg, #D0D0D0 0%, #DFDFDF 25%, #EBEBEB 50%, #F8F8F8 78%, #FFFFFF 100%);
     }
 
-    /* CAPA 1: Terraza central superior con rampa de caída perimetral suave */
+    /* CAPA 1: Terraza central */
     .layer-1 {
       width: 15.9375rem;
       height: 11.9375rem;
       border-radius: 2.75rem;
       z-index: 5;
       box-shadow: 
-        0.5rem 0.875rem 1.5rem rgba(18, 25, 40, 0.08),
-        0.125rem 0.25rem 0.5rem rgba(18, 25, 40, 0.03),
-        inset -0.25rem -0.25rem 0.75rem rgba(255, 255, 255, 0.8),
-        inset 0.25rem 0.25rem 0.75rem rgba(180, 195, 212, 0.4);
+        0.5rem 0.875rem 1.5rem rgba(0, 0, 0, 0.08),
+        0.125rem 0.25rem 0.5rem rgba(0, 0, 0, 0.03),
+        inset -0.75rem -0.75rem 2rem rgba(255, 255, 255, 0.90),
+        inset 0.75rem 0.75rem 2rem rgba(160, 160, 160, 0.35);
     }
 
-    /* CAPA 2: Terraza intermedia 1 */
+    /* CAPA 2: Terraza 1 */
     .layer-2 {
       width: 21.4375rem;
       height: 17.5rem;
       border-radius: 5rem;
       z-index: 4;
       box-shadow: 
-        0.75rem 1.125rem 1.875rem rgba(18, 25, 40, 0.065),
-        0.1875rem 0.3125rem 0.625rem rgba(18, 25, 40, 0.025),
-        inset -0.375rem -0.375rem 1rem rgba(255, 255, 255, 0.75),
-        inset 0.375rem 0.375rem 1rem rgba(180, 195, 212, 0.35);
+        0.75rem 1.125rem 1.875rem rgba(0, 0, 0, 0.065),
+        0.1875rem 0.3125rem 0.625rem rgba(0, 0, 0, 0.025),
+        inset -1rem -1rem 2.5rem rgba(255, 255, 255, 0.85),
+        inset 1rem 1rem 2.5rem rgba(160, 160, 160, 0.30);
     }
 
-    /* CAPA 3: Terraza intermedia 2 */
+    /* CAPA 3: Terraza 2 */
     .layer-3 {
       width: 27rem;
       height: 23rem;
       border-radius: 7.75rem;
       z-index: 3;
       box-shadow: 
-        1rem 1.5rem 2.375rem rgba(18, 25, 40, 0.05),
-        0.25rem 0.4375rem 0.875rem rgba(18, 25, 40, 0.02),
-        inset -0.5rem -0.5rem 1.25rem rgba(255, 255, 255, 0.7),
-        inset 0.5rem 0.5rem 1.25rem rgba(180, 195, 212, 0.3);
+        1rem 1.5rem 2.375rem rgba(0, 0, 0, 0.05),
+        0.25rem 0.4375rem 0.875rem rgba(0, 0, 0, 0.02),
+        inset -1.25rem -1.25rem 3rem rgba(255, 255, 255, 0.80),
+        inset 1.25rem 1.25rem 3rem rgba(160, 160, 160, 0.25);
     }
 
-    /* CAPA 4: Base exterior continua */
+    /* CAPA 4: Base exterior */
     .layer-4 {
       width: 32.5rem;
       height: 28.5rem;
       border-radius: 10.5rem;
       z-index: 2;
       box-shadow: 
-        1.375rem 2rem 3.125rem rgba(18, 25, 40, 0.04),
-        0.375rem 0.625rem 1.125rem rgba(18, 25, 40, 0.015),
-        inset -0.625rem -0.625rem 1.5rem rgba(255, 255, 255, 0.65),
-        inset 0.625rem 0.625rem 1.5rem rgba(180, 195, 212, 0.25);
+        1.375rem 2rem 3.125rem rgba(0, 0, 0, 0.04),
+        0.375rem 0.625rem 1.125rem rgba(0, 0, 0, 0.015),
+        inset -1.5rem -1.5rem 3.5rem rgba(255, 255, 255, 0.75),
+        inset 1.5rem 1.5rem 3.5rem rgba(160, 160, 160, 0.20);
     }
 
-    /* Fades fijos de scroll */
+    /* Fades de scroll */
     .fade-top, .fade-bottom {
       position: absolute;
       left: 0;
@@ -215,16 +215,16 @@
 
     .fade-top {
       top: 0;
-      background: linear-gradient(to bottom, rgba(248, 250, 252, 0.95) 15%, rgba(248, 250, 252, 0) 100%);
+      background: linear-gradient(to bottom, rgba(247, 247, 247, 0.95) 15%, rgba(247, 247, 247, 0) 100%);
     }
 
     .fade-bottom {
       bottom: 0;
-      background: linear-gradient(to top, rgba(227, 232, 238, 0.95) 20%, rgba(227, 232, 238, 0) 100%);
+      background: linear-gradient(to top, rgba(226, 226, 226, 0.95) 20%, rgba(226, 226, 226, 0) 100%);
     }
 
     /* ==========================================================================
-       5. LISTA DE PLATOS Y CARD FLOTANTE (BLUR PURO Y FLUIDEZ 60 FPS)
+       5. LISTA DE PLATOS Y CARD EXPANDIBLE ESTILO WEBFLOW (BLUR 8px RESTAURADO)
        ========================================================================== */
     .menu-list {
       position: relative;
@@ -233,7 +233,7 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       list-style: none;
-      padding: 0.8rem 0 3.5rem 0; /* Padding inferior estándar limpio en reposo */
+      padding: 0.8rem 0 3.5rem 0;
       scrollbar-width: none;
       transition: padding-bottom 0.38s var(--ease-webflow);
     }
@@ -242,30 +242,22 @@
       display: none;
     }
 
-    /* Padding inferior temporal inyectado solo con Card abierta */
+    /* Espacio extra inyectado solo con Card abierta */
     .menu-list.has-expanded {
       padding-bottom: 16rem;
     }
 
-    /* Bloqueo de scroll global durante Card abierta */
-    .menu-list.scroll-locked {
-      overflow-y: hidden !important;
-      touch-action: none;
-    }
-
-    /* FILA BASE: Sin contain: layout para blindar backdrop-filter */
+    /* FILA BASE: Sin contain: layout ni will-change que rompan el backdrop-filter */
     .menu-item {
       position: relative;
       width: 100%;
       height: 3.25rem;
       cursor: pointer;
       z-index: 10;
-      overflow: visible;
-      will-change: height, margin;
       transition: height 0.38s var(--ease-webflow), margin 0.38s var(--ease-webflow);
     }
 
-    /* CARD EXPANDIDA (CERRADA, ANCLAJE IZQUIERDO Y SIMETRÍA DERECHA) */
+    /* CARD EXPANDIDA */
     .menu-item.expanded {
       height: 14.8rem;
       z-index: 30;
@@ -283,8 +275,8 @@
       opacity: 0;
       pointer-events: none;
       box-shadow: 
-        0 0.875rem 1.75rem rgba(18, 25, 40, 0.12),
-        0 0.25rem 0.625rem rgba(18, 25, 40, 0.06);
+        0 0.875rem 1.75rem rgba(0, 0, 0, 0.10),
+        0 0.25rem 0.625rem rgba(0, 0, 0, 0.05);
       transition: opacity 0.35s var(--ease-webflow), right 0.18s var(--ease-webflow), border-radius 0.18s var(--ease-webflow);
       z-index: 2;
     }
@@ -298,8 +290,8 @@
       right: 2rem;
       border-radius: 0.875rem;
       box-shadow: 
-        0 1.125rem 2.25rem rgba(18, 25, 40, 0.14),
-        0 0.375rem 0.875rem rgba(18, 25, 40, 0.08);
+        0 1.125rem 2.25rem rgba(0, 0, 0, 0.12),
+        0 0.375rem 0.875rem rgba(0, 0, 0, 0.06);
     }
 
     /* 2. CÁUSTICA 1 (EXTERIOR) */
@@ -329,7 +321,7 @@
       bottom: -0.5rem;
     }
 
-    /* 3. CRISTAL LÍQUIDO (BLUR 8px RESTAURADO Y OPERATIVO) */
+    /* 3. CRISTAL LÍQUIDO (BLUR 8px 100% OPERATIVO) */
     .glass-overlay {
       position: absolute;
       left: 2rem;
@@ -339,9 +331,9 @@
       border-radius: 0;
       background: linear-gradient(
         90deg, 
-        rgba(255, 255, 255, 0.42) 0%, 
-        rgba(255, 255, 255, 0.20) 55%, 
-        rgba(255, 255, 255, 0.04) 100%
+        rgba(255, 255, 255, 0.40) 0%, 
+        rgba(255, 255, 255, 0.18) 55%, 
+        rgba(255, 255, 255, 0.03) 100%
       );
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
@@ -349,9 +341,9 @@
       pointer-events: none;
       overflow: hidden;
       box-shadow: 
-        0 0.5rem 1.5rem rgba(18, 25, 40, 0.06),
+        0 0.5rem 1.5rem rgba(0, 0, 0, 0.05),
         inset 0.09375rem 0.125rem 0.1875rem rgba(255, 255, 255, 0.92),
-        inset -0.09375rem -0.125rem 0.25rem rgba(18, 25, 40, 0.04);
+        inset -0.09375rem -0.125rem 0.25rem rgba(0, 0, 0, 0.03);
       transition: opacity 0.35s var(--ease-webflow), right 0.18s var(--ease-webflow), border-radius 0.18s var(--ease-webflow);
       z-index: 5;
     }
@@ -401,12 +393,12 @@
       background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.90) 35%, rgba(0, 0, 0, 0.04) 70%, transparent 100%);
     }
 
-    /* LÍNEA ROJA INDICADORA: ALTURA FIJA BLOQUEADA (3.25rem) SIN ESTIRAMIENTO */
+    /* LÍNEA ROJA: ALTURA BLOQUEADA INMUTABLE (3.25rem) */
     .red-indicator {
       position: absolute;
       left: 1.65rem;
       top: 0;
-      height: 3.25rem; /* Bloqueada estrictamente para impedir crecimiento */
+      height: 3.25rem;
       width: 0.29375rem;
       background-color: var(--color-btn);
       box-shadow: 0 0 0.625rem rgba(186, 13, 54, 0.45);
@@ -434,7 +426,7 @@
       flex-direction: column;
     }
 
-    /* CABECERA (POSICIÓN HORIZONTAL ESTABLE) */
+    /* CABECERA (POSICIÓN VERTICAL ESTABLE) */
     .item-header {
       position: relative;
       height: 3.25rem;
@@ -445,12 +437,9 @@
       transition: transform 0.35s var(--ease-webflow);
     }
 
-    .menu-item.active .item-header {
-      transform: translateX(2.4rem);
-    }
-
+    .menu-item.active .item-header,
     .menu-item.expanded .item-header {
-      transform: translateX(2.4rem); /* Mantiene la misma posición sin saltos */
+      transform: translateX(2.4rem);
     }
 
     /* Número */
@@ -473,6 +462,7 @@
     /* Nombre */
     .item-name {
       font-size: 1.0rem;
+      line-height: 1.2;
       font-variation-settings: "wdth" 125, "wght" 400;
       letter-spacing: 0.02rem;
       color: var(--color-text-muted);
@@ -492,19 +482,19 @@
       text-shadow: 0 0.0625rem 0.125rem rgba(255, 255, 255, 0.8);
     }
 
-    /* ZONA DERECHA: HAMBURGUESA Y PRECIO EXACTAMENTE EN EL MISMO EJE */
+    /* ZONA DERECHA: HAMBURGUESA Y PRECIO LIGHT ALINEADO AL BORDE SUPERIOR */
     .item-meta {
       position: absolute;
-      right: 3.4rem; /* Anclaje idéntico para ambos estados */
+      right: 5.6rem; /* Situado dentro del margen del cristal expandido */
       top: 0;
       bottom: 0;
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 2.8rem;
+      width: 3.2rem;
     }
 
-    /* ICONO "MÁS INFO" (3 BARRAS APILADAS REDONDEADAS) */
+    /* ICONO "MÁS INFO" */
     .more-info-icon {
       position: absolute;
       display: flex;
@@ -535,23 +525,23 @@
       transform: scale(0.6);
     }
 
-    /* PRECIO EN NEGRO PURO (18€) */
+    /* PRECIO: TIPOGRAFÍA LIGHT, MÁS GRANDE Y ALINEADO CON LA PARTE SUPERIOR DEL TÍTULO */
     .item-price {
       position: absolute;
-      font-size: 1.08rem;
+      font-size: 1.35rem;
       font-family: var(--font-fredoka);
-      font-variation-settings: "wdth" 110, "wght" 500;
+      font-variation-settings: "wdth" 105, "wght" 300; /* Fredoka Light */
       color: #000000;
-      letter-spacing: 0.03125rem;
+      letter-spacing: 0.02rem;
       opacity: 0;
       pointer-events: none;
-      transform: scale(0.85);
+      transform: translateY(-0.125rem); /* Alineación rasante superior con item-name */
       transition: opacity 0.18s ease-out, transform 0.18s ease-out;
     }
 
     .menu-item.expanded .item-price {
       opacity: 1;
-      transform: scale(1);
+      pointer-events: auto;
     }
 
     /* CUERPO DEL CARD */
@@ -571,33 +561,50 @@
       transition: opacity 0.16s ease-out 0.22s, transform 0.16s ease-out 0.22s;
     }
 
-    /* CONTENEDOR DE SCROLL CON CALADO INFERIOR SUAVE */
+    /* CONTENEDOR CON MICRO-ESFERA PERSONALIZADA DE RECORRIDO COMPLETO */
+    .card-scroll-container {
+      position: relative;
+      width: 100%;
+      height: 8.8rem;
+    }
+
     .card-scroll-wrap {
-      max-height: 8.8rem;
+      height: 100%;
       overflow-y: auto;
-      padding-right: 0.8rem;
+      padding-right: 1.4rem;
       padding-bottom: 2.2rem;
       -webkit-mask-image: linear-gradient(to bottom, black 0%, black 72%, transparent 100%);
       mask-image: linear-gradient(to bottom, black 0%, black 72%, transparent 100%);
+      scrollbar-width: none;
     }
 
-    /* SCROLLBAR: PEQUEÑA ESFERA BLANCA NEUMÓRFICA (OPACIDAD CALIBRADA 0.85) */
     .card-scroll-wrap::-webkit-scrollbar {
-      width: 0.35rem;
+      display: none;
     }
 
-    .card-scroll-wrap::-webkit-scrollbar-track {
-      background: rgba(18, 25, 40, 0.03);
-      border-radius: 0.5rem;
+    /* PISTA Y ESFERA BLANCA (0.65 OPACIDAD + SOMBRA MULTIDIRECCIONAL) */
+    .card-scroll-track {
+      position: absolute;
+      right: 0.2rem;
+      top: 0.15rem;
+      bottom: 1.8rem;
+      width: 0.45rem;
+      pointer-events: none;
     }
 
-    .card-scroll-wrap::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.85);
-      border-radius: 0.5rem;
+    .card-scroll-dot {
+      width: 0.42rem;
+      height: 0.42rem;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.65);
       box-shadow: 
-        0 0.0625rem 0.1875rem rgba(18, 25, 40, 0.22),
-        inset 0 0 0.0625rem rgba(255, 255, 255, 0.95);
-      min-height: 0.85rem;
+        0 0.0625rem 0.25rem rgba(0, 0, 0, 0.35),
+        inset 0 0 0.0625rem rgba(255, 255, 255, 0.85);
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
+      will-change: transform;
     }
 
     /* TEXTO DESCRIPTIVO */
@@ -605,7 +612,7 @@
       font-size: 0.92rem;
       line-height: 1.54;
       letter-spacing: 0.0125rem;
-      color: #1E232B;
+      color: #1A1A1A;
       font-variation-settings: "wdth" 105, "wght" 400;
       text-shadow: 0 0.0625rem 0.0625rem rgba(255, 255, 255, 0.85);
       max-width: 95%;
@@ -624,7 +631,7 @@
       <button type="button" class="btn-ar" id="btn-ar"><span>Ver en tu mesa</span></button>
     </section>
 
-    <!-- ZONA INFERIOR: Topografía Cerámica 3D y Menú -->
+    <!-- ZONA INFERIOR: Topografía Cerámica Monocromática y Menú -->
     <section class="menu-section">
       
       <!-- 4 Terrazas de Cerámica Concéntricas -->
@@ -665,10 +672,15 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="card-scroll-wrap">
-                <p class="card-text">
-                  Delicada selección de lechugas tiernas combinadas con pechuga asada a baja temperatura, lascas de Parmigiano Reggiano curado 24 meses, crujientes dados de pan artesanal y un aliño tradicional emulsionado suavemente con toques de anchoa del Cantábrico y limón fresco. Un clásico atemporal elaborado con técnicas de alta cocina para garantizar una textura envolvente en cada bocado.
-                </p>
+              <div class="card-scroll-container">
+                <div class="card-scroll-wrap">
+                  <p class="card-text">
+                    Delicada selección de lechugas tiernas combinadas con pechuga asada a baja temperatura, lascas de Parmigiano Reggiano curado 24 meses, crujientes dados de pan artesanal y un aliño tradicional emulsionado suavemente con toques de anchoa del Cantábrico y limón fresco. Un clásico atemporal elaborado con técnicas de alta cocina para garantizar una textura envolvente en cada bocado.
+                  </p>
+                </div>
+                <div class="card-scroll-track">
+                  <div class="card-scroll-dot"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -697,10 +709,15 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="card-scroll-wrap">
-                <p class="card-text">
-                  Masa madre de fermentación lenta horneada a la piedra, base de tomate San Marzano DOP, mozzarella fior di latte fundente y una cuidada selección de salame piccante calabrés, terminado con finas láminas de guindilla fresca y un hilo de aceite aromatizado con orégano silvestre.
-                </p>
+              <div class="card-scroll-container">
+                <div class="card-scroll-wrap">
+                  <p class="card-text">
+                    Masa madre de fermentación lenta horneada a la piedra, base de tomate San Marzano DOP, mozzarella fior di latte fundente y una cuidada selección de salame piccante calabrés, terminado con finas láminas de guindilla fresca y un hilo de aceite aromatizado con orégano silvestre.
+                  </p>
+                </div>
+                <div class="card-scroll-track">
+                  <div class="card-scroll-dot"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -729,10 +746,15 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="card-scroll-wrap">
-                <p class="card-text">
-                  Carne 100% de vaca madurada picada al momento, fundida con doble loncha de queso cheddar inglés curado, cebolla caramelizada lentamente, pepinillos encurtidos artesanos y salsa especial de la casa en pan brioche artesanal ligeramente tostado con mantequilla.
-                </p>
+              <div class="card-scroll-container">
+                <div class="card-scroll-wrap">
+                  <p class="card-text">
+                    Carne 100% de vaca madurada picada al momento, fundida con doble loncha de queso cheddar inglés curado, cebolla caramelizada lentamente, pepinillos encurtidos artesanos y salsa especial de la casa en pan brioche artesanal ligeramente tostado con mantequilla.
+                  </p>
+                </div>
+                <div class="card-scroll-track">
+                  <div class="card-scroll-dot"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -761,10 +783,15 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="card-scroll-wrap">
-                <p class="card-text">
-                  Corazón cremoso de burrata de Puglia acompañada de tomates cherry confitados en aceite virgen extra, pesto verde genovés elaborado al mortero, piñones tostados crujientes y una reducción aterciopelada de vinagre balsámico tradicional de Módena.
-                </p>
+              <div class="card-scroll-container">
+                <div class="card-scroll-wrap">
+                  <p class="card-text">
+                    Corazón cremoso de burrata de Puglia acompañada de tomates cherry confitados en aceite virgen extra, pesto verde genovés elaborado al mortero, piñones tostados crujientes y una reducción aterciopelada de vinagre balsámico tradicional de Módena.
+                  </p>
+                </div>
+                <div class="card-scroll-track">
+                  <div class="card-scroll-dot"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -793,10 +820,15 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="card-scroll-wrap">
-                <p class="card-text">
-                  Nuestra receta insignia con crema de trufa negra, setas silvestres salteadas al vino blanco, queso scamorza ahumado y prosciutto di Parma añadido al final del horneado para preservar todos sus matices aromáticos y textura sedosa.
-                </p>
+              <div class="card-scroll-container">
+                <div class="card-scroll-wrap">
+                  <p class="card-text">
+                    Nuestra receta insignia con crema de trufa negra, setas silvestres salteadas al vino blanco, queso scamorza ahumado y prosciutto di Parma añadido al final del horneado para preservar todos sus matices aromáticos y textura sedosa.
+                  </p>
+                </div>
+                <div class="card-scroll-track">
+                  <div class="card-scroll-dot"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -825,10 +857,15 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="card-scroll-wrap">
-                <p class="card-text">
-                  Láminas intercaladas de tomate corazón de buey de huerta y mozzarella de búfala campana, aderezadas con hojas frescas de albahaca morada, escamas de sal marina ahumada y aceite monovarietal de aceituna arbequina de primera extracción.
-                </p>
+              <div class="card-scroll-container">
+                <div class="card-scroll-wrap">
+                  <p class="card-text">
+                    Láminas intercaladas de tomate corazón de buey de huerta y mozzarella de búfala campana, aderezadas con hojas frescas de albahaca morada, escamas de sal marina ahumada y aceite monovarietal de aceituna arbequina de primera extracción.
+                  </p>
+                </div>
+                <div class="card-scroll-track">
+                  <div class="card-scroll-dot"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -857,10 +894,15 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="card-scroll-wrap">
-                <p class="card-text">
-                  Combinación gourmet de higos frescos de temporada, queso gorgonzola dulce, nueces pacanas tostadas y un ligero glaseado de miel de flores silvestres sobre una base blanca y crujiente de fermentación de 48 horas.
-                </p>
+              <div class="card-scroll-container">
+                <div class="card-scroll-wrap">
+                  <p class="card-text">
+                    Combinación gourmet de higos frescos de temporada, queso gorgonzola dulce, nueces pacanas tostadas y un ligero glaseado de miel de flores silvestres sobre una base blanca y crujiente de fermentación de 48 horas.
+                  </p>
+                </div>
+                <div class="card-scroll-track">
+                  <div class="card-scroll-dot"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -889,10 +931,15 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="card-scroll-wrap">
-                <p class="card-text">
-                  Delicada selección de lechugas tiernas combinadas con pechuga asada a baja temperatura, lascas de Parmigiano Reggiano curado 24 meses, crujientes dados de pan artesanal y un aliño tradicional emulsionado suavemente con toques de anchoa del Cantábrico y limón fresco.
-                </p>
+              <div class="card-scroll-container">
+                <div class="card-scroll-wrap">
+                  <p class="card-text">
+                    Delicada selección de lechugas tiernas combinadas con pechuga asada a baja temperatura, lascas de Parmigiano Reggiano curado 24 meses, crujientes dados de pan artesanal y un aliño tradicional emulsionado suavemente con toques de anchoa del Cantábrico y limón fresco.
+                  </p>
+                </div>
+                <div class="card-scroll-track">
+                  <div class="card-scroll-dot"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -921,10 +968,15 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="card-scroll-wrap">
-                <p class="card-text">
-                  Masa madre de fermentación lenta horneada a la piedra, base de tomate San Marzano DOP, mozzarella fior di latte fundente y una cuidada selección de salame piccante calabrés, terminado con finas láminas de guindilla fresca y un hilo de aceite aromatizado con orégano silvestre.
-                </p>
+              <div class="card-scroll-container">
+                <div class="card-scroll-wrap">
+                  <p class="card-text">
+                    Masa madre de fermentación lenta horneada a la piedra, base de tomate San Marzano DOP, mozzarella fior di latte fundente y una cuidada selección de salame piccante calabrés, terminado con finas láminas de guindilla fresca y un hilo de aceite aromatizado con orégano silvestre.
+                  </p>
+                </div>
+                <div class="card-scroll-track">
+                  <div class="card-scroll-dot"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -953,10 +1005,15 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="card-scroll-wrap">
-                <p class="card-text">
-                  Carne 100% de vaca madurada picada al momento, fundida con doble loncha de queso cheddar inglés curado, cebolla caramelizada lentamente, pepinillos encurtidos artesanos y salsa especial de la casa en pan brioche artesanal ligeramente tostado con mantequilla.
-                </p>
+              <div class="card-scroll-container">
+                <div class="card-scroll-wrap">
+                  <p class="card-text">
+                    Carne 100% de vaca madurada picada al momento, fundida con doble loncha de queso cheddar inglés curado, cebolla caramelizada lentamente, pepinillos encurtidos artesanos y salsa especial de la casa en pan brioche artesanal ligeramente tostado con mantequilla.
+                  </p>
+                </div>
+                <div class="card-scroll-track">
+                  <div class="card-scroll-dot"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -985,10 +1042,15 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="card-scroll-wrap">
-                <p class="card-text">
-                  Corazón cremoso de burrata de Puglia acompañada de tomates cherry confitados en aceite virgen extra, pesto verde genovés elaborado al mortero, piñones tostados crujientes y una reducción aterciopelada de vinagre balsámico tradicional de Módena.
-                </p>
+              <div class="card-scroll-container">
+                <div class="card-scroll-wrap">
+                  <p class="card-text">
+                    Corazón cremoso de burrata de Puglia acompañada de tomates cherry confitados en aceite virgen extra, pesto verde genovés elaborado al mortero, piñones tostados crujientes y una reducción aterciopelada de vinagre balsámico tradicional de Módena.
+                  </p>
+                </div>
+                <div class="card-scroll-track">
+                  <div class="card-scroll-dot"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -1017,10 +1079,15 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="card-scroll-wrap">
-                <p class="card-text">
-                  Nuestra receta insignia con crema de trufa negra, setas silvestres salteadas al vino blanco, queso scamorza ahumado y prosciutto di Parma añadido al final del horneado para preservar todos sus matices aromáticos y textura sedosa.
-                </p>
+              <div class="card-scroll-container">
+                <div class="card-scroll-wrap">
+                  <p class="card-text">
+                    Nuestra receta insignia con crema de trufa negra, setas silvestres salteadas al vino blanco, queso scamorza ahumado y prosciutto di Parma añadido al final del horneado para preservar todos sus matices aromáticos y textura sedosa.
+                  </p>
+                </div>
+                <div class="card-scroll-track">
+                  <div class="card-scroll-dot"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -1049,10 +1116,15 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="card-scroll-wrap">
-                <p class="card-text">
-                  Láminas intercaladas de tomate corazón de buey de huerta y mozzarella de búfala campana, aderezadas con hojas frescas de albahaca morada, escamas de sal marina ahumada y aceite monovarietal de aceituna arbequina de primera extracción.
-                </p>
+              <div class="card-scroll-container">
+                <div class="card-scroll-wrap">
+                  <p class="card-text">
+                    Láminas intercaladas de tomate corazón de buey de huerta y mozzarella de búfala campana, aderezadas con hojas frescas de albahaca morada, escamas de sal marina ahumada y aceite monovarietal de aceituna arbequina de primera extracción.
+                  </p>
+                </div>
+                <div class="card-scroll-track">
+                  <div class="card-scroll-dot"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -1081,10 +1153,15 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="card-scroll-wrap">
-                <p class="card-text">
-                  Combinación gourmet de higos frescos de temporada, queso gorgonzola dulce, nueces pacanas tostadas y un ligero glaseado de miel de flores silvestres sobre una base blanca y crujiente de fermentación de 48 horas.
-                </p>
+              <div class="card-scroll-container">
+                <div class="card-scroll-wrap">
+                  <p class="card-text">
+                    Combinación gourmet de higos frescos de temporada, queso gorgonzola dulce, nueces pacanas tostadas y un ligero glaseado de miel de flores silvestres sobre una base blanca y crujiente de fermentación de 48 horas.
+                  </p>
+                </div>
+                <div class="card-scroll-track">
+                  <div class="card-scroll-dot"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -1113,10 +1190,15 @@
               </div>
             </div>
             <div class="card-body">
-              <div class="card-scroll-wrap">
-                <p class="card-text">
-                  Nuestra receta insignia con crema de trufa negra, setas silvestres salteadas al vino blanco, queso scamorza ahumado y prosciutto di Parma añadido al final del horneado para preservar todos sus matices aromáticos y textura sedosa.
-                </p>
+              <div class="card-scroll-container">
+                <div class="card-scroll-wrap">
+                  <p class="card-text">
+                    Nuestra receta insignia con crema de trufa negra, setas silvestres salteadas al vino blanco, queso scamorza ahumado y prosciutto di Parma añadido al final del horneado para preservar todos sus matices aromáticos y textura sedosa.
+                  </p>
+                </div>
+                <div class="card-scroll-track">
+                  <div class="card-scroll-dot"></div>
+                </div>
               </div>
             </div>
           </div>
@@ -1134,7 +1216,7 @@
       const btnAr = document.getElementById('btn-ar');
 
       // ======================================================================
-      // 1. CINEMÁTICA Y FÍSICA: INERCIA PESADA + HOLD DE 200ms
+      // 1. CINEMÁTICA Y FÍSICA: ARRANQUE ILUMINADO EN 225° + INERCIA PESADA
       // ======================================================================
       const layerElements = [
         document.querySelector('.layer-1'),
@@ -1153,9 +1235,10 @@
         { delay: 510, twistPower: 0.12, twistDamp: 0.968, scaleDip: 0.989, parallaxK: 0.20 }
       ];
 
+      // Ángulo inicial en 225° (rotación de 180° para iniciar con la cara iluminada arriba)
       const layers = layerElements.map((el, i) => ({
         el,
-        angle: 45,
+        angle: 225,
         twistSpeed: 0,
         twistAcc: 0,
         scale: 1,
@@ -1195,20 +1278,20 @@
           layer.twistSpeed *= conf.twistDamp;
           layer.angle += (BASE_SPEED * currentDirection) + layer.twistSpeed;
 
-          // Acoplamiento concéntrico asintótico
+          // Acoplamiento concéntrico suave
           if (i > 0) {
             const angleDiff = layers[0].angle - layer.angle;
             layer.angle += angleDiff * 0.012;
           }
 
-          // Rampa de escala viscoelástica
+          // Rampa de escala continua
           const lerpRate = layer.isCompressing ? 0.22 : 0.0275;
           layer.scale += (layer.targetScale - layer.scale) * lerpRate;
 
           // Micro-parallax diferencial
           const layerY = currentParallaxY * conf.parallaxK;
 
-          // Renderizado final acelerado
+          // Renderizado acelerado
           layer.el.style.transform = `translate(-50%, calc(-50% + ${layerY}px)) rotate(${layer.angle}deg) scale(${layer.scale})`;
         });
 
@@ -1230,14 +1313,11 @@
           layer.timeoutId = setTimeout(() => {
             const conf = layer.config;
             
-            // Impulso de torsión angular
             layer.twistAcc = currentDirection * conf.twistPower;
 
-            // FASE 1: Hundimiento rápido
             layer.isCompressing = true;
             layer.targetScale = conf.scaleDip;
 
-            // FASE 2: Hold de 200ms en compresión máxima + Retorno suave (180ms + 200ms = 380ms)
             layer.recoveryTimeoutId = setTimeout(() => {
               layer.isCompressing = false;
               layer.targetScale = 1.0;
@@ -1248,15 +1328,35 @@
       }
 
       // ======================================================================
-      // 5. INTERACCIÓN DE LISTA, JERARQUÍA TÁCTIL Y AUTO-SCROLL
+      // 5. CONTROLADOR DE MICRO-ESFERA DE SCROLL EN CARD (RECORRIDO 0% A 100%)
+      // ======================================================================
+      function updateCardScrollDot(wrap) {
+        const container = wrap.closest('.card-scroll-container');
+        if (!container) return;
+        const track = container.querySelector('.card-scroll-track');
+        const dot = container.querySelector('.card-scroll-dot');
+        if (!track || !dot) return;
+
+        const maxScroll = wrap.scrollHeight - wrap.clientHeight;
+        const progress = maxScroll > 0 ? (wrap.scrollTop / maxScroll) : 0;
+        const maxTravel = track.clientHeight - dot.clientHeight;
+        const travel = Math.max(0, Math.min(progress * maxTravel, maxTravel));
+        dot.style.transform = `translate(-50%, ${travel}px)`;
+      }
+
+      document.querySelectorAll('.card-scroll-wrap').forEach((wrap) => {
+        wrap.addEventListener('scroll', () => updateCardScrollDot(wrap), { passive: true });
+      });
+
+      // ======================================================================
+      // 6. INTERACCIÓN DE LISTA Y EXPANSIÓN SINCRÓNICA A 60 FPS
       // ======================================================================
       function collapseAllCards() {
         menuItems.forEach((i) => i.classList.remove('expanded'));
         menuList.classList.remove('has-expanded');
-        menuList.classList.remove('scroll-locked');
       }
 
-      // Discriminador de gestos táctiles (Tap vs Scroll)
+      // Discriminador táctil (Tap vs Scroll)
       let touchStartY = 0;
       let touchStartX = 0;
       let isTouchDragging = false;
@@ -1276,8 +1376,12 @@
       }, { passive: true });
 
       menuItems.forEach((item) => {
-        item.addEventListener('click', () => {
-          // Si el usuario estaba arrastrando/haciendo scroll en el texto, no cerrar
+        item.addEventListener('click', (e) => {
+          // Si el clic viene del área de texto scrolleable, no colapsamos
+          if (e.target.closest('.card-scroll-wrap')) {
+            return;
+          }
+
           if (isTouchDragging) {
             return;
           }
@@ -1286,25 +1390,27 @@
           const isCurrentlyExpanded = item.classList.contains('expanded');
 
           if (isCurrentlyActive) {
-            // SEGUNDO TOQUE: Alterna despliegue de Card
+            // SEGUNDO TOQUE: Alterna Card
             if (isCurrentlyExpanded) {
               collapseAllCards();
             } else {
               collapseAllCards();
               item.classList.add('expanded');
-
-              // Inyección de espacio para scroll completo en platos inferiores
               menuList.classList.add('has-expanded');
-              menuList.classList.add('scroll-locked');
 
-              // Posicionamiento superior elevado bajo el botón AR
-              setTimeout(() => {
-                const targetScroll = item.offsetTop - 10;
-                menuList.scrollTo({
-                  top: Math.max(0, targetScroll),
-                  behavior: 'smooth'
-                });
-              }, 30);
+              // Reinicio de scroll y esfera a la posición superior absoluta
+              const wrap = item.querySelector('.card-scroll-wrap');
+              if (wrap) {
+                wrap.scrollTop = 0;
+                updateCardScrollDot(wrap);
+              }
+
+              // Scroll suave inmediato en el mismo frame
+              const targetScroll = item.offsetTop - 10;
+              menuList.scrollTo({
+                top: Math.max(0, targetScroll),
+                behavior: 'smooth'
+              });
             }
             triggerChainReaction();
           } else {
