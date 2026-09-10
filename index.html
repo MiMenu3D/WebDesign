@@ -1,4 +1,4 @@
-<!-- Versión: WebDesign v2.26 -->
+<!-- Versión: WebDesign v2.27 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -120,7 +120,7 @@
     }
 
     /* ==========================================================================
-       4. ZONA INFERIOR: CERÁMICA NEUMÓRFICA 3D (VOLUMEN Y CONCAVIDAD CONTINUA)
+       4. ZONA INFERIOR: CERÁMICA 3D (DEGRADADOS ESCALONADOS CON RELIEVE REAL)
        ========================================================================== */
     .menu-section {
       position: relative;
@@ -141,13 +141,12 @@
       overflow: hidden;
     }
 
-    /* Curvatura continua de lado a lado cruzando el centro al 50% (cero líneas o bordes artificiales) */
+    /* Capas cerámicas con relieves y contrastes compensados por escalón */
     .ceramic-layer {
       position: absolute;
       top: 50%;
       left: 50%;
       transform-origin: center center;
-      background: linear-gradient(90deg, #CBD5E1 0%, #D8E1EC 25%, #E4ECF4 50%, #F5F7FA 78%, #FFFFFF 100%);
       will-change: transform;
     }
 
@@ -157,39 +156,43 @@
       height: 191px;
       border-radius: 44px;
       z-index: 5;
+      background: linear-gradient(90deg, #CBD5E1 0%, #D8E1EC 25%, #E4ECF4 50%, #F5F7FA 78%, #FFFFFF 100%);
       box-shadow: 
         8px 14px 24px rgba(18, 25, 40, 0.08),
         2px 4px 8px rgba(18, 25, 40, 0.03);
     }
 
-    /* CAPA 2: Terraza 1 (343x280px, r: 80px) */
+    /* CAPA 2: Terraza 1 con labio de luz superior izquierdo para recorte nítido */
     .layer-2 {
       width: 343px;
       height: 280px;
       border-radius: 80px;
       z-index: 4;
+      background: linear-gradient(90deg, #E8EEF5 0%, #CBD5E1 14%, #D8E1EC 34%, #E5EDF4 55%, #F6F8FB 80%, #FFFFFF 100%);
       box-shadow: 
         12px 18px 30px rgba(18, 25, 40, 0.065),
         3px 5px 10px rgba(18, 25, 40, 0.025);
     }
 
-    /* CAPA 3: Terraza 2 (432x368px, r: 124px) */
+    /* CAPA 3: Terraza 2 con transición iluminada */
     .layer-3 {
       width: 432px;
       height: 368px;
       border-radius: 124px;
       z-index: 3;
+      background: linear-gradient(90deg, #E5ECF4 0%, #CBD5E1 12%, #D8E1EC 32%, #E5EDF4 54%, #F6F8FB 80%, #FFFFFF 100%);
       box-shadow: 
         16px 24px 38px rgba(18, 25, 40, 0.05),
         4px 7px 14px rgba(18, 25, 40, 0.02);
     }
 
-    /* CAPA 4: Base gigante (520x456px, r: 168px) */
+    /* CAPA 4: Base gigante */
     .layer-4 {
       width: 520px;
       height: 456px;
       border-radius: 168px;
       z-index: 2;
+      background: linear-gradient(90deg, #E2EAF2 0%, #CBD5E1 10%, #D8E1EC 30%, #E5EDF4 52%, #F6F8FB 80%, #FFFFFF 100%);
       box-shadow: 
         22px 32px 50px rgba(18, 25, 40, 0.04),
         6px 10px 18px rgba(18, 25, 40, 0.015);
@@ -216,7 +219,7 @@
     }
 
     /* ==========================================================================
-       5. LISTA DE PLATOS Y CARD FLOTANTE CON RADIO DE 44px
+       5. LISTA DE PLATOS Y CARD FLOTANTE SIMÉTRICA (BLUR SANTO GRIAL OPERATIVO)
        ========================================================================== */
     .menu-list {
       position: relative;
@@ -225,21 +228,27 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       list-style: none;
-      padding: 0.8rem 0 22rem 0; /* Padding inferior generoso para subida 100% de platos 12-15 */
+      padding: 0.8rem 0 4rem 0; /* Padding estándar normal */
       scrollbar-width: none;
+      transition: padding-bottom 0.38s var(--ease-webflow);
     }
 
     .menu-list::-webkit-scrollbar {
       display: none;
     }
 
-    /* BLOQUEO DE SCROLL CON CARD EXPANDIDA */
+    /* Padding dinámico añadido solo cuando hay un Card desplegado */
+    .menu-list.has-expanded {
+      padding-bottom: 14rem;
+    }
+
+    /* BLOQUEO DE SCROLL EXTERNO CON CARD EXPANDIDA */
     .menu-list.scroll-locked {
       overflow-y: hidden !important;
       touch-action: none;
     }
 
-    /* FILA BASE */
+    /* FILA BASE: Sin will-change: transform para blindar el backdrop-filter */
     .menu-item {
       position: relative;
       width: 100%;
@@ -247,18 +256,18 @@
       cursor: pointer;
       z-index: 10;
       overflow: visible;
-      will-change: height, transform;
+      contain: layout;
       transition: height 0.38s var(--ease-webflow), margin 0.38s var(--ease-webflow);
     }
 
-    /* ESTADO CARD FLOTANTE EXPANDIDA (CERRADA, DESPEGADA Y CON RADIO DE 44px) */
+    /* CARD FLOTANTE EXPANDIDA (RADIO 14px, ANCLAJE IZQUIERDO Y SIMETRÍA DERECHA) */
     .menu-item.expanded {
       height: 14.8rem;
       z-index: 30;
       margin: 0.6rem 0;
     }
 
-    /* 1. SOMBRA AMBIENTAL BAJO EL CRISTAL (ADAPTABLE A CARD FLOTANTE) */
+    /* 1. SOMBRA AMBIENTAL BAJO EL CRISTAL */
     .glass-shadow {
       position: absolute;
       left: 2rem;
@@ -271,7 +280,7 @@
       box-shadow: 
         0 14px 28px rgba(18, 25, 40, 0.12),
         0 4px 10px rgba(18, 25, 40, 0.06);
-      transition: opacity 0.35s var(--ease-webflow), left 0.38s var(--ease-webflow), right 0.38s var(--ease-webflow), border-radius 0.38s var(--ease-webflow);
+      transition: opacity 0.35s var(--ease-webflow), right 0.38s var(--ease-webflow), border-radius 0.38s var(--ease-webflow);
       z-index: 2;
     }
 
@@ -280,15 +289,15 @@
     }
 
     .menu-item.expanded .glass-shadow {
-      left: 1rem;
-      right: 1rem;
-      border-radius: 44px; /* Radio equivalente a la capa 1 */
+      left: 2rem;
+      right: 2rem; /* Simétrico con el margen izquierdo */
+      border-radius: 14px;
       box-shadow: 
         0 18px 36px rgba(18, 25, 40, 0.14),
         0 6px 14px rgba(18, 25, 40, 0.08);
     }
 
-    /* 2. CÁUSTICA 1 (EXTERIOR): RECUPERADA Y VISIBLE EN BORDE DERECHO */
+    /* 2. CÁUSTICA 1 (EXTERIOR): TOTALMENTE RESTAURADA */
     .caustic-bg {
       position: absolute;
       right: 1.5rem;
@@ -311,11 +320,11 @@
     }
 
     .menu-item.expanded .caustic-bg {
-      right: 2.2rem;
+      right: 3.2rem;
       bottom: -0.5rem;
     }
 
-    /* 3. CRISTAL LÍQUIDO (BLUR 100% OPERATIVO + ADAPTACIÓN A PANEL FLOTANTE DE 44px) */
+    /* 3. CRISTAL LÍQUIDO (BLUR 100% OPERATIVO + ADAPTACIÓN FLOTANTE) */
     .glass-overlay {
       position: absolute;
       left: 2rem;
@@ -325,7 +334,7 @@
       border-radius: 0;
       background: linear-gradient(
         90deg, 
-        rgba(255, 255, 255, 0.42) 0%, 
+        rgba(255, 255, 255, 0.45) 0%, 
         rgba(255, 255, 255, 0.22) 55%, 
         rgba(255, 255, 255, 0.04) 100%
       );
@@ -338,7 +347,7 @@
         0 8px 24px rgba(18, 25, 40, 0.06),
         inset 1.5px 2px 3px rgba(255, 255, 255, 0.92),
         inset -1.5px -2px 4px rgba(18, 25, 40, 0.04);
-      transition: opacity 0.35s var(--ease-webflow), left 0.38s var(--ease-webflow), right 0.38s var(--ease-webflow), border-radius 0.38s var(--ease-webflow);
+      transition: opacity 0.35s var(--ease-webflow), right 0.38s var(--ease-webflow), border-radius 0.38s var(--ease-webflow);
       z-index: 5;
     }
 
@@ -347,12 +356,12 @@
     }
 
     .menu-item.expanded .glass-overlay {
-      left: 1rem;
-      right: 1rem;
-      border-radius: 44px; /* Radio equivalente a la capa 1 */
+      left: 2rem;
+      right: 2rem; /* Simétrico con el margen izquierdo */
+      border-radius: 14px;
     }
 
-    /* 4. CÁUSTICA 2 (INTERIOR): 100% BLANCA Y POSICIONADA A LA DERECHA */
+    /* 4. CÁUSTICA 2 (INTERIOR) */
     .caustic-glass {
       position: absolute;
       right: 1.5rem;
@@ -387,7 +396,7 @@
       background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.90) 35%, rgba(0, 0, 0, 0.04) 70%, transparent 100%);
     }
 
-    /* RECTÁNGULO ROJO (SE ELIMINA COMPLETAMENTE EN ESTADO EXPANDIDO) */
+    /* RECTÁNGULO ROJO (DESAPARECE RÁPIDO EN 0.15s AL EXPANDIR) */
     .red-indicator {
       position: absolute;
       left: 1.65rem;
@@ -406,7 +415,8 @@
     }
 
     .menu-item.expanded .red-indicator {
-      opacity: 0 !important; /* Eliminada en estado Card */
+      opacity: 0 !important;
+      transition: opacity 0.15s ease-out;
     }
 
     /* ESTRUCTURA INTERIOR */
@@ -435,7 +445,7 @@
     }
 
     .menu-item.expanded .item-header {
-      transform: translateX(1.2rem); /* Centrado visual armónico en panel flotante */
+      transform: translateX(1.0rem);
     }
 
     /* Número */
@@ -477,23 +487,23 @@
       text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
     }
 
-    /* ZONA DERECHA: ICONO Y PRECIO CENTRADOS EN EL MISMO EJE */
+    /* ZONA DERECHA: ICONO Y PRECIO ALINEADOS EN EL MISMO EJE VERTICAL */
     .item-meta {
       position: relative;
       margin-left: auto;
-      padding-right: 2.6rem;
+      padding-right: 3.4rem; /* Desplazado a la izquierda para alineación perfecta */
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 2.5rem;
+      width: 2.8rem;
       height: 100%;
     }
 
     .menu-item.expanded .item-meta {
-      padding-right: 3.2rem;
+      padding-right: 3.4rem;
     }
 
-    /* ICONO "MÁS INFO" (3 BARRAS HORIZONTALES APILADAS REDONDEADAS Y GRUESAS) */
+    /* ICONO "MÁS INFO" (3 BARRAS APILADAS REDONDEADAS) */
     .more-info-icon {
       position: absolute;
       display: flex;
@@ -501,22 +511,22 @@
       justify-content: center;
       align-items: center;
       gap: 3.5px;
-      width: 1.3rem;
-      height: 1.3rem;
+      width: 1.4rem;
+      height: 1.4rem;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.25s var(--ease-webflow), transform 0.25s var(--ease-webflow);
     }
 
     .more-info-icon .bar {
-      width: 14px;
-      height: 2.2px;
-      background-color: rgba(0, 0, 0, 0.65);
+      width: 15px;
+      height: 2.4px;
+      background-color: rgba(0, 0, 0, 0.70);
       border-radius: 2px;
     }
 
     .menu-item.active .more-info-icon {
-      opacity: 0.75;
+      opacity: 0.80;
     }
 
     .menu-item.expanded .more-info-icon {
@@ -524,13 +534,13 @@
       transform: scale(0.6);
     }
 
-    /* PRECIO EN NEGRO PURO Y PERFECTAMENTE CENTRADO (18€) */
+    /* PRECIO EN NEGRO PURO (18€) */
     .item-price {
       position: absolute;
       font-size: 1.08rem;
       font-family: var(--font-fredoka);
       font-variation-settings: "wdth" 110, "wght" 500;
-      color: #000000; /* Negro puro */
+      color: #000000;
       letter-spacing: 0.5px;
       opacity: 0;
       pointer-events: none;
@@ -543,10 +553,10 @@
       transform: scale(1);
     }
 
-    /* CUERPO DEL CARD: FADE-IN PRECISO Y FLUIDO A 60 FPS */
+    /* CUERPO DEL CARD */
     .card-body {
       position: relative;
-      padding: 0.2rem 2.4rem 1.4rem 3.4rem;
+      padding: 0.2rem 2.8rem 1.4rem 3.4rem;
       opacity: 0;
       pointer-events: none;
       transform: translateY(-4px);
@@ -560,33 +570,34 @@
       transition: opacity 0.16s ease-out 0.24s, transform 0.16s ease-out 0.24s;
     }
 
-    /* CONTENEDOR DE SCROLL CON CALADO INFERIOR SUAVE Y SCROLLBAR NEUMÓRFICA */
+    /* CONTENEDOR DE SCROLL CON CALADO Y ESPACIO INFERIOR PARA LECTURA AL 100% */
     .card-scroll-wrap {
       max-height: 8.8rem;
       overflow-y: auto;
-      padding-right: 0.6rem;
+      padding-right: 0.8rem;
+      padding-bottom: 2.2rem; /* Espacio para que la última línea suba por encima del degradado */
       -webkit-mask-image: linear-gradient(to bottom, black 0%, black 72%, transparent 100%);
       mask-image: linear-gradient(to bottom, black 0%, black 72%, transparent 100%);
     }
 
-    /* Scrollbar neumórfica blanca: cápsula sobre hendidura */
+    /* SCROLLBAR: PEQUEÑA CÁPSULA BLANCA VERTICAL SUTIL */
     .card-scroll-wrap::-webkit-scrollbar {
-      width: 4.5px;
+      width: 3.5px;
     }
 
     .card-scroll-wrap::-webkit-scrollbar-track {
-      background: rgba(18, 25, 40, 0.05);
+      background: rgba(18, 25, 40, 0.04);
       border-radius: 10px;
-      box-shadow: inset 0 1px 2px rgba(18, 25, 40, 0.08);
     }
 
     .card-scroll-wrap::-webkit-scrollbar-thumb {
-      background: #FFFFFF;
+      background: rgba(255, 255, 255, 0.75);
       border-radius: 10px;
-      box-shadow: 0 1px 3px rgba(18, 25, 40, 0.20), inset 0 0 0 0.5px rgba(255, 255, 255, 0.9);
+      box-shadow: 0 1px 2px rgba(18, 25, 40, 0.15);
+      min-height: 1.2rem;
     }
 
-    /* TEXTO CON LONGITUD DE LÍNEA CONTENIDA Y MÁXIMA LEGIBILIDAD */
+    /* TEXTO DESCRIPTIVO */
     .card-text {
       font-size: 0.92rem;
       line-height: 1.54;
@@ -717,7 +728,7 @@
             <div class="card-body">
               <div class="card-scroll-wrap">
                 <p class="card-text">
-                  Carne 100% de vaca madurada picada al momento, fundida con doble loncha de queso cheddar inglés curado, cebolla caramelizada lentamente, pepinillos encurtidos artesanos y salsa especial de la casa en pan brioche artesanal ligeramente tostado con mantequilla noisette.
+                  Carne 100% de vaca madurada picada al momento, fundida con doble loncha de queso cheddar inglés curado, cebolla caramelizada lentamente, pepinillos encurtidos artesanos y salsa especial de la casa en pan brioche artesanal ligeramente tostado con mantequilla.
                 </p>
               </div>
             </div>
@@ -1234,17 +1245,37 @@
       }
 
       // ======================================================================
-      // 5. INTERACCIÓN DE LISTA, CARD FLOTANTE ELEVADA Y SCROLL TOTAL
+      // 5. INTERACCIÓN DE LISTA, JERARQUÍA TÁCTIL (TAP VS SCROLL) Y PADDING ADAPTATIVO
       // ======================================================================
       function collapseAllCards() {
         menuItems.forEach((i) => i.classList.remove('expanded'));
+        menuList.classList.remove('has-expanded');
         menuList.classList.remove('scroll-locked');
       }
 
+      // Control de jerarquía táctil para diferenciar Tap de Scroll en el texto
+      let touchStartY = 0;
+      let touchStartX = 0;
+      let isTouchDragging = false;
+
+      menuList.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+        touchStartX = e.touches[0].clientX;
+        isTouchDragging = false;
+      }, { passive: true });
+
+      menuList.addEventListener('touchmove', (e) => {
+        const deltaY = Math.abs(e.touches[0].clientY - touchStartY);
+        const deltaX = Math.abs(e.touches[0].clientX - touchStartX);
+        if (deltaY > 6 || deltaX > 6) {
+          isTouchDragging = true;
+        }
+      }, { passive: true });
+
       menuItems.forEach((item) => {
         item.addEventListener('click', (e) => {
-          // Si el clic proviene del área de scroll interna, no cerramos
-          if (e.target.closest('.card-scroll-wrap')) {
+          // Si el usuario estaba arrastrando/haciendo scroll en el texto, no cerrar
+          if (isTouchDragging) {
             return;
           }
 
@@ -1259,10 +1290,11 @@
               collapseAllCards();
               item.classList.add('expanded');
 
-              // Bloqueo de scroll global durante la vista de Card
+              // Añadir padding inferior temporal para permitir que platos 12-15 suban hasta arriba
+              menuList.classList.add('has-expanded');
               menuList.classList.add('scroll-locked');
 
-              // Posicionamiento más elevado, cercano al botón rojo AR (~10px)
+              // Posicionamiento superior elevado (~10px debajo del botón AR)
               setTimeout(() => {
                 const targetScroll = item.offsetTop - 10;
                 menuList.scrollTo({
