@@ -1,4 +1,4 @@
-<!-- Versión: WebDesign v2.25 -->
+<!-- Versión: WebDesign v2.26 -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,7 +17,7 @@
 
   <style>
     /* ==========================================================================
-       1. RESET Y VARIABLES GLOBALES (UNIDADES RESPONSIVAS DE PANTALLA)
+       1. RESET Y VARIABLES GLOBALES
        ========================================================================== */
     *, *::before, *::after {
       box-sizing: border-box;
@@ -120,7 +120,7 @@
     }
 
     /* ==========================================================================
-       4. ZONA INFERIOR: CERÁMICA NEUMÓRFICA 3D (SOMBRAS Y LUCES 100% HOMOGÉNEAS)
+       4. ZONA INFERIOR: CERÁMICA NEUMÓRFICA 3D (VOLUMEN Y CONCAVIDAD CONTINUA)
        ========================================================================== */
     .menu-section {
       position: relative;
@@ -141,70 +141,61 @@
       overflow: hidden;
     }
 
-    /* Estructura común: Luz longitudinal amplia y neutra */
+    /* Curvatura continua de lado a lado cruzando el centro al 50% (cero líneas o bordes artificiales) */
     .ceramic-layer {
       position: absolute;
       top: 50%;
       left: 50%;
       transform-origin: center center;
-      background: linear-gradient(90deg, #DFE5ED 0%, #EAEEF4 28%, #F5F7FA 62%, #FFFFFF 100%);
+      background: linear-gradient(90deg, #CBD5E1 0%, #D8E1EC 25%, #E4ECF4 50%, #F5F7FA 78%, #FFFFFF 100%);
       will-change: transform;
     }
 
-    /* TODAS LAS CAPAS CON LA MISMA INTENSIDAD HOMOGÉNEA DE SOMBRA Y LUZ */
+    /* CAPA 1: Plato central (255x191px, r: 44px) */
     .layer-1 {
       width: 255px;
       height: 191px;
       border-radius: 44px;
       z-index: 5;
       box-shadow: 
-        8px 14px 24px rgba(18, 25, 40, 0.07),
-        2px 4px 8px rgba(18, 25, 40, 0.025),
-        inset 34px 0px 44px rgba(160, 174, 192, 0.30),
-        inset -34px 0px 44px rgba(255, 255, 255, 0.98),
-        inset 0px 2px 4px rgba(255, 255, 255, 0.90);
+        8px 14px 24px rgba(18, 25, 40, 0.08),
+        2px 4px 8px rgba(18, 25, 40, 0.03);
     }
 
+    /* CAPA 2: Terraza 1 (343x280px, r: 80px) */
     .layer-2 {
       width: 343px;
       height: 280px;
       border-radius: 80px;
       z-index: 4;
       box-shadow: 
-        11px 17px 28px rgba(18, 25, 40, 0.06),
-        3px 5px 9px rgba(18, 25, 40, 0.02),
-        inset 34px 0px 44px rgba(160, 174, 192, 0.30),
-        inset -34px 0px 44px rgba(255, 255, 255, 0.98),
-        inset 0px 2px 4px rgba(255, 255, 255, 0.90);
+        12px 18px 30px rgba(18, 25, 40, 0.065),
+        3px 5px 10px rgba(18, 25, 40, 0.025);
     }
 
+    /* CAPA 3: Terraza 2 (432x368px, r: 124px) */
     .layer-3 {
       width: 432px;
       height: 368px;
       border-radius: 124px;
       z-index: 3;
       box-shadow: 
-        15px 22px 35px rgba(18, 25, 40, 0.05),
-        4px 7px 12px rgba(18, 25, 40, 0.018),
-        inset 34px 0px 44px rgba(160, 174, 192, 0.30),
-        inset -34px 0px 44px rgba(255, 255, 255, 0.98),
-        inset 0px 2px 4px rgba(255, 255, 255, 0.90);
+        16px 24px 38px rgba(18, 25, 40, 0.05),
+        4px 7px 14px rgba(18, 25, 40, 0.02);
     }
 
+    /* CAPA 4: Base gigante (520x456px, r: 168px) */
     .layer-4 {
       width: 520px;
       height: 456px;
       border-radius: 168px;
       z-index: 2;
       box-shadow: 
-        20px 28px 45px rgba(18, 25, 40, 0.04),
-        5px 9px 15px rgba(18, 25, 40, 0.012),
-        inset 34px 0px 44px rgba(160, 174, 192, 0.30),
-        inset -34px 0px 44px rgba(255, 255, 255, 0.98),
-        inset 0px 2px 4px rgba(255, 255, 255, 0.90);
+        22px 32px 50px rgba(18, 25, 40, 0.04),
+        6px 10px 18px rgba(18, 25, 40, 0.015);
     }
 
-    /* Fades de scroll desacoplados */
+    /* Fades de scroll */
     .fade-top, .fade-bottom {
       position: absolute;
       left: 0;
@@ -225,7 +216,7 @@
     }
 
     /* ==========================================================================
-       5. LISTA DE PLATOS, CRISTAL SANTO GRIAL Y CARD EXPANDIBLE FLUIDA
+       5. LISTA DE PLATOS Y CARD FLOTANTE CON RADIO DE 44px
        ========================================================================== */
     .menu-list {
       position: relative;
@@ -234,7 +225,7 @@
       overflow-y: auto;
       -webkit-overflow-scrolling: touch;
       list-style: none;
-      padding: 1rem 0 5rem 0;
+      padding: 0.8rem 0 22rem 0; /* Padding inferior generoso para subida 100% de platos 12-15 */
       scrollbar-width: none;
     }
 
@@ -242,7 +233,7 @@
       display: none;
     }
 
-    /* BLOQUEO DINÁMICO DE SCROLL CON CARD DESPLEGADA */
+    /* BLOQUEO DE SCROLL CON CARD EXPANDIDA */
     .menu-list.scroll-locked {
       overflow-y: hidden !important;
       touch-action: none;
@@ -255,31 +246,32 @@
       height: 3.25rem;
       cursor: pointer;
       z-index: 10;
-      overflow: hidden;
-      will-change: height;
-      transition: height 0.42s var(--ease-webflow), margin-bottom 0.42s var(--ease-webflow);
+      overflow: visible;
+      will-change: height, transform;
+      transition: height 0.38s var(--ease-webflow), margin 0.38s var(--ease-webflow);
     }
 
-    /* ESTADO CARD EXPANDIDA (ALTURA ~4.5 FILAS = 14.6rem) */
+    /* ESTADO CARD FLOTANTE EXPANDIDA (CERRADA, DESPEGADA Y CON RADIO DE 44px) */
     .menu-item.expanded {
-      height: 14.6rem;
+      height: 14.8rem;
       z-index: 30;
-      margin-bottom: 0.5rem;
+      margin: 0.6rem 0;
     }
 
-    /* 1. SOMBRA AMBIENTAL BAJO EL CRISTAL */
+    /* 1. SOMBRA AMBIENTAL BAJO EL CRISTAL (ADAPTABLE A CARD FLOTANTE) */
     .glass-shadow {
       position: absolute;
       left: 2rem;
       right: 0;
       top: 0;
       bottom: 0;
+      border-radius: 0;
       opacity: 0;
       pointer-events: none;
       box-shadow: 
         0 14px 28px rgba(18, 25, 40, 0.12),
         0 4px 10px rgba(18, 25, 40, 0.06);
-      transition: opacity 0.35s var(--ease-webflow);
+      transition: opacity 0.35s var(--ease-webflow), left 0.38s var(--ease-webflow), right 0.38s var(--ease-webflow), border-radius 0.38s var(--ease-webflow);
       z-index: 2;
     }
 
@@ -287,16 +279,25 @@
       opacity: 1;
     }
 
-    /* 2. CÁUSTICA 1 (EXTERIOR): +20% INTENSIDAD Y DESPLAZADA AL BORDE DERECHO EN % */
+    .menu-item.expanded .glass-shadow {
+      left: 1rem;
+      right: 1rem;
+      border-radius: 44px; /* Radio equivalente a la capa 1 */
+      box-shadow: 
+        0 18px 36px rgba(18, 25, 40, 0.14),
+        0 6px 14px rgba(18, 25, 40, 0.08);
+    }
+
+    /* 2. CÁUSTICA 1 (EXTERIOR): RECUPERADA Y VISIBLE EN BORDE DERECHO */
     .caustic-bg {
       position: absolute;
-      right: 1.5%;
-      bottom: -0.8rem;
-      width: 8.75rem;
-      height: 1.65rem;
+      right: 1.5rem;
+      bottom: -0.75rem;
+      width: 8.5rem;
+      height: 1.6rem;
       border-radius: 50%;
       background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.95) 28%, rgba(255, 255, 255, 0.42) 58%, rgba(255, 255, 255, 0) 78%);
-      filter: blur(2px);
+      filter: blur(2.2px);
       mix-blend-mode: screen;
       opacity: 0;
       pointer-events: none;
@@ -309,13 +310,19 @@
       transform: translateY(1px) scale(1.10);
     }
 
-    /* 3. CRISTAL LÍQUIDO TRANSLÚCIDO Y ELEGANTE (BLUR FUNCIONAL v2.11 + BISEL v2.16) */
+    .menu-item.expanded .caustic-bg {
+      right: 2.2rem;
+      bottom: -0.5rem;
+    }
+
+    /* 3. CRISTAL LÍQUIDO (BLUR 100% OPERATIVO + ADAPTACIÓN A PANEL FLOTANTE DE 44px) */
     .glass-overlay {
       position: absolute;
       left: 2rem;
       right: 0;
       top: 0;
       bottom: 0;
+      border-radius: 0;
       background: linear-gradient(
         90deg, 
         rgba(255, 255, 255, 0.42) 0%, 
@@ -331,7 +338,7 @@
         0 8px 24px rgba(18, 25, 40, 0.06),
         inset 1.5px 2px 3px rgba(255, 255, 255, 0.92),
         inset -1.5px -2px 4px rgba(18, 25, 40, 0.04);
-      transition: opacity 0.35s var(--ease-webflow);
+      transition: opacity 0.35s var(--ease-webflow), left 0.38s var(--ease-webflow), right 0.38s var(--ease-webflow), border-radius 0.38s var(--ease-webflow);
       z-index: 5;
     }
 
@@ -339,12 +346,18 @@
       opacity: 1;
     }
 
-    /* 4. CÁUSTICA 2 (INTERIOR): +20% INTENSIDAD, 100% BLANCA Y EXTENDIDA A LA DERECHA */
+    .menu-item.expanded .glass-overlay {
+      left: 1rem;
+      right: 1rem;
+      border-radius: 44px; /* Radio equivalente a la capa 1 */
+    }
+
+    /* 4. CÁUSTICA 2 (INTERIOR): 100% BLANCA Y POSICIONADA A LA DERECHA */
     .caustic-glass {
       position: absolute;
-      right: 1.5%;
-      bottom: 0.25rem;
-      width: 8.2rem;
+      right: 1.5rem;
+      bottom: 0.3rem;
+      width: 8rem;
       height: 1.4rem;
       border-radius: 50%;
       background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.72) 35%, rgba(255, 255, 255, 0.22) 65%, transparent 85%);
@@ -354,7 +367,7 @@
       pointer-events: none;
     }
 
-    /* ESPECULARES SUPERIOR E INFERIOR (v2.16) */
+    /* ESPECULARES */
     .specular-top, .specular-bottom {
       position: absolute;
       left: 0;
@@ -374,18 +387,17 @@
       background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.90) 35%, rgba(0, 0, 0, 0.04) 70%, transparent 100%);
     }
 
-    /* RECTÁNGULO ROJO INDICADOR (MITAD DE GROSOR EN CARD EXPANDIDA) */
+    /* RECTÁNGULO ROJO (SE ELIMINA COMPLETAMENTE EN ESTADO EXPANDIDO) */
     .red-indicator {
       position: absolute;
       left: 1.65rem;
       top: 0;
       bottom: 0;
       width: 4.7px;
-      border-radius: 0;
       background-color: var(--color-btn);
       box-shadow: 0 0 10px rgba(186, 13, 54, 0.45);
       opacity: 0;
-      transition: opacity 0.35s var(--ease-webflow), width 0.35s var(--ease-webflow);
+      transition: opacity 0.35s var(--ease-webflow);
       z-index: 15;
     }
 
@@ -394,10 +406,10 @@
     }
 
     .menu-item.expanded .red-indicator {
-      width: 2.35px; /* Mitad de grosor */
+      opacity: 0 !important; /* Eliminada en estado Card */
     }
 
-    /* ESTRUCTURA INTERNA */
+    /* ESTRUCTURA INTERIOR */
     .item-wrapper {
       position: relative;
       z-index: 20;
@@ -407,7 +419,7 @@
       flex-direction: column;
     }
 
-    /* CABECERA DE LA FILA */
+    /* CABECERA */
     .item-header {
       position: relative;
       height: 3.25rem;
@@ -419,10 +431,14 @@
     }
 
     .menu-item.active .item-header {
-      transform: translateX(2.5rem);
+      transform: translateX(2.4rem);
     }
 
-    /* Número del plato */
+    .menu-item.expanded .item-header {
+      transform: translateX(1.2rem); /* Centrado visual armónico en panel flotante */
+    }
+
+    /* Número */
     .item-number {
       font-size: 0.68rem;
       font-variation-settings: "wdth" 100, "wght" 300;
@@ -439,7 +455,7 @@
       color: var(--color-text-active);
     }
 
-    /* Nombre del plato */
+    /* Nombre */
     .item-name {
       font-size: 1.0rem;
       font-variation-settings: "wdth" 125, "wght" 400;
@@ -461,73 +477,76 @@
       text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
     }
 
-    /* ZONA DERECHA: ICONO INFO Y PRECIO */
+    /* ZONA DERECHA: ICONO Y PRECIO CENTRADOS EN EL MISMO EJE */
     .item-meta {
       position: relative;
       margin-left: auto;
-      padding-right: 2.8rem;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      height: 100%;
-    }
-
-    /* ICONO "i" DE INFORMACIÓN */
-    .info-icon {
-      position: absolute;
-      right: 2.8rem;
-      width: 1.15rem;
-      height: 1.15rem;
-      border-radius: 50%;
-      border: 1.2px solid rgba(0, 0, 0, 0.45);
-      color: rgba(0, 0, 0, 0.65);
+      padding-right: 2.6rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.68rem;
-      font-family: var(--font-fredoka);
-      font-variation-settings: "wdth" 100, "wght" 500;
+      width: 2.5rem;
+      height: 100%;
+    }
+
+    .menu-item.expanded .item-meta {
+      padding-right: 3.2rem;
+    }
+
+    /* ICONO "MÁS INFO" (3 BARRAS HORIZONTALES APILADAS REDONDEADAS Y GRUESAS) */
+    .more-info-icon {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 3.5px;
+      width: 1.3rem;
+      height: 1.3rem;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.25s var(--ease-webflow), transform 0.25s var(--ease-webflow);
     }
 
-    .info-icon span {
-      transform: translateY(-0.5px);
+    .more-info-icon .bar {
+      width: 14px;
+      height: 2.2px;
+      background-color: rgba(0, 0, 0, 0.65);
+      border-radius: 2px;
     }
 
-    .menu-item.active .info-icon {
-      opacity: 0.65;
+    .menu-item.active .more-info-icon {
+      opacity: 0.75;
     }
 
-    .menu-item.expanded .info-icon {
+    .menu-item.expanded .more-info-icon {
       opacity: 0;
-      transform: scale(0.65);
+      transform: scale(0.6);
     }
 
-    /* PRECIO DEL PLATO EN ROJO CORPORATIVO Y PESO MEDIUM (18€) */
+    /* PRECIO EN NEGRO PURO Y PERFECTAMENTE CENTRADO (18€) */
     .item-price {
       position: absolute;
-      right: 2.8rem;
       font-size: 1.08rem;
       font-family: var(--font-fredoka);
       font-variation-settings: "wdth" 110, "wght" 500;
-      color: var(--color-btn);
+      color: #000000; /* Negro puro */
       letter-spacing: 0.5px;
       opacity: 0;
       pointer-events: none;
-      transform: translateY(2px);
+      transform: scale(0.85);
       transition: opacity 0.35s var(--ease-webflow), transform 0.35s var(--ease-webflow);
     }
 
     .menu-item.expanded .item-price {
       opacity: 1;
-      transform: translateY(0);
+      transform: scale(1);
     }
 
-    /* CUERPO DEL CARD: FADE-IN PRECISO A PARTIR DE 2/3 DEL DESPLIEGUE (DELAY 260ms) */
+    /* CUERPO DEL CARD: FADE-IN PRECISO Y FLUIDO A 60 FPS */
     .card-body {
-      padding: 0.4rem 2.2rem 1.4rem 5.25rem;
+      position: relative;
+      padding: 0.2rem 2.4rem 1.4rem 3.4rem;
       opacity: 0;
       pointer-events: none;
       transform: translateY(-4px);
@@ -538,10 +557,36 @@
       opacity: 1;
       pointer-events: auto;
       transform: translateY(0);
-      transition: opacity 0.16s ease-out 0.26s, transform 0.16s ease-out 0.26s;
+      transition: opacity 0.16s ease-out 0.24s, transform 0.16s ease-out 0.24s;
     }
 
-    /* TEXTO DESCRIPTIVO +2 PUNTOS MÁS GRANDE (0.92rem) Y MÁXIMA LEGIBILIDAD */
+    /* CONTENEDOR DE SCROLL CON CALADO INFERIOR SUAVE Y SCROLLBAR NEUMÓRFICA */
+    .card-scroll-wrap {
+      max-height: 8.8rem;
+      overflow-y: auto;
+      padding-right: 0.6rem;
+      -webkit-mask-image: linear-gradient(to bottom, black 0%, black 72%, transparent 100%);
+      mask-image: linear-gradient(to bottom, black 0%, black 72%, transparent 100%);
+    }
+
+    /* Scrollbar neumórfica blanca: cápsula sobre hendidura */
+    .card-scroll-wrap::-webkit-scrollbar {
+      width: 4.5px;
+    }
+
+    .card-scroll-wrap::-webkit-scrollbar-track {
+      background: rgba(18, 25, 40, 0.05);
+      border-radius: 10px;
+      box-shadow: inset 0 1px 2px rgba(18, 25, 40, 0.08);
+    }
+
+    .card-scroll-wrap::-webkit-scrollbar-thumb {
+      background: #FFFFFF;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(18, 25, 40, 0.20), inset 0 0 0 0.5px rgba(255, 255, 255, 0.9);
+    }
+
+    /* TEXTO CON LONGITUD DE LÍNEA CONTENIDA Y MÁXIMA LEGIBILIDAD */
     .card-text {
       font-size: 0.92rem;
       line-height: 1.54;
@@ -549,6 +594,7 @@
       color: #1E232B;
       font-variation-settings: "wdth" 105, "wght" 400;
       text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85);
+      max-width: 95%;
     }
   </style>
 </head>
@@ -596,14 +642,20 @@
               <span class="item-number">01</span>
               <span class="item-name">Ensalada César</span>
               <div class="item-meta">
-                <div class="info-icon"><span>i</span></div>
+                <div class="more-info-icon">
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                </div>
                 <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
-              <p class="card-text">
-                Delicada selección de lechugas tiernas combinadas con pechuga asada a baja temperatura, lascas de Parmigiano Reggiano curado 24 meses, crujientes dados de pan artesanal y un aliño tradicional emulsionado suavemente con toques de anchoa del Cantábrico y limón fresco.
-              </p>
+              <div class="card-scroll-wrap">
+                <p class="card-text">
+                  Delicada selección de lechugas tiernas combinadas con pechuga asada a baja temperatura, lascas de Parmigiano Reggiano curado 24 meses, crujientes dados de pan artesanal y un aliño tradicional emulsionado suavemente con toques de anchoa del Cantábrico y limón fresco. Un clásico atemporal elaborado con técnicas de alta cocina para garantizar una textura envolvente en cada bocado.
+                </p>
+              </div>
             </div>
           </div>
         </li>
@@ -622,14 +674,20 @@
               <span class="item-number">02</span>
               <span class="item-name">Pizza Diávola</span>
               <div class="item-meta">
-                <div class="info-icon"><span>i</span></div>
+                <div class="more-info-icon">
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                </div>
                 <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
-              <p class="card-text">
-                Masa madre de fermentación lenta horneada a la piedra, base de tomate San Marzano DOP, mozzarella fior di latte fundente y una cuidada selección de salame piccante calabrés, terminado con finas láminas de guindilla fresca y un hilo de aceite aromatizado.
-              </p>
+              <div class="card-scroll-wrap">
+                <p class="card-text">
+                  Masa madre de fermentación lenta horneada a la piedra, base de tomate San Marzano DOP, mozzarella fior di latte fundente y una cuidada selección de salame piccante calabrés, terminado con finas láminas de guindilla fresca y un hilo de aceite aromatizado con orégano silvestre.
+                </p>
+              </div>
             </div>
           </div>
         </li>
@@ -648,14 +706,20 @@
               <span class="item-number">03</span>
               <span class="item-name">Cheeseburger</span>
               <div class="item-meta">
-                <div class="info-icon"><span>i</span></div>
+                <div class="more-info-icon">
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                </div>
                 <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
-              <p class="card-text">
-                Carne 100% de vaca madurada picada al momento, fundida con doble loncha de queso cheddar inglés curado, cebolla caramelizada lentamente, pepinillos encurtidos artesanos y salsa especial de la casa en pan brioche artesanal ligeramente tostado con mantequilla.
-              </p>
+              <div class="card-scroll-wrap">
+                <p class="card-text">
+                  Carne 100% de vaca madurada picada al momento, fundida con doble loncha de queso cheddar inglés curado, cebolla caramelizada lentamente, pepinillos encurtidos artesanos y salsa especial de la casa en pan brioche artesanal ligeramente tostado con mantequilla noisette.
+                </p>
+              </div>
             </div>
           </div>
         </li>
@@ -674,14 +738,20 @@
               <span class="item-number">04</span>
               <span class="item-name">Burrata italiana</span>
               <div class="item-meta">
-                <div class="info-icon"><span>i</span></div>
+                <div class="more-info-icon">
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                </div>
                 <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
-              <p class="card-text">
-                Corazón cremoso de burrata de Puglia acompañada de tomates cherry confitados en aceite virgen extra, pesto verde genovés elaborado al mortero, piñones tostados crujientes y una reducción aterciopelada de vinagre balsámico tradicional de Módena.
-              </p>
+              <div class="card-scroll-wrap">
+                <p class="card-text">
+                  Corazón cremoso de burrata de Puglia acompañada de tomates cherry confitados en aceite virgen extra, pesto verde genovés elaborado al mortero, piñones tostados crujientes y una reducción aterciopelada de vinagre balsámico tradicional de Módena.
+                </p>
+              </div>
             </div>
           </div>
         </li>
@@ -700,14 +770,20 @@
               <span class="item-number">05</span>
               <span class="item-name">Pizza de la casa</span>
               <div class="item-meta">
-                <div class="info-icon"><span>i</span></div>
+                <div class="more-info-icon">
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                </div>
                 <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
-              <p class="card-text">
-                Nuestra receta insignia con crema de trufa negra, setas silvestres salteadas al vino blanco, queso scamorza ahumado y prosciutto di Parma añadido al final del horneado para preservar todos sus matices aromáticos y textura sedosa.
-              </p>
+              <div class="card-scroll-wrap">
+                <p class="card-text">
+                  Nuestra receta insignia con crema de trufa negra, setas silvestres salteadas al vino blanco, queso scamorza ahumado y prosciutto di Parma añadido al final del horneado para preservar todos sus matices aromáticos y textura sedosa.
+                </p>
+              </div>
             </div>
           </div>
         </li>
@@ -726,14 +802,20 @@
               <span class="item-number">06</span>
               <span class="item-name">Ensalada Caprese</span>
               <div class="item-meta">
-                <div class="info-icon"><span>i</span></div>
+                <div class="more-info-icon">
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                </div>
                 <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
-              <p class="card-text">
-                Láminas intercaladas de tomate corazón de buey de huerta y mozzarella de búfala campana, aderezadas con hojas frescas de albahaca morada, escamas de sal marina ahumada y aceite monovarietal de aceituna arbequina de primera extracción.
-              </p>
+              <div class="card-scroll-wrap">
+                <p class="card-text">
+                  Láminas intercaladas de tomate corazón de buey de huerta y mozzarella de búfala campana, aderezadas con hojas frescas de albahaca morada, escamas de sal marina ahumada y aceite monovarietal de aceituna arbequina de primera extracción.
+                </p>
+              </div>
             </div>
           </div>
         </li>
@@ -752,14 +834,20 @@
               <span class="item-number">07</span>
               <span class="item-name">Pizza especial</span>
               <div class="item-meta">
-                <div class="info-icon"><span>i</span></div>
+                <div class="more-info-icon">
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                </div>
                 <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
-              <p class="card-text">
-                Combinación gourmet de higos frescos de temporada, queso gorgonzola dulce, nueces pacanas tostadas y un ligero glaseado de miel de flores silvestres sobre una base blanca y crujiente de fermentación de 48 horas.
-              </p>
+              <div class="card-scroll-wrap">
+                <p class="card-text">
+                  Combinación gourmet de higos frescos de temporada, queso gorgonzola dulce, nueces pacanas tostadas y un ligero glaseado de miel de flores silvestres sobre una base blanca y crujiente de fermentación de 48 horas.
+                </p>
+              </div>
             </div>
           </div>
         </li>
@@ -778,14 +866,20 @@
               <span class="item-number">08</span>
               <span class="item-name">Ensalada César</span>
               <div class="item-meta">
-                <div class="info-icon"><span>i</span></div>
+                <div class="more-info-icon">
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                </div>
                 <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
-              <p class="card-text">
-                Delicada selección de lechugas tiernas combinadas con pechuga asada a baja temperatura, lascas de Parmigiano Reggiano curado 24 meses, crujientes dados de pan artesanal y un aliño tradicional emulsionado suavemente con toques de anchoa del Cantábrico y limón fresco.
-              </p>
+              <div class="card-scroll-wrap">
+                <p class="card-text">
+                  Delicada selección de lechugas tiernas combinadas con pechuga asada a baja temperatura, lascas de Parmigiano Reggiano curado 24 meses, crujientes dados de pan artesanal y un aliño tradicional emulsionado suavemente con toques de anchoa del Cantábrico y limón fresco.
+                </p>
+              </div>
             </div>
           </div>
         </li>
@@ -804,14 +898,20 @@
               <span class="item-number">09</span>
               <span class="item-name">Pizza Diávola</span>
               <div class="item-meta">
-                <div class="info-icon"><span>i</span></div>
+                <div class="more-info-icon">
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                </div>
                 <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
-              <p class="card-text">
-                Masa madre de fermentación lenta horneada a la piedra, base de tomate San Marzano DOP, mozzarella fior di latte fundente y una cuidada selección de salame piccante calabrés, terminado con finas láminas de guindilla fresca y un hilo de aceite aromatizado.
-              </p>
+              <div class="card-scroll-wrap">
+                <p class="card-text">
+                  Masa madre de fermentación lenta horneada a la piedra, base de tomate San Marzano DOP, mozzarella fior di latte fundente y una cuidada selección de salame piccante calabrés, terminado con finas láminas de guindilla fresca y un hilo de aceite aromatizado con orégano silvestre.
+                </p>
+              </div>
             </div>
           </div>
         </li>
@@ -830,14 +930,20 @@
               <span class="item-number">10</span>
               <span class="item-name">Cheeseburger</span>
               <div class="item-meta">
-                <div class="info-icon"><span>i</span></div>
+                <div class="more-info-icon">
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                </div>
                 <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
-              <p class="card-text">
-                Carne 100% de vaca madurada picada al momento, fundida con doble loncha de queso cheddar inglés curado, cebolla caramelizada lentamente, pepinillos encurtidos artesanos y salsa especial de la casa en pan brioche artesanal ligeramente tostado con mantequilla.
-              </p>
+              <div class="card-scroll-wrap">
+                <p class="card-text">
+                  Carne 100% de vaca madurada picada al momento, fundida con doble loncha de queso cheddar inglés curado, cebolla caramelizada lentamente, pepinillos encurtidos artesanos y salsa especial de la casa en pan brioche artesanal ligeramente tostado con mantequilla.
+                </p>
+              </div>
             </div>
           </div>
         </li>
@@ -856,14 +962,20 @@
               <span class="item-number">11</span>
               <span class="item-name">Burrata italiana</span>
               <div class="item-meta">
-                <div class="info-icon"><span>i</span></div>
+                <div class="more-info-icon">
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                </div>
                 <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
-              <p class="card-text">
-                Corazón cremoso de burrata de Puglia acompañada de tomates cherry confitados en aceite virgen extra, pesto verde genovés elaborado al mortero, piñones tostados crujientes y una reducción aterciopelada de vinagre balsámico tradicional de Módena.
-              </p>
+              <div class="card-scroll-wrap">
+                <p class="card-text">
+                  Corazón cremoso de burrata de Puglia acompañada de tomates cherry confitados en aceite virgen extra, pesto verde genovés elaborado al mortero, piñones tostados crujientes y una reducción aterciopelada de vinagre balsámico tradicional de Módena.
+                </p>
+              </div>
             </div>
           </div>
         </li>
@@ -882,14 +994,20 @@
               <span class="item-number">12</span>
               <span class="item-name">Pizza de la casa</span>
               <div class="item-meta">
-                <div class="info-icon"><span>i</span></div>
+                <div class="more-info-icon">
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                </div>
                 <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
-              <p class="card-text">
-                Nuestra receta insignia con crema de trufa negra, setas silvestres salteadas al vino blanco, queso scamorza ahumado y prosciutto di Parma añadido al final del horneado para preservar todos sus matices aromáticos y textura sedosa.
-              </p>
+              <div class="card-scroll-wrap">
+                <p class="card-text">
+                  Nuestra receta insignia con crema de trufa negra, setas silvestres salteadas al vino blanco, queso scamorza ahumado y prosciutto di Parma añadido al final del horneado para preservar todos sus matices aromáticos y textura sedosa.
+                </p>
+              </div>
             </div>
           </div>
         </li>
@@ -908,14 +1026,20 @@
               <span class="item-number">13</span>
               <span class="item-name">Ensalada Caprese</span>
               <div class="item-meta">
-                <div class="info-icon"><span>i</span></div>
+                <div class="more-info-icon">
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                </div>
                 <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
-              <p class="card-text">
-                Láminas intercaladas de tomate corazón de buey de huerta y mozzarella de búfala campana, aderezadas con hojas frescas de albahaca morada, escamas de sal marina ahumada y aceite monovarietal de aceituna arbequina de primera extracción.
-              </p>
+              <div class="card-scroll-wrap">
+                <p class="card-text">
+                  Láminas intercaladas de tomate corazón de buey de huerta y mozzarella de búfala campana, aderezadas con hojas frescas de albahaca morada, escamas de sal marina ahumada y aceite monovarietal de aceituna arbequina de primera extracción.
+                </p>
+              </div>
             </div>
           </div>
         </li>
@@ -934,14 +1058,20 @@
               <span class="item-number">14</span>
               <span class="item-name">Pizza especial</span>
               <div class="item-meta">
-                <div class="info-icon"><span>i</span></div>
+                <div class="more-info-icon">
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                </div>
                 <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
-              <p class="card-text">
-                Combinación gourmet de higos frescos de temporada, queso gorgonzola dulce, nueces pacanas tostadas y un ligero glaseado de miel de flores silvestres sobre una base blanca y crujiente de fermentación de 48 horas.
-              </p>
+              <div class="card-scroll-wrap">
+                <p class="card-text">
+                  Combinación gourmet de higos frescos de temporada, queso gorgonzola dulce, nueces pacanas tostadas y un ligero glaseado de miel de flores silvestres sobre una base blanca y crujiente de fermentación de 48 horas.
+                </p>
+              </div>
             </div>
           </div>
         </li>
@@ -960,14 +1090,20 @@
               <span class="item-number">15</span>
               <span class="item-name">Pizza de la casa</span>
               <div class="item-meta">
-                <div class="info-icon"><span>i</span></div>
+                <div class="more-info-icon">
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                  <div class="bar"></div>
+                </div>
                 <div class="item-price">18€</div>
               </div>
             </div>
             <div class="card-body">
-              <p class="card-text">
-                Nuestra receta insignia con crema de trufa negra, setas silvestres salteadas al vino blanco, queso scamorza ahumado y prosciutto di Parma añadido al final del horneado para preservar todos sus matices aromáticos y textura sedosa.
-              </p>
+              <div class="card-scroll-wrap">
+                <p class="card-text">
+                  Nuestra receta insignia con crema de trufa negra, setas silvestres salteadas al vino blanco, queso scamorza ahumado y prosciutto di Parma añadido al final del horneado para preservar todos sus matices aromáticos y textura sedosa.
+                </p>
+              </div>
             </div>
           </div>
         </li>
@@ -984,7 +1120,7 @@
       const btnAr = document.getElementById('btn-ar');
 
       // ======================================================================
-      // 1. CINEMÁTICA Y FÍSICA: INERCIA PESADA + HOLD DE 200ms
+      // 1. CINEMÁTICA Y FÍSICA: INERCIA PESADA + HOLD DE 200ms (BLINDADA)
       // ======================================================================
       const layerElements = [
         document.querySelector('.layer-1'),
@@ -996,7 +1132,6 @@
       const BASE_SPEED = 0.055;
       let currentDirection = 1;
 
-      // Escalonado a 170ms y compresión +10% más profunda
       const layerConfigs = [
         { delay: 0,   twistPower: 0.42, twistDamp: 0.958, scaleDip: 0.958, parallaxK: 1.80 },
         { delay: 170, twistPower: 0.82, twistDamp: 0.955, scaleDip: 0.969, parallaxK: 1.28 },
@@ -1099,7 +1234,7 @@
       }
 
       // ======================================================================
-      // 5. INTERACCIÓN DE LISTA, EXPANSION DE CARD Y BLOQUEO DE SCROLL
+      // 5. INTERACCIÓN DE LISTA, CARD FLOTANTE ELEVADA Y SCROLL TOTAL
       // ======================================================================
       function collapseAllCards() {
         menuItems.forEach((i) => i.classList.remove('expanded'));
@@ -1108,6 +1243,11 @@
 
       menuItems.forEach((item) => {
         item.addEventListener('click', (e) => {
+          // Si el clic proviene del área de scroll interna, no cerramos
+          if (e.target.closest('.card-scroll-wrap')) {
+            return;
+          }
+
           const isCurrentlyActive = item.classList.contains('active');
           const isCurrentlyExpanded = item.classList.contains('expanded');
 
@@ -1119,21 +1259,21 @@
               collapseAllCards();
               item.classList.add('expanded');
 
-              // Bloquear el scroll mientras el Card está abierto
+              // Bloqueo de scroll global durante la vista de Card
               menuList.classList.add('scroll-locked');
 
-              // Posicionamiento a 25px por debajo del visor / botón rojo
+              // Posicionamiento más elevado, cercano al botón rojo AR (~10px)
               setTimeout(() => {
-                const targetScroll = item.offsetTop - 25;
+                const targetScroll = item.offsetTop - 10;
                 menuList.scrollTo({
                   top: Math.max(0, targetScroll),
                   behavior: 'smooth'
                 });
-              }, 40);
+              }, 30);
             }
             triggerChainReaction();
           } else {
-            // PRIMER TOQUE: Selección simple (1 fila, sin desplazamiento ni salto vertical)
+            // PRIMER TOQUE: Selección simple (1 fila, sin desplazamiento)
             collapseAllCards();
             menuItems.forEach((i) => i.classList.remove('active'));
             item.classList.add('active');
